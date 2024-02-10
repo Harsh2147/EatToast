@@ -18,6 +18,7 @@ import Deletecategory from "./components/admin/Deletecategory";
 import Updateproduct from "./components/admin/Updateproduct";
 import Deleteproduct from "./components/admin/Deleteproduct";
 import NoPage from "./components/admin/NoPage";
+import Logout from "./components/admin/Logout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         </Route>
 
         <Route path="Login" element={<Login />} />
+        <Route path="Logout" element={<Logout />} />
         <Route path="Registration" element={<Registration />} />
         <Route path="Dashboard" element={<Dashboard />} />
         <Route path="Addcategory" element={<Addcategory />} />
