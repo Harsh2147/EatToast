@@ -6,13 +6,7 @@ function Dashboard() {
   // Check if loginData exists in localStorage
   const loginData = localStorage.getItem("loginData");
   console.log("Login Data= " + loginData);
-  useEffect(() => {
-    // Define the logout function
-    if (!loginData && loginData == null) {
-      navigate("/Login");
-      //alert(`Please Login First`);
-    }
-  }, []);
+
   const [showCategorySubMenu, setShowCategorySubMenu] = useState(false);
   const [showItemsSubMenu, setShowItemsSubMenu] = useState(false);
   const [showOrdersSubMenu, setShowOrdersSubMenu] = useState(false);
