@@ -136,16 +136,28 @@ function Dashboard() {
                 </>
               )}
               {!loginData && (
-                <li>
-                  <a href="#">
-                    <span class="icon">
-                      <ion-icon name="exit-outline"></ion-icon>
-                    </span>
-                    <span class="title">
-                      <a href="/Login">Login</a>
-                    </span>
-                  </a>
-                </li>
+                <>
+                  <li>
+                    <a href="#">
+                      <span class="icon">
+                        <ion-icon name="exit-outline"></ion-icon>
+                      </span>
+                      <span class="title">
+                        <a href="/Registration">Register Here</a>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span class="icon">
+                        <ion-icon name="exit-outline"></ion-icon>
+                      </span>
+                      <span class="title">
+                        <a href="/Login">Login</a>
+                      </span>
+                    </a>
+                  </li>
+                </>
               )}
             </ul>
           </div>
