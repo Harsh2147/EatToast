@@ -241,7 +241,7 @@ function Deleteproduct() {
                 </div>
                 <input
                   type="submit"
-                  class="btn btn-primary "
+                  class="btn btn-danger "
                   value="Are your Sure to Delete this Product"
                   style={{ margin: "0 auto" }}
                 />

@@ -236,14 +236,14 @@ function Viewproduct() {
                       <div>
                         <Link
                           to={`/updateProduct/${product._id}`}
-                          className="btn btn-primary "
+                          className="btn btn-primary mt-2 "
                           onClick={() => setData(product)}
                         >
                           Update
                         </Link>{" "}
                         <Link
                           to={`/deleteProduct/${product._id}`}
-                          className="btn btn-danger "
+                          className="btn btn-danger mt-2 "
                           onClick={() => setData(product)}
                         >
                           Delete

@@ -55,7 +55,7 @@ function Registration() {
       errors.push("Lastname field is required");
     }
     if (!email) {
-      errors.push("email field is required");
+      errors.push("Email field is required");
     }
     if (!Address) {
       errors.push("Address is required");
@@ -251,7 +251,7 @@ function Registration() {
             </div>
             <div className="card-body">
               {errorMessages.length > 0 && (
-                <div style={{ color: "red" }}>
+                <div style={{ color: "red"  , fontWeight:"700" }}>
                   <ul>
                     {errorMessages.map((error, index) => (
                       <li key={index}>{error}</li>
@@ -358,16 +358,14 @@ function Registration() {
                 </div>
                 <input
                   type="submit"
-                  class="btn btn-primary "
+                  class="btn btn-primary mt-2 mb-3 "
                   value="Register"
-                  style={{ margin: "0 auto" }}
+                  
                 />
                 <p>
                   Already a registered? <a href="/Login">Log in</a>
                 </p>
-                <p>
-                  Go to Dashboard <a href="/Dashboard">Dashboard</a>
-                </p>
+                
               </form>
             </div>
           </div>

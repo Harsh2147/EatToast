@@ -209,7 +209,7 @@ function Deletecategory() {
 
                 <input
                   type="submit"
-                  className="btn btn-primary "
+                  className="btn btn-danger "
                   value="Are your Sure to Delete this Category"
                   style={{ margin: "0 auto" }}
                 />

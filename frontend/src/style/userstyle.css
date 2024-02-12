@@ -1,0 +1,285 @@
+* {
+    font-family: "balloobhai", cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+:root {
+    --blue: #0f0d2a;
+    --white: #fff;
+    --gray: #332e2e;
+    --black1: #222;
+    --black2: #453f3f;
+    --red: #ff3838;
+}
+
+html {
+
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* header style start from here */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    background: var(--white);
+    padding: .5rem 10%;
+}
+
+header .nav-logo i {
+    padding-right: .5rem;
+    color: var(--blue);
+}
+
+header .navbar a {
+    font-size: 1.5rem;
+    margin-left: 3rem;
+    color: var(--blue);
+}
+
+header .navbar a:hover {
+    color: var(--red);
+}
+
+header .nav-logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--blue);
+}
+
+header a {
+    font-size: 2rem;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 900;
+}
+
+#menu-button {
+    color: var(--blue);
+    font-size: 2rem;
+    border-radius: .3rem;
+    cursor: pointer;
+    padding: .5rem;
+    border: 2px solid blue;
+    display: none;
+}
+
+section {
+    padding: 2rem 9%;
+}
+
+/* 
+header style end here */
+
+
+/* main poster section start here */
+.banner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.99);
+    /* Adjust the alpha value */
+    mix-blend-mode: multiply;
+    z-index: -1;
+}
+
+.banner-overlay::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('../../public/img/poster2.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.banner-content {
+    flex: 1 1 40rem;
+    padding-top: 6.5rem;
+    text-align: center;
+    padding: 5rem;
+    color: var(--white);
+}
+
+.banner-content h3 {
+    font-size: 3rem;
+}
+
+.banner-content p {
+    font-size: 1.5rem;
+}
+
+.main-button {
+    display: inline-block;
+    padding: .3rem 1rem;
+    border: .2rem solid var(--white);
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 900;
+    background: var(--blue);
+}
+
+.main-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 100%;
+    background: var(--red);
+    transition: .3s linear;
+    z-index: -1;
+}
+
+.main-button:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+/* main poster section end here */
+
+
+/* special section start here */
+
+.special-head{
+    font-size: 2.5rem;
+    padding: 1rem;
+    color: var(--blue);
+    font-weight: 900;
+}
+
+.special-head span{
+    color: var(--red);
+}
+
+.special .special-box-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.special .special-box-container .box{
+   flex:1 1 20rem;
+   position: relative;
+   overflow: hidden;
+   box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+   border: .1rem solid rgba(0, 0, 0, .3);
+}
+
+.special .special-box-container .box .special-image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: -100%;
+    left: 0;
+}
+
+.special .special-box-container .box .content{
+    text-align: center;
+    background: var(--white);
+    padding: 1rem;
+}
+
+.special .special-box-container .box .content .content-icon{
+    margin: 1.5rem 0;
+    font-size: 5rem;
+    color: var(--blue);
+}
+
+.special .special-box-container .box .content h3{
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+.special .special-box-container .box .content p{
+    font-size: 1rem;
+    color: var(--red);
+  }
+
+  .special .special-box-container .box:hover .special-image{
+    top: 0;
+  }
+
+  .special .special-box-container .box:hover .content{
+    transform: translate(100%);
+  }
+
+/* special section end here */
+
+
+
+
+
+/* 
+media queries */
+
+@media (max-width :1100px) {
+    html {
+        font-size: 55%;
+
+    }
+
+    header {
+        padding: .2rem;
+    }
+
+    section{
+        padding: 2rem 9%;
+    }
+}
+
+@media (max-width: 900px) {
+    #menu-button {
+        display: initial;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--blue);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    header .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    header .navbar a {
+        margin: 1rem;
+        padding: 1.5rem;
+        color: var(--white);
+        border: 0.2rem solid rgba(0, 0, 0, 0.1);
+        border-left: 0.5rem solid red;
+    }
+}

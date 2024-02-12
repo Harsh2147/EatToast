@@ -263,5 +263,9 @@ body {
 
 .productbox .card .dashboxicon img {
   height: 200px;
-  width: 250px;
+  width: 200px;
+}
+
+.form-label{
+  font-weight: 800;
 }

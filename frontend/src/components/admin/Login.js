@@ -72,7 +72,7 @@ function Login() {
       } catch (error) {
         if (error.message.includes("User not found")) {
           setErrorMessages([
-            `User notfound, please enter the right credentials or signup `,
+            `User not found, please enter the right credentials or signup `,
           ]);
         }
 
@@ -224,7 +224,7 @@ function Login() {
 
             <div class="card-body">
               {errorMessages.length > 0 && (
-                <div style={{ color: "red" }}>
+                <div style={{ color: "red" , fontWeight:"700"}}>
                   <ul>
                     {errorMessages.map((error, index) => (
                       <li key={index}>{error}</li>
@@ -279,9 +279,8 @@ function Login() {
                 </div>
                 <input
                   type="submit"
-                  class="btn btn-primary "
+                  class="btn btn-primary mt-3 mb-3"
                   value="Login"
-                  style={{ margin: "0 auto" }}
                 />
 
                 <p>
