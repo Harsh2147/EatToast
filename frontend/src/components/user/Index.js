@@ -74,7 +74,7 @@ function Index() {
                                 Breakfast wrap
                             </h3>
                             <p>
-                                The term "burger" is derived from the resemblance of the icon to the layers in a hamburger. Each horizontal line in the icon represents a layer of the burger. When clicked or tapped, it often reveals or hides a navigation menu or additional content on a website.
+                                The  "burger" is derived from the resemblance of the icon to the layers in a hamburger.
                             </p>
                         </div>
                     </div>
@@ -84,12 +84,12 @@ function Index() {
                         <img src="/img/poster2.jpg" alt="Speciality 1" class="special-image" />
 
                         <div class="content">
-                        <div class="fas fa-glass-whiskey content-icon"></div>
+                            <div class="fas fa-glass-whiskey content-icon"></div>
                             <h3>
                                 Breakfast wrap
                             </h3>
                             <p>
-                                The term "burger" is derived from the resemblance of the icon to the layers in a hamburger. Each horizontal line in the icon represents a layer of the burger. When clicked or tapped, it often reveals or hides a navigation menu or additional content on a website.
+                                The  "burger" is derived from the resemblance of the icon to the layers in a hamburger.
                             </p>
                         </div>
                     </div>
@@ -99,21 +99,71 @@ function Index() {
                         <img src="/img/s2.jpg" alt="Speciality 1" class="special-image" />
 
                         <div class="content">
-                        <div class="fas fa-mug-hot content-icon"></div>
+                            <div class="fas fa-mug-hot content-icon"></div>
                             <h3>
                                 Breakfast wrap
                             </h3>
                             <p>
-                            The term "burger" is derived from the resemblance of the icon to the layers in a hamburger. Each horizontal line in the icon represents a layer of the burger. When clicked or tapped, it often reveals or hides a navigation menu or additional content on a website.
+                                The  "burger" is derived from the resemblance of the icon to the layers in a hamburger.
                             </p>
-
-
                         </div>
                     </div>
                 </div>
 
             </div>
             {/* speciality section end here */}
+
+
+            {/* about section start here */}
+
+            <section class="main-about-us" id="main-about-us">
+                <h1 class="special-head text-center"> About <span>Us</span></h1>
+
+
+                <div class="row">
+                    <div class="main-about-us-image">
+                        <img src="/img/aboutus2.jpg" alt="about-us"></img>
+
+                    </div>
+
+                    <div class="about-us-content">
+                        <h3>
+                            Best food in the country
+                        </h3>
+
+                        <p>
+                            loremSunt aliquip dolore ullamco culpa aliquip proident pariatur Lorem nulla nisi Lorem esse. Fugiat pariatur cupidatat sit ut quis velit ad labore. Sunt nostrud nostrud do sunt consequat consectetur.
+                        </p>
+                        <p>
+                            Laborum cillum id cupidatat anim fugiat reprehenderit. Velit anim aliquip vel
+
+                        </p>
+
+                        <div class="icons-container">
+                            <div class="about-us-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Free delivery</span>
+                            </div>
+
+                            <div class="about-us-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>Easy Payment</span>
+                            </div>
+
+                            <div class="about-us-icon">
+                                <i class="fas fa-headset"></i>
+                                <span>24/7 service</span>
+                            </div>
+                        </div>
+                        <button class="about-us-btn">
+                            Learn More
+                        </button>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* about section end here */}
 
         </>
     );

@@ -13,6 +13,10 @@
     --black1: #222;
     --black2: #453f3f;
     --red: #ff3838;
+    --green: #27ae60;
+    --black: #192a56;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
 }
 
 html {
@@ -168,33 +172,33 @@ header style end here */
 
 /* special section start here */
 
-.special-head{
+.special-head {
     font-size: 2.5rem;
     padding: 1rem;
     color: var(--blue);
     font-weight: 900;
 }
 
-.special-head span{
+.special-head span {
     color: var(--red);
 }
 
-.special .special-box-container{
+.special .special-box-container {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     padding: 1rem;
 }
 
-.special .special-box-container .box{
-   flex:1 1 20rem;
-   position: relative;
-   overflow: hidden;
-   box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-   border: .1rem solid rgba(0, 0, 0, .3);
+.special .special-box-container .box {
+    flex: 1 1 20rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    border: .1rem solid rgba(0, 0, 0, .3);
 }
 
-.special .special-box-container .box .special-image{
+.special .special-box-container .box .special-image {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -203,39 +207,126 @@ header style end here */
     left: 0;
 }
 
-.special .special-box-container .box .content{
+.special .special-box-container .box .content {
     text-align: center;
     background: var(--white);
     padding: 1rem;
 }
 
-.special .special-box-container .box .content .content-icon{
+.special .special-box-container .box .content .content-icon {
     margin: 1.5rem 0;
-    font-size: 5rem;
+    font-size: 2rem;
     color: var(--blue);
 }
 
-.special .special-box-container .box .content h3{
-  font-size: 2rem;
-  color: var(--blue);
+.special .special-box-container .box .content h3 {
+    font-size: 1.5rem;
+    color: var(--blue);
 }
 
-.special .special-box-container .box .content p{
+.special .special-box-container .box .content p {
     font-size: 1rem;
     color: var(--red);
-  }
+}
 
-  .special .special-box-container .box:hover .special-image{
+.special .special-box-container .box:hover .special-image {
     top: 0;
-  }
+}
 
-  .special .special-box-container .box:hover .content{
+.special .special-box-container .box:hover .content {
     transform: translate(100%);
-  }
+}
 
 /* special section end here */
 
+/* about section style start here */
 
+.main-about-us .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.main-about-us .row .main-about-us-image {
+    flex: 1 1 30rem;
+}
+
+.main-about-us .row .main-about-us-image img {
+    width: 100%;
+    height: 30rem;
+}
+
+.main-about-us .row .about-us-content {
+    flex: 1 1 30rem;
+}
+
+.main-about-us .row .about-us-content p {
+    color: var(--light-color);
+    font-size: 1rem;
+    padding: .5rem 0;
+    line-height: 1.5;
+}
+
+.main-about-us .row .about-us-content h3 {
+    color: var(--blue);
+    font-size: 1.5rem;
+    padding: .5rem;
+    line-height: 1.5;
+    font-weight: 900;
+}
+
+.main-about-us .row .about-us-content .icons-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    margin-top: .5rem;
+}
+
+.main-about-us .row .about-us-content .icons-container .about-us-icon {
+    background: #eee;
+    border-radius: .5rem;
+    border: .1rem solid rgba(0, 0, 0, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex: 1 1 5rem;
+    padding: .5rem 1rem;
+}
+
+.main-about-us .row .about-us-content .icons-container .about-us-icon i {
+    font-size: 1.5rem;
+    color: var(--green);
+
+}
+
+.main-about-us .row .about-us-content .icons-container .about-us-icon span {
+    font-size: 1rem;
+    color: var(--blue);
+    font-weight: 600;
+}
+
+.about-us-btn {
+    background-color: var(--blue);
+    color: var(--green);
+    padding: .7rem;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: .6rem;
+    margin-top: .3rem;
+    width: 9.5rem;
+}
+
+.about-us-btn:hover{
+    background: var(--green);
+    color: var(--blue);
+}
+
+
+
+/* about section end here */
 
 
 
@@ -252,7 +343,7 @@ media queries */
         padding: .2rem;
     }
 
-    section{
+    section {
         padding: 2rem 9%;
     }
 }
