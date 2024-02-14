@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { FETCH_ALL_CATEGORIES } from "../../graphql/FetchCatQuery";
 import { INSERT_PRODUCTS_MUTATION } from "../../graphql/InsertProcMutation";
-
+import axios from "axios";
 function Additems() {
   const navigate = useNavigate();
   // Check if loginData exists in localStorage
@@ -37,7 +37,7 @@ function Additems() {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDescription, setProductDescription] = useState("");
-  const [productImage, setProductImage] = useState("");
+  const [productImage, setProductImage] = useState(null);
   const [category, setCategory] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
 
@@ -87,7 +87,18 @@ function Additems() {
       alert("Product Added Successfully");
     }
   };
-
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    // Extracting file name from the path
+    const fileName = file.name;
+    setProductImage(fileName); // Set the file name
+    const response = await axios.post("public/img", fileName, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log("File uploaded successfully:", response.data);
+  };
   //   if (loading)
   //     return (
   //       <h2>
@@ -292,8 +303,7 @@ function Additems() {
                     id="productImage"
                     className="form-control"
                     name="productImage"
-                    value={productImage}
-                    onChange={(e) => setProductImage(e.target.value)}
+                    onChange={handleFileChange}
                   />
                 </div>
 
