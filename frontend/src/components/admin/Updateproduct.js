@@ -15,7 +15,7 @@ function Updateproduct() {
     // Define the logout function
     if (!loginData && loginData == null) {
       navigate("/Login");
-      //alert(`Please Login First`);
+      //alert(Please Login First);
     }
   }, []);
   const [showCategorySubMenu, setShowCategorySubMenu] = useState(false);
@@ -42,7 +42,7 @@ function Updateproduct() {
   const [productImage, setProductImage] = useState("");
   const [category, setCategory] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
-  const { loadingCat, errorCat, dataCat } = useQuery(FETCH_ALL_CATEGORIES);
+  const { loadingCat, errorCat, data } = useQuery(FETCH_ALL_CATEGORIES);
   const [errorl, setError] = useState(false);
   const [updatePro, { loading1, error1, data1 }] =
     useMutation(UPDATE_PRODUCT_BY_ID);
@@ -67,11 +67,12 @@ function Updateproduct() {
     alert("Product Updated Successfully");
   };
   const { id } = useParams();
-  console.log(`url parameter:${id}`);
+  console.log("url parameter:${id}");
 
-  const { loading, error, data } = useQuery(FETCH_PRODUCT_BY_ID, {
+  const { loading, error, dataproduct } = useQuery(FETCH_PRODUCT_BY_ID, {
     variables: { proId: id },
   });
+
   useEffect(() => {
     setProductName(localStorage.getItem("Product_name"));
     setProductPrice(localStorage.getItem("Product_price"));
@@ -82,6 +83,9 @@ function Updateproduct() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
+  if (loadingCat) return <p>Loading categories...</p>;
+
+  console.log("DataCat:", data);
 
   return (
     <>
@@ -252,7 +256,7 @@ function Updateproduct() {
                     className="form-control"
                     name="productImage"
                     value={productImage}
-                    onChange={(e) => setProductImage(e.target.value)}
+                    onChange={(e) => setProductImage(e.target.files[0])}
                   />
                 </div>
 
@@ -267,13 +271,16 @@ function Updateproduct() {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="">Select Category</option>
-                    <option value="testCat">testCat</option>
-                    {dataCat?.getAllCategory_db.map((cat) => (
-                      <option key={cat._id} value={cat.category_name}>
-                        {" "}
-                        {cat.category_name}
-                      </option>
-                    ))}
+
+                    {data && data.getAllCategory_db && (
+                      <>
+                        {data.getAllCategory_db.map((cat) => (
+                          <option key={cat._id} value={cat.category_name}>
+                            {cat.category_name}
+                          </option>
+                        ))}
+                      </>
+                    )}
                   </select>
                 </div>
                 <input
