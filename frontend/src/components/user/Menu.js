@@ -1,178 +1,123 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+import { FETCH_ALL_PRODUCTS } from "../../graphql/FetchProductQuery";
+import { Link } from "react-router-dom";
 function Menu() {
+  const navigate = useNavigate();
 
-    return (
-        <>
-            {/* header section start from here */}
-            <header>
-                <a href="#" class="nav-logo"><i class="fas fa-utensils"></i>EatToast</a>
-                <div id="menu-button" class="fas fa-bars"></div>
-                <nav class="navbar">
-                    <a href="/Index">Home</a>
-                    <a href="/Menu">Menu</a>
-                    <a href="#">Order</a>
-                    <a href="#">Review</a>
-                    <a href="#">Profile</a>
-                </nav>
-            </header>
-            {/* header section end here */}
+  const { loading, error, data } = useQuery(FETCH_ALL_PRODUCTS);
+  const [search, setSearch] = useState("");
 
-            {/* menu section start here */}
-            <section class="menu-section" id="menu-section">
-                <h1 class="special-head text-center mt-5"> Our <span> Menu</span></h1>
-                <p class="text-center">Veniam quis mollit laboris sit nisi fugiat occaecat do minim.</p>
+  if (error) {
+    console.error("Error fetching Products:", error.message);
+  }
+  const setData = (product) => {
+    let {
+      Product_name,
+      _id,
+      Product_price,
+      Product_description,
+      Product_image,
+      Category,
+    } = product;
+    console.log("ID" + _id);
+    localStorage.setItem("id", _id);
+    localStorage.setItem("Product_name", Product_name);
+    localStorage.setItem("Product_price", Product_price);
+    localStorage.setItem("Product_description", Product_description);
+    localStorage.setItem("Product_image", Product_image);
+    localStorage.setItem("Category", Category);
+  };
+  return (
+    <>
+      {/* header section start from here */}
+      <header>
+        <a href="#" class="nav-logo">
+          <i class="fas fa-utensils"></i>EatToast
+        </a>
+        <div id="menu-button" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <a href="/Index">Home</a>
+          <a href="/Menu">Menu</a>
+          <a href="#">Order</a>
+          <a href="#">Review</a>
+          <a href="#">Profile</a>
+        </nav>
+      </header>
+      {/* header section end here */}
 
-                <div class="menu-box-container">
-                    <div class="menu-box">
-                        <div class="menu-image">
-                            <img src="/img/chocolate.jpg" alt="menu-image1"></img>
-                            <a href="#" class="fas fa-heart"></a>
-                        </div>
-                        <div class="menu-box-content">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h3>
-                                FrenchTosat stack
-                            </h3>
-                            <p>
-                                Eu ullamco pariatur officia elit incididunt cupidatat culpa eu do dolor reprehenderit et.
-                            </p>
-                            <button class="menu-button">Add to cart</button>
-                            <span class="item-price">$12.99</span>
-                        </div>
-                    </div>
-
-                    <div class="menu-box">
-                        <div class="menu-image">
-                            <img src="/img/pancake.jpg" alt="menu-image1"></img>
-                            <a href="#" class="fas fa-heart"></a>
-                        </div>
-                        <div class="menu-box-content">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h3>
-                                Chocolate pancake
-                            </h3>
-                            <p>
-                                Eu ullamco pariatur officia elit incididunt cupidatat culpa eu do dolor reprehenderit et.
-                            </p>
-                            <button class="menu-button">Add to cart</button>
-                            <span class="item-price">$12.99</span>
-                        </div>
-                    </div>
-
-                    <div class="menu-box">
-                        <div class="menu-image">
-                            <img src="/img/Blueberry.jpg" alt="menu-image1"></img>
-                            <a href="#" class="fas fa-heart"></a>
-                        </div>
-                        <div class="menu-box-content">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h3>
-                                Blueberry waffle
-                            </h3>
-                            <p>
-                                Eu ullamco pariatur officia elit incididunt cupidatat culpa eu do dolor reprehenderit et.
-                            </p>
-                            <button class="menu-button">Add to cart</button>
-                            <span class="item-price">$12.99</span>
-                        </div>
-                    </div>
-
-                    <div class="menu-box">
-                        <div class="menu-image">
-                            <img src="/img/Blueberry.jpg" alt="menu-image1"></img>
-                            <a href="#" class="fas fa-heart"></a>
-                        </div>
-                        <div class="menu-box-content">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h3>
-                                Blueberry waffle
-                            </h3>
-                            <p>
-                                Eu ullamco pariatur officia elit incididunt cupidatat culpa eu do dolor reprehenderit et.
-                            </p>
-                            <button class="menu-button">Add to cart</button>
-                            <span class="item-price">$12.99</span>
-                        </div>
-                    </div>
-
-                    <div class="menu-box">
-                        <div class="menu-image">
-                            <img src="/img/chocolate.jpg" alt="menu-image1"></img>
-                            <a href="#" class="fas fa-heart"></a>
-                        </div>
-                        <div class="menu-box-content">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h3>
-                                FrenchTosat stack
-                            </h3>
-                            <p>
-                                Eu ullamco pariatur officia elit incididunt cupidatat culpa eu do dolor reprehenderit et.
-                            </p>
-                            <button class="menu-button">Add to cart</button>
-                            <span class="item-price">$12.99</span>
-                        </div>
-                    </div>
-
-                    <div class="menu-box">
-                        <div class="menu-image">
-                            <img src="/img/pancake.jpg" alt="menu-image1"></img>
-                            <a href="#" class="fas fa-heart"></a>
-                        </div>
-                        <div class="menu-box-content">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h3>
-                                Chocolate pancake
-                            </h3>
-                            <p>
-                                Eu ullamco pariatur officia elit incididunt cupidatat culpa eu do dolor reprehenderit et.
-                            </p>
-                            <button class="menu-button">Add to cart</button>
-                            <span class="item-price">$12.99</span>
-                        </div>
-                    </div>
+      {/* menu section start here */}
+      <section class="menu-section" id="menu-section">
+        <h1 class="special-head text-center mt-5">
+          {" "}
+          Our <span> Menu</span>
+        </h1>
+        <p class="text-center">
+          Veniam quis mollit laboris sit nisi fugiat occaecat do minim.
+        </p>
+        <div className="container mt-5 mb-5 px-5">
+          <div className="row">
+            <div className="col-md-12 ">
+              <div className="input-group ">
+                <input
+                  id="search"
+                  type="text"
+                  className="form-control"
+                  placeholder="Search..."
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-box-container">
+          {data?.getAllProducts_db
+            .filter((product) => {
+              return search.toLocaleLowerCase() === ""
+                ? product
+                : product.Product_name.toLocaleLowerCase().includes(search) ||
+                    product.Product_description.toLocaleLowerCase().includes(
+                      search
+                    ) ||
+                    product.Category.toLocaleLowerCase().includes(search);
+            })
+            .map((product) => (
+              <div class="menu-box">
+                <div class="menu-image">
+                  <img src="/img/pancake.jpg" alt="menu-image1"></img>
+                  <a href="#" class="fas fa-heart"></a>
                 </div>
-            </section >
-            {/* menu section end here */}
-
-        </>
-    );
+                <div class="menu-box-content">
+                  <tr key={product._id}>
+                    <div class="stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <h3>{product.Product_name}</h3>
+                    <p>{product.Product_description}</p>
+                    <Link
+                      to={`#`}
+                      className="menu-button "
+                      onClick={() => setData(product)}
+                    >
+                      Add to cart
+                    </Link>{" "}
+                    <span class="item-price">${product.Product_price}</span>
+                  </tr>
+                </div>
+              </div>
+            ))}
+        </div>
+      </section>
+      {/* menu section end here */}
+    </>
+  );
 }
 
 export default Menu;
