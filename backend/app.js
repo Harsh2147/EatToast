@@ -187,7 +187,7 @@ const resolvers = {
         const newProducts = new productModel(args.productInput);
 
         const savedProducts = await newProducts.save();
-        console.log(newProducts);
+        console.log(savedProducts);
         return savedProducts;
       } catch (err) {
         console.log(err);

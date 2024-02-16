@@ -120,6 +120,7 @@ function Registration() {
           <ul>
             <li>
               <a href="#">
+        
                 <span class="title">EatToast</span>
               </a>
             </li>

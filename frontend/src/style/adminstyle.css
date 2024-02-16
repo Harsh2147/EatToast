@@ -30,6 +30,8 @@ body {
 
 
 /* admin-navigation style start here */
+
+
 .admin-navigation {
   position: fixed;
   width: 300px;
@@ -38,6 +40,7 @@ body {
   font-weight: 900;
 
 }
+
 
 .admin-navigation ul li {
   position: relative;
@@ -86,8 +89,8 @@ body {
   text-align: start;
   font-weight: 900;
   font-size: 20px;
-
 }
+
 
 /* admin-navigation style end here */
 

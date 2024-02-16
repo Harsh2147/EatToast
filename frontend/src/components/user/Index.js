@@ -27,15 +27,15 @@ function Index() {
             <header>
                 <a href="#" class="nav-logo"><i class="fas fa-utensils"></i>EatToast</a>
                 <div id="menu-button" class="fas fa-bars"></div>
-
                 <nav class="navbar">
-                    <a href="#">Home</a>
-                    <a href="#">Menu</a>
+                    <a href="/Index">Home</a>
+                    <a href="/Menu">Menu</a>
                     <a href="#">Order</a>
                     <a href="#">Review</a>
                     <a href="#">Profile</a>
                 </nav>
             </header>
+            {/* header section end here */}
 
 
             {/* banner section start here */}
@@ -66,7 +66,7 @@ function Index() {
 
                 <div class="special-box-container">
                     <div class="box">
-                        <img src="/img/poster2.jpg" alt="Speciality 1" class="special-image" />
+                        <img src="/img/pancake.jpg" alt="Speciality 1" class="special-image" />
 
                         <div class="content">
                             <div class="fas fa-pizza-slice content-icon"></div>
@@ -81,7 +81,7 @@ function Index() {
 
 
                     <div class="box">
-                        <img src="/img/poster2.jpg" alt="Speciality 1" class="special-image" />
+                        <img src="/img/chocolate.jpg" alt="Speciality 1" class="special-image" />
 
                         <div class="content">
                             <div class="fas fa-glass-whiskey content-icon"></div>
@@ -96,7 +96,7 @@ function Index() {
 
 
                     <div class="box">
-                        <img src="/img/s2.jpg" alt="Speciality 1" class="special-image" />
+                        <img src="/img/Blueberry.jpg" alt="Speciality 1" class="special-image" />
 
                         <div class="content">
                             <div class="fas fa-mug-hot content-icon"></div>
