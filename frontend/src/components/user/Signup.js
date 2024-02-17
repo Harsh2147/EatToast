@@ -1,31 +1,161 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { CUSTOMER_REGISTRATION_MUTATION } from "../../graphql/CustomerRegistrationMutation";
+import { useMutation, useQuery } from "@apollo/client";
+
 function UserSignup() {
+  const navigate = useNavigate();
+  const [Firstname, setFirstname] = useState("");
+  const [Lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
 
-    return (
-        <>
-            <div class="login-container">
-                <div class="login_form">
-                    <h1 class="special-head text-center"><span>LOGIN</span></h1>
-                    <form class="login_input">
-                        <input type="text" class="field" placeholder="First Name" />
-                        <input type="text" class="field" placeholder="Last Name" />
-                        <input type="text" class="field" placeholder="Phone No" />
-                        <input type="Email" class="field" placeholder="Email" />
-                        <input type="password" class="field"  placeholder="Password" />
-                        <button type="submit" class="submit-button">Login</button>
-                        <div class="tag">
-                            <span>All ready registered?</span>
-                            <a href="/UserLogin">Sing In</a>
-                        </div>
+  const [Mobile, setMobile] = useState("");
+  const [Password, setPassword] = useState("");
 
-                    </form>
+  const [errorMessages, setErrorMessages] = useState([]);
 
-                </div>
+  const [registration, { error, data }] = useMutation(
+    CUSTOMER_REGISTRATION_MUTATION
+  );
 
+  const validateForm = async () => {
+    const errors = [];
+
+    if (!Firstname) {
+      errors.push("Firstname field is required");
+    }
+    if (!Lastname) {
+      errors.push("Lastname field is required");
+    }
+    if (!email) {
+      errors.push("Email field is required");
+    }
+
+    if (!Mobile) {
+      errors.push("Mobile is required");
+    }
+    if (!Password) {
+      errors.push("Password is required");
+    }
+
+    setErrorMessages(errors);
+    return errors.length === 0;
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      try {
+        const result = await registration({
+          variables: {
+            customerInput: {
+              Firstname,
+              Mobile: parseInt(Mobile),
+              Lastname,
+              email,
+              Password,
+            },
+          },
+        });
+        // console.log("result.data " + result.data);
+        // console.log("result.data.signupCustomer " + result.data.signupCustomer);
+        if (result.data && result.data.signupCustomer) {
+          alert("Successful");
+          navigate("/UserLogin");
+        }
+      } catch (error) {
+        // Check if the error message is related to an existing user
+        if (
+          error.message.includes(
+            "User with the provided email and usertype already exists."
+          )
+        ) {
+          setErrorMessages([
+            `User with the provided email and usertype already exists. will you like to login? `,
+          ]);
+        }
+        return;
+      }
+    }
+  };
+  return (
+    <>
+      <div class="login-container">
+        <div class="login_form">
+          <h1 class="special-head text-center">
+            <span>Signup</span>
+          </h1>
+          {errorMessages.length > 0 && (
+            <div style={{ color: "red", fontWeight: "700" }}>
+              <ul>
+                {errorMessages.map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
             </div>
+          )}
+          <form onSubmit={handleSubmit} class="login_input">
+            <input
+              id="Firstname"
+              type="text"
+              className="field"
+              placeholder="First Name"
+              name="Firstname"
+              value={Firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+            />
 
-        </>
-    );
+            <input
+              id="Lastname"
+              type="text"
+              className="field"
+              placeholder="Last Name"
+              name="Lastname"
+              value={Lastname}
+              onChange={(e) => setLastname(e.target.value)}
+            />
+
+            <input
+              type="text"
+              className="field"
+              placeholder="Phone No"
+              id="Mobile"
+              name="Mobile"
+              value={Mobile}
+              onChange={(e) => setMobile(e.target.value)}
+            />
+
+            <input
+              type="Email"
+              className="field"
+              placeholder="Email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              className="field"
+              placeholder="Password"
+              id="Password"
+              name="Password"
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button type="submit" class="submit-button">
+              Signup
+            </button>
+            <div class="tag">
+              <span>All ready registered?</span>
+              <a href="/UserLogin">Lgo In</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default UserSignup;

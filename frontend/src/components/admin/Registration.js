@@ -120,7 +120,6 @@ function Registration() {
           <ul>
             <li>
               <a href="#">
-        
                 <span class="title">EatToast</span>
               </a>
             </li>
@@ -252,7 +251,7 @@ function Registration() {
             </div>
             <div className="card-body">
               {errorMessages.length > 0 && (
-                <div style={{ color: "red"  , fontWeight:"700" }}>
+                <div style={{ color: "red", fontWeight: "700" }}>
                   <ul>
                     {errorMessages.map((error, index) => (
                       <li key={index}>{error}</li>
@@ -361,12 +360,10 @@ function Registration() {
                   type="submit"
                   class="btn btn-primary mt-2 mb-3 "
                   value="Register"
-                  
                 />
                 <p>
                   Already a registered? <a href="/Login">Log in</a>
                 </p>
-                
               </form>
             </div>
           </div>
