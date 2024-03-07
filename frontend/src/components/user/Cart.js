@@ -10,6 +10,7 @@ function Cart() {
   const cartItems = JSON.parse(cartItemsString) || []; // Parse the string into an array, or default to an empty array if cartItemsString is null or cannot be parsed
   const [cartItem, setCartItems] = useState(cartItems);
   const [totalPriceNew, setTotalPrice] = useState(0);
+  const taxRate = 0.1;
 
   let finalPrice = 0;
   let totalPrice = cartItems.reduce(
@@ -65,6 +66,9 @@ function Cart() {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItem));
   }, [cartItem]);
+  const subTotalPrice = totalPriceNew;
+  const taxAmount = subTotalPrice * taxRate;
+  const totalPriceWithTax = subTotalPrice + taxAmount;
   console.log("cartItem_updated" + JSON.stringify(cartItem));
   return (
     <>
@@ -180,14 +184,14 @@ function Cart() {
 
               <div class="d-flex justify-content-between">
                 <h6>Tax</h6>
-                <p>$18.25</p>
+                <p>${taxAmount.toFixed(2)}</p>
               </div>
 
               <hr className="second-hr"></hr>
 
               <div class="d-flex justify-content-between">
                 <h6>Total</h6>
-                <p>${totalPrice + 18.25}</p>
+                <p>${totalPriceWithTax.toFixed(2)}</p>
               </div>
 
               <div class="d-flex justify-content-between">
