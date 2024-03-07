@@ -5,10 +5,7 @@ import { FETCH_ALL_PRODUCTS } from "../../graphql/FetchProductQuery";
 import { Link } from "react-router-dom";
 function Menu() {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState(() => {
-    const storedCartItems = localStorage.getItem("cartItems");
-    return storedCartItems ? JSON.parse(storedCartItems) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
   const { loading, error, data } = useQuery(FETCH_ALL_PRODUCTS);
   const [search, setSearch] = useState("");
 
@@ -67,7 +64,6 @@ function Menu() {
         <nav class="navbar">
           <a href="/Index">Home</a>
           <a href="/Menu">Menu</a>
-          <a href="/Cart">CART</a>
           <a href="#">Order</a>
           <a href="#">Review</a>
           <a href="#">Profile</a>
@@ -129,17 +125,14 @@ function Menu() {
                     </div>
                     <h3>{product.Product_name}</h3>
                     <p>{product.Product_description}</p>
-                    {/* <Link
-                      to={`/Cart`}
+                    <Link
+                      to={`/UserLogin`}
                       className="menu-button "
-                      onClick={() => {
-                        handleAddToCart(product);
-                      }}
+                      onClick={() => setData(product)}
                     >
-                      ADD TO CART
-                    </Link>{" "} */}
+                      Add to cart
+                    </Link>{" "}
                     <button
-                      className="menu-button "
                       id="addtocart"
                       onClick={() => {
                         handleAddToCart(product);
