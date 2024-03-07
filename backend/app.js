@@ -7,6 +7,7 @@ import eatToastModel from "./models/EatToastModel.js";
 import productModel from "./models/ProductModel.js";
 import ProductModel from "./models/ProductModel.js";
 import UsersModel from "./models/UsersModel.js";
+import CustomersModel from "./models/CustomerModel.js";
 import bcrypt from "bcrypt";
 const typeDefs = `
 type User{
@@ -27,6 +28,25 @@ input UserInput{
   Password: String,
   Mobile: Int,
   Usertype: UserType,
+}
+type Customer{
+  _id: ID,
+  Firstname: String,
+  Lastname: String,
+  email: String,
+ 
+  Mobile: Int,
+  Password: String,
+ 
+}
+input CustomerInput{
+  Firstname: String,
+  Lastname: String,
+  email: String,
+ 
+  Password: String,
+  Mobile: Int,
+  
 }
 enum UserType{
   ADMIN
@@ -89,7 +109,7 @@ type Mutation{
   db_deleteCategoryById(cat_id:ID):Category
 
   signupUser(userInput: UserInput): User
-  
+  signupCustomer(CustomerInput: CustomerInput): Customer
   checkExistingUser(email: String!, Password:String!, Usertype: UserType!): User
 }
 
@@ -264,6 +284,42 @@ const resolvers = {
         return updated_cat;
       } catch (err) {
         console.log(`Update Failed due to the error below \n ${err}`);
+      }
+    },
+
+    signupCustomer: async (parent, args, context, info) => {
+      try {
+        if (!args.CustomerInput) {
+          throw new Error("User input data is missing.");
+        }
+        const { email } = args.CustomerInput;
+        // Check for existing user with the same email and usertype
+        const existingUser = await CustomersModel.findOne({ email });
+
+        if (existingUser) {
+          // Throw an error if the user already exists with the same email and usertype
+          throw new Error(
+            "User with the provided email and usertype already exists."
+          );
+        }
+
+        const salt = 15;
+        const hashedPassword = await bcrypt.hash(
+          args.CustomerInput.Password,
+          salt
+        );
+
+        // If no existing user found, proceed with user creation logic
+        const newCustomer = new CustomersModel({
+          ...args.CustomerInput,
+          Password: hashedPassword,
+        });
+
+        const savedCustomer = await newCustomer.save();
+
+        return savedCustomer;
+      } catch (error) {
+        throw error; // Rethrow the error to be caught by Apollo Server and returned to the client
       }
     },
     signupUser: async (parent, args, context, info) => {
