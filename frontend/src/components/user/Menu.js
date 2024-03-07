@@ -40,6 +40,7 @@ function Menu() {
         <nav class="navbar">
           <a href="/Index">Home</a>
           <a href="/Menu">Menu</a>
+          <a href="/Cart">CART</a>
           <a href="#">Order</a>
           <a href="#">Review</a>
           <a href="#">Profile</a>

@@ -240,90 +240,121 @@ header style end here */
 /* special section end here */
 
 /* about section style start here */
+/*--About--*/
 
-.main-about-us .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-.main-about-us .row .main-about-us-image {
-    flex: 1 1 30rem;
-}
-
-.main-about-us .row .main-about-us-image img {
+.about{
     width: 100%;
-    height: 30rem;
+    height: 100vh;
+    padding: 10px 0 0 0;
+    background: url('../../public/img/about_bg.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-.main-about-us .row .about-us-content {
-    flex: 1 1 30rem;
-}
-
-.main-about-us .row .about-us-content p {
-    color: var(--light-color);
-    font-size: 1rem;
-    padding: .5rem 0;
-    line-height: 1.5;
-}
-
-.main-about-us .row .about-us-content h3 {
-    color: var(--blue);
-    font-size: 1.5rem;
-    padding: .5rem;
-    line-height: 1.5;
-    font-weight: 900;
-}
-
-.main-about-us .row .about-us-content .icons-container {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding: 1rem 0;
-    margin-top: .5rem;
-}
-
-.main-about-us .row .about-us-content .icons-container .about-us-icon {
-    background: #eee;
-    border-radius: .5rem;
-    border: .1rem solid rgba(0, 0, 0, .2);
+.about .about_main{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    flex: 1 1 5rem;
-    padding: .5rem 1rem;
+    justify-content: space-around;
 }
 
-.main-about-us .row .about-us-content .icons-container .about-us-icon i {
-    font-size: 1.5rem;
-    color: var(--green);
-
+.about .about_main .about_image img{
+    width: 46rem;
 }
 
-.main-about-us .row .about-us-content .icons-container .about-us-icon span {
-    font-size: 1rem;
+.about .about_main .about_text h1{
+    font-size: 3rem;
+    position: relative;
+    bottom: 40px;
+}
+
+.about .about_main .about_text h1 span{
+    color: var(--red);
+    margin-right: 15px;
+}
+
+.about .about_main .about_text h3{
+    position: relative;
+    bottom: .5rem;
+    font-size: 2rem;
+}
+
+.about .about_main .about_text p{
+    width: 650px;
+    text-align: justify;
+    line-height: 23px;
+    margin-top: 20px;
+}
+
+.about .about_main .about_text .about_services{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.about .about_main .about_text .about_services .s_1{
+    display: flex;
+    align-items: center;
+    width: 180px;
+    background: #ececec;
+    padding: 10px;
+    border: 2px solid var(--blue);
+    cursor: pointer;
+}
+
+.about .about_main .about_text .about_services .s_1 i{
+    color: #000;
+    margin: 5px 10px 5px 5px;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.about .about_main .about_text .about_services .s_1:hover i{
     color: var(--blue);
-    font-weight: 600;
 }
 
-.about-us-btn {
-    background-color: var(--blue);
-    color: var(--green);
-    padding: .7rem;
-    font-weight: 900;
+.about .about_main .about_text .about_services .s_1 a{
     text-decoration: none;
-    border-radius: .6rem;
-    margin-top: .3rem;
-    width: 9.5rem;
+    color: #000;
+    font-size: 16px;
 }
 
-.about-us-btn:hover {
-    background: var(--green);
-    color: var(--blue);
+.about .about_main .about_text .about_btn i{
+    font-size: 15px;
+    margin-right: 8px;
 }
 
+.about .about_main .about_text .about_btn{
+    position: relative;
+    top: 35px;
+    padding: 10px 20px;
+    border: 2px solid var(--blue);
+    text-decoration: none;
+    color: #000;
+    z-index: 5;
+    transition: 0.3s;
+}
+
+.about .about_main .about_text .about_btn:hover{
+    color: #fff;
+}
+
+.about .about_main .about_text .about_btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    z-index: -1;
+    background: var(--blue);
+    transition: 0.3s;
+}
+
+.about .about_main .about_text .about_btn:hover::before{
+    top: unset;
+    width: 100%;
+    bottom: 0;
+}
 
 
 /* about section end here */
@@ -511,6 +542,127 @@ header style end here */
     text-decoration: none;
 }
 /* user style end here */
+
+/* cart page design start here */
+
+/* cart page design start here */
+
+.cart-container{
+    margin-top: 80px;
+  }
+
+  .cart-head{
+      font-weight: 900;
+      color: var(--blue);
+      font-size: 1.5rem;
+  }
+
+  .cart-container table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .cart-container table thead{
+    font-weight: 700;
+  }
+
+  .cart-container table thead td{
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: .7rem;
+  }
+
+  .cart-container table td{
+    border: 1px solid var(--black1);
+    text-align: center;
+  }
+
+  .cart-container table td:nth-child(1){
+    width: 100px;
+  }
+
+  .cart-container table td:nth-child(2),
+  .cart-container table td:nth-child(3){
+    width: 200px;
+  }
+
+  .cart-container table td:nth-child(4),
+  .cart-container table td:nth-child(5),
+  .cart-container table td:nth-child(6) {
+    width: 170px;
+  }
+
+
+  .cart-container table tbody img{
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+  }
+
+  .cart-container table tbody i{
+    color: var(--blue);
+    
+  }
+
+  .cart-bottom .coupon>div,
+  .cart-bottom .total>div{
+    border: 1px solid var(--light-color);
+    margin-top: 2.5rem;
+
+  }
+
+  .cart-bottom .coupon h5,
+  .cart-bottom .total h5{
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: .7rem 12px;
+    font-weight: 700;
+  }
+  .cart-bottom .coupon p,
+  .cart-bottom .coupon input {
+    padding: 0 .7rem;
+  }
+
+  .cart-bottom .coupon input {
+     height: 2.5rem;
+     margin: 0 0 1.5rem 1.5rem;
+  }
+
+  .cart-bottom .total div>div{
+    padding: 0 2rem;
+  }
+
+  .cart-bottom button{
+    margin-left: 2rem;
+    height: 2.5rem;
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 900;
+    
+  }
+  .cart-bottom .total h6{
+    color: var(--blue);
+    font-weight: 900;
+  }
+  
+  .second-hr{
+    background: var(--green);
+    width: 100%;
+    height: .5rem;
+  }
+
+  .cart-bottom .total div>button{
+    margin:  0 2rem 2.5rem 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+
+
 
 /* media queries  */
 

@@ -22,6 +22,7 @@ import Index from "./components/user/Index";
 import Menu from "./components/user/Menu";
 import UserLogin from "./components/user/Login";
 import UserSignup from "./components/user/Signup";
+import Cart from "./components/user/Cart";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="Menu" element={<Menu />} />
         <Route path="UserLogin" element={<UserLogin />} />
         <Route path="UserSignup" element={<UserSignup />} />
+        <Route path="Cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );

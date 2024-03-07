@@ -30,6 +30,7 @@ function Index() {
                 <nav class="navbar">
                     <a href="/Index">Home</a>
                     <a href="/Menu">Menu</a>
+                    <a href="/Cart">Cart</a>
                     <a href="#">Order</a>
                     <a href="#">Review</a>
                     <a href="#">Profile</a>
@@ -57,6 +58,8 @@ function Index() {
                     <a href="#" class="main-button">Order Now</a>
                 </div>
             </div>
+
+
             {/* banner section end here */}
 
 
@@ -116,52 +119,57 @@ function Index() {
 
             {/* about section start here */}
 
-            <section class="main-about-us" id="main-about-us">
-                <h1 class="special-head text-center"> About <span>Us</span></h1>
+            <div class="about">
 
+                <div class="about_main">
 
-                <div class="row">
-                    <div class="main-about-us-image">
-                        <img src="/img/aboutus2.jpg" alt="about-us"></img>
-
+                    <div class="about_image">
+                        <img src="/img/about.png" />
                     </div>
 
-                    <div class="about-us-content">
-                        <h3>
-                            Best food in the country
-                        </h3>
+                    <div class="about_text">
 
+                        <h1><span>About</span>Us</h1>
+                        <h3>why food choose us?</h3>
                         <p>
-                            loremSunt aliquip dolore ullamco culpa aliquip proident pariatur Lorem nulla nisi Lorem esse. Fugiat pariatur cupidatat sit ut quis velit ad labore. Sunt nostrud nostrud do sunt consequat consectetur.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Itaque recusandae dolore tempora fugiat quisquam illum,
+                            veniam adipisci iusto consequuntur porro explicabo
+                            repudiandae nam quis beatae obcaecati. Magnam provident
+                            fuga aspernatur. Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Cum minus facilis placeat sint repellendus
+                            dolorum nostrum, corrupti magni ducimus, et neque nihil enim.
+                            Tempore quia rerum placeat laboriosam, sit quasi!
                         </p>
-                        <p>
-                            Laborum cillum id cupidatat anim fugiat reprehenderit. Velit anim aliquip vel
 
-                        </p>
+                        <div class="about_services">
 
-                        <div class="icons-container">
-                            <div class="about-us-icon">
-                                <i class="fas fa-shipping-fast"></i>
-                                <span>Free delivery</span>
+                            <div class="s_1">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <a href="#">Fast Delivery</a>
                             </div>
 
-                            <div class="about-us-icon">
-                                <i class="fas fa-dollar-sign"></i>
-                                <span>Easy Payment</span>
+                            <div class="s_1">
+                                <i class="fa-brands fa-amazon-pay"></i>
+                                <a href="#">Easy Payment</a>
                             </div>
 
-                            <div class="about-us-icon">
-                                <i class="fas fa-headset"></i>
-                                <span>24/7 service</span>
+                            <div class="s_1">
+                                <i class="fa-solid fa-headset"></i>
+                                <a href="#">24 x 7 Services</a>
                             </div>
+
                         </div>
-                        <button class="about-us-btn">
-                            Learn More
-                        </button>
+
+                        <a href="#" class="about_btn">
+                            <i class="fa-solid fa-burger"></i>Order Now
+                        </a>
 
                     </div>
+
                 </div>
-            </section>
+
+            </div>
 
             {/* about section end here */}
 
