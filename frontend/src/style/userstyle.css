@@ -687,8 +687,15 @@ header style end here */
 
 
   /* checkout style start here */
-
-
+.total .cart-container{
+    padding: 0 !important;
+    margin: 0;
+}
+  .total .cart-container table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
   .checkout-form{
     margin-top: 90px;
     border: 1px solid var(--black2);

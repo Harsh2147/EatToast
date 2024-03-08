@@ -25,12 +25,12 @@ function Header() {
         {CustomerloginData ? (
           <>
             <a href="#">Profile</a>
-            <a href="#">Logout</a>
+            <a href="/UserLogout">Logout</a>
           </>
         ) : (
           <>
-            <a to="/UserLogin">Login</a>
-            <a to="/UserSignup">Sighnup Here</a>
+            <a href="/UserLogin">Login</a>
+            <a href="/UserSignup">Signup</a>
           </>
         )}
 
