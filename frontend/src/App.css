@@ -73,7 +73,7 @@
   margin: 2px;
 }
 
-.quantity button:hover {
+.mx-auto button:hover {
   background-color: #ed5656;
 }
 .total-container {

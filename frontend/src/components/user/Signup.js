@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CUSTOMER_REGISTRATION_MUTATION } from "../../graphql/CustomerRegistrationMutation";
 import { useMutation, useQuery } from "@apollo/client";
-
+import Header from "./Header";
 function UserSignup() {
   const navigate = useNavigate();
   const [Firstname, setFirstname] = useState("");
@@ -80,6 +80,7 @@ function UserSignup() {
   };
   return (
     <>
+      <Header />
       <div class="login-container">
         <div class="login_form">
           <h1 class="special-head text-center">
