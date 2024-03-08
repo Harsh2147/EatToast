@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { FETCH_ALL_PRODUCTS } from "../../graphql/FetchProductQuery";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 function Menu() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(() => {
@@ -52,6 +53,7 @@ function Menu() {
     // localStorage.setItem("cartItems", JSON.stringify(cartItems));
     console.log("cartItems=" + cartItems);
     console.log("product_Id=" + product_Id, "userId=" + userId);
+    alert(product.Product_name + " added to Cart Successfully !!!");
   };
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -59,20 +61,7 @@ function Menu() {
   return (
     <>
       {/* header section start from here */}
-      <header>
-        <a href="#" class="nav-logo">
-          <i class="fas fa-utensils"></i>EatToast
-        </a>
-        <div id="menu-button" class="fas fa-bars"></div>
-        <nav class="navbar">
-          <a href="/Index">Home</a>
-          <a href="/Menu">Menu</a>
-          <a href="/Cart">CART</a>
-          <a href="#">Order</a>
-          <a href="#">Review</a>
-          <a href="#">Profile</a>
-        </nav>
-      </header>
+      <Header />
       {/* header section end here */}
 
       {/* menu section start here */}

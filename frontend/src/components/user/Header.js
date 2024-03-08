@@ -1,0 +1,38 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+function Header() {
+  const cartItemsString = localStorage.getItem("cartItems");
+  const cartItems = JSON.parse(cartItemsString) || [];
+
+  // Calculate total quantity of products in the cart
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+  return (
+    <header>
+      <a href="#" class="nav-logo">
+        <i class="fas fa-utensils"></i>EatToast
+      </a>
+      <div id="menu-button" class="fas fa-bars"></div>
+      <nav class="navbar">
+        <a href="/Index">Home</a>
+        <a href="/Menu">Menu</a>
+
+        <a href="#">Order</a>
+        <a href="#">Review</a>
+        <a href="#">Profile</a>
+        <a href="/Cart">
+          <i class="fas fa-shopping-cart">
+            <span className="cart-length">
+              {totalQuantity > 0 && `(${totalQuantity})`}
+            </span>
+          </i>{" "}
+        </a>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;

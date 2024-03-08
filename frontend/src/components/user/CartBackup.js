@@ -10,10 +10,16 @@ function Cart() {
   const cartItems = JSON.parse(cartItemsString) || []; // Parse the string into an array, or default to an empty array if cartItemsString is null or cannot be parsed
   const [cartItem, setCartItems] = useState(cartItems);
   const [totalPriceNew, setTotalPrice] = useState(0);
+  const taxRate = 0.1;
+
+  let finalPrice = 0;
   let totalPrice = cartItems.reduce(
     (price, item) => price + item.quantity * item.Product_price,
     0
   );
+  // const [subTotalPriceNew, setSubTotalPrice] = useState(totalPrice + 18.25);
+  // //setSubTotalPrice(totalPrice * 18.25);
+  // finalPrice = subTotalPriceNew;
   const handleAddProduct = (Product) => {
     const ProductExist = cartItem.find((item) => item._id === Product._id);
 
@@ -54,10 +60,15 @@ function Cart() {
     );
     setTotalPrice(newTotalPrice);
     totalPrice = totalPriceNew;
+    // setSubTotalPrice(totalPrice * 18.25);
+    // finalPrice = subTotalPriceNew;
   }, [cartItem]);
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItem));
   }, [cartItem]);
+  const subTotalPrice = totalPriceNew;
+  const taxAmount = subTotalPrice * taxRate;
+  const totalPriceWithTax = subTotalPrice + taxAmount;
   console.log("cartItem_updated" + JSON.stringify(cartItem));
   return (
     <>
@@ -70,6 +81,7 @@ function Cart() {
         <nav class="navbar">
           <a href="/Index">Home</a>
           <a href="/Menu">Menu</a>
+          <a href="/Cart">Cart</a>
           <a href="#">Order</a>
           <a href="#">Review</a>
           <a href="#">Profile</a>
@@ -77,67 +89,121 @@ function Cart() {
       </header>
       {/* header section end here */}
 
-      {/* menu section start here */}
-      <section class="menu-section" id="menu-section">
-        <h1 class="special-head text-center mt-5">
-          {" "}
-          Your <span>Cart</span>
-        </h1>
-        <p class="text-center">
-          Veniam quis mollit laboris sit nisi fugiat occaecat do minim.
-        </p>
-        <div class="container">
-          {cartItems.map((item, index) => (
-            <div class="cart-items">
-              <div class="cart-item">
-                <img src="/img/pancake.jpg" alt="menu-image1"></img>
+      <div class="container-fluid text-center">
+        <div class="cart-container ">
+          <p class="cart-head">YOUR SHOPPING CART</p>
+          <table class="mx-auto" width="100%">
+            <thead>
+              <tr>
+                <td>Remove</td>
+                <td>Image</td>
+                <td>Product</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total</td>
+              </tr>
+            </thead>
 
-                <div class="cart-item-content">
-                  <tr key={item._id}>
-                    <div class="stars">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>{item.Product_name}</h3>
-                    <p>{item.Product_description}</p>
-                    <div class="quantity">
-                      <input
-                        type="number"
-                        value={item.quantity}
-                        min="1"
-                      ></input>
-                      <button
-                        class="increase"
-                        onClick={() => handleAddProduct(item)}
-                      >
-                        +
-                      </button>
-                      <button
-                        class="decrease"
-                        onClick={() => handleRemoveProduct(item)}
-                      >
-                        -
-                      </button>
-                    </div>
+            <tbody>
+              {cartItems.map((item, index) => (
+                <tr key={item._id}>
+                  <td>
+                    <a href="#">
+                      <i class="fas fa-trash-alt"></i>
+                    </a>
+                  </td>
 
-                    <span class="item-price">
+                  <td>
+                    <img src="/img/pancake.jpg"></img>
+                  </td>
+
+                  <td>
+                    <h5>{item.Product_name}</h5>
+                  </td>
+
+                  <td>
+                    <h5>{item.Product_price}</h5>
+                  </td>
+
+                  <td>
+                    {" "}
+                    <input
+                      class="w-25 pl-1"
+                      type="number"
+                      value={item.quantity}
+                      min="1"
+                    ></input>
+                    <button
+                      class="increase"
+                      onClick={() => handleAddProduct(item)}
+                    >
+                      +
+                    </button>
+                    <button
+                      class="decrease"
+                      onClick={() => handleRemoveProduct(item)}
+                    >
+                      -
+                    </button>
+                  </td>
+
+                  <td>
+                    <h5>
+                      {" "}
                       {item.quantity}*${item.Product_price}
-                    </span>
-                  </tr>
-                </div>
+                    </h5>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cart-bottom">
+        <div class="row">
+          <div class="coupon col-lg-5 col-md-5 col-12 mx-3" mb-4>
+            <div>
+              <h5>COUPON</h5>
+
+              <p>Enter Your Coupon name if you have one.</p>
+
+              <input type="text" placeholder="coupon code"></input>
+              <button>APPLY COUPON</button>
+            </div>
+          </div>
+
+          <div class="total col-lg-6 col-md-6 col-12" mb-4>
+            <div>
+              <h5>CART TOTAL</h5>
+
+              <div class="d-flex justify-content-between">
+                <h6>Subtotal</h6>
+                <p>${totalPrice}</p>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <h6>Tax</h6>
+                <p>${taxAmount.toFixed(2)}</p>
+              </div>
+
+              <hr className="second-hr"></hr>
+
+              <div class="d-flex justify-content-between">
+                <h6>Total</h6>
+                <p>${totalPriceWithTax.toFixed(2)}</p>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <h6></h6>
+                <p>
+                  <button class="ml-auto">PROCESS</button>
+                </p>
               </div>
             </div>
-          ))}
-        </div>{" "}
-        <div class="total-container">
-          <div class="total-price">Total Price: ${totalPrice}</div>
-          <button class="checkout-button">Proceed to Checkout</button>
+          </div>
         </div>
-      </section>
-      {/* menu section end here */}
+      </div>
     </>
   );
 }
