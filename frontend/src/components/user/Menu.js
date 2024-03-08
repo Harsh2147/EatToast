@@ -70,14 +70,15 @@ function Menu() {
           {" "}
           Our <span> Menu</span>
         </h1>
-        <p class="text-center">
-          Veniam quis mollit laboris sit nisi fugiat occaecat do minim.
-        </p>
+
         <div className="container mt-5 mb-5 px-5">
           <div className="row">
             <div className="col-md-12 ">
-              <div className="input-group ">
+              <label for="search" class="s-label">Search Product Here:</label>
+              <div className="input-group p-search" >
+
                 <input
+
                   id="search"
                   type="text"
                   className="form-control"
@@ -96,10 +97,10 @@ function Menu() {
               return search.toLocaleLowerCase() === ""
                 ? product
                 : product.Product_name.toLocaleLowerCase().includes(search) ||
-                    product.Product_description.toLocaleLowerCase().includes(
-                      search
-                    ) ||
-                    product.Category.toLocaleLowerCase().includes(search);
+                product.Product_description.toLocaleLowerCase().includes(
+                  search
+                ) ||
+                product.Category.toLocaleLowerCase().includes(search);
             })
             .map((product) => (
               <div class="menu-box">
