@@ -24,6 +24,7 @@ import UserLogin from "./components/user/Login";
 import UserSignup from "./components/user/Signup";
 import Cart from "./components/user/Cart";
 import Checkout from "./components/user/Checkout";
+import Logout from "./components/user/Logout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path="UserSignup" element={<UserSignup />} />
         <Route path="Cart" element={<Cart />} />
         <Route path="Checkout" element={<Checkout />} />
+        <Route path="Logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

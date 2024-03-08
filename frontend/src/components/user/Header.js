@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Header() {
   const cartItemsString = localStorage.getItem("cartItems");
   const cartItems = JSON.parse(cartItemsString) || [];
-
+  const CustomerloginData = localStorage.getItem("CustomerloginData");
   // Calculate total quantity of products in the cart
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -22,7 +22,18 @@ function Header() {
 
         <a href="#">Order</a>
         <a href="#">Review</a>
-        <a href="#">Profile</a>
+        {CustomerloginData ? (
+          <>
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+          </>
+        ) : (
+          <>
+            <a to="/UserLogin">Login</a>
+            <a to="/UserSignup">Sighnup Here</a>
+          </>
+        )}
+
         <a href="/Cart">
           <i class="fas fa-shopping-cart">
             <span className="cart-length">

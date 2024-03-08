@@ -637,12 +637,29 @@ header style end here */
 
   .cart-bottom button{
     margin-left: 2rem;
+    
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 900;
+    padding:8px;
+    border-radius: 20%;
+  }
+  .cart-bottom button:hover {
+    background-color: #ff3838;
+}
+  .cart-bottom a {
+    margin-left: 2rem;
     height: 2.5rem;
     background-color: var(--blue);
     color: var(--white);
     font-weight: 900;
-    
-  }
+    padding:12px;
+    text-decoration: none;
+    border-radius: 20%;
+}
+.cart-bottom a:hover {
+    background-color: #ff3838;
+}
   .cart-bottom .total h6{
     color: var(--blue);
     font-weight: 900;
