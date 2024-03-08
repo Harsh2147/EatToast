@@ -31,7 +31,7 @@ function Index() {
                     <a href="/Index">Home</a>
                     <a href="/Menu">Menu</a>
                     <a href="/Cart">Cart</a>
-                    <a href="#">Order</a>
+                    <a href="Checkout">Checkout</a>
                     <a href="#">Review</a>
                     <a href="#">Profile</a>
                 </nav>

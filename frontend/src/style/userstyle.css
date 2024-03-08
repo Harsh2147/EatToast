@@ -461,6 +461,14 @@ header style end here */
     font-weight: 900;
 }
 
+.p-search input{
+    border: 2px solid black;
+}
+
+.s-label{
+    font-weight: 900;
+    padding: 1rem 0;
+}
 
 
 /* user login style start from here */
@@ -660,6 +668,61 @@ header style end here */
     justify-content: flex-end;
   }
 
+
+  /* checkout style start here */
+
+
+  .checkout-form{
+    margin-top: 90px;
+    border: 1px solid var(--black2);
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    border-radius: 1rem 5rem;
+  }
+
+ .side-cart{
+    margin-top: 90px;
+ }
+
+.section-break {
+    border: none;
+    border-top: 4px solid var(--blue); 
+    margin: 10px 0;
+}
+
+.checkout-form .row h3{
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 1rem;
+}
+
+.checkout-form .row .col label,
+.checkout-form .row .col-3 label,
+.checkout-form .row .col-6 label{
+    font-weight: 900;
+    margin: .4rem;
+    color: var(--blue);
+}
+
+.checkout-form .row .col input,
+.checkout-form .row .col-3 input,
+.checkout-form .row .col-6 input{
+    border: 1px solid var(--black2);
+    border-radius: .7rem;
+}
+
+.check-button{
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 900;
+    padding: .8rem;
+    margin: .8rem;
+    width: 17rem;
+}
+
+  /* checkout style end here */
 
 
 

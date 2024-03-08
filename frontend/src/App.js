@@ -23,6 +23,7 @@ import Menu from "./components/user/Menu";
 import UserLogin from "./components/user/Login";
 import UserSignup from "./components/user/Signup";
 import Cart from "./components/user/Cart";
+import Checkout from "./components/user/Checkout"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="UserLogin" element={<UserLogin />} />
         <Route path="UserSignup" element={<UserSignup />} />
         <Route path="Cart" element={<Cart />} />
+        <Route path="Checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   );
