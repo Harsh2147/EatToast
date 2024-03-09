@@ -21,7 +21,7 @@ function Header() {
         <a href="/Menu">Menu</a>
 
         <a href="#">Order</a>
-        <a href="#">Review</a>
+        <a href="/Review">Review</a>
         {CustomerloginData ? (
           <>
             <a href="#">Profile</a>
