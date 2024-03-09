@@ -12,9 +12,11 @@ export const ADD_ORDER_MUTATION = gql`
       Quantity
       TotalPriceWithTax
       Date
+      CurrentDate
       DeliveryType
       PaymentBy
       CustomerId
+      Time
     }
   }
 `;
