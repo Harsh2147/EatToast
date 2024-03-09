@@ -56,7 +56,7 @@ function App() {
         <Route path="UserSignup" element={<UserSignup />} />
         <Route path="Cart" element={<Cart />} />
         <Route path="Checkout" element={<Checkout />} />
-        <Route path="Checkout" element={<Checkout />} />
+    
       </Routes>
     </BrowserRouter>
   );
