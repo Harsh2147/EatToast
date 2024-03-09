@@ -11,7 +11,11 @@ function UserSignup() {
 
   const [Mobile, setMobile] = useState("");
   const [Password, setPassword] = useState("");
-
+  const [Address1, setAddress1] = useState("");
+  const [Address2, setAddress2] = useState("");
+  const [PostalCode, setPostalCode] = useState("");
+  const [State, setState] = useState("");
+  const [Country, setCountry] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
 
   const [registration, { error, data }] = useMutation(
@@ -54,6 +58,11 @@ function UserSignup() {
               Lastname,
               email,
               Password,
+              Address1,
+              Address2,
+              PostalCode,
+              State,
+              Country,
             },
           },
         });

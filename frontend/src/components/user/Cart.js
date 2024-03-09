@@ -86,26 +86,17 @@ function Cart() {
           <table class="mx-auto" width="100%">
             <thead>
               <tr>
-                <td>Remove</td>
                 <td>Image</td>
                 <td>Product</td>
                 <td>Price</td>
                 <td>Quantity</td>
-                <td>Total</td>
+                <td>Total</td> <td>Remove</td>
               </tr>
             </thead>
 
             <tbody>
               {cartItems.map((item, index) => (
                 <tr key={item._id}>
-                  <td>
-                    <button
-                      onClick={() => handleRemoveProductfromCart(item._id)}
-                    >
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </td>
-
                   <td>
                     <img src="/img/pancake.jpg"></img>
                   </td>
@@ -145,6 +136,13 @@ function Cart() {
                       {" "}
                       <h5>${item.quantity * item.Product_price}</h5>
                     </h5>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleRemoveProductfromCart(item._id)}
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -190,7 +188,10 @@ function Cart() {
               <div class="d-flex justify-content-between">
                 <h6></h6>
                 <p>
-                  <button class="ml-auto">PROCESS</button>
+                  {/* <button class="ml-auto">PROCESS</button> */}
+                  <Link to={`/Checkout`} className="ml-auto ">
+                    PROCCED TO CHECKOUT
+                  </Link>{" "}
                 </p>
               </div>
             </div>

@@ -645,12 +645,29 @@ header style end here */
 
   .cart-bottom button{
     margin-left: 2rem;
+    
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 900;
+    padding:8px;
+    border-radius: 20%;
+  }
+  .cart-bottom button:hover {
+    background-color: #ff3838;
+}
+  .cart-bottom a {
+    margin-left: 2rem;
     height: 2.5rem;
     background-color: var(--blue);
     color: var(--white);
     font-weight: 900;
-    
-  }
+    padding:12px;
+    text-decoration: none;
+    border-radius: 20%;
+}
+.cart-bottom a:hover {
+    background-color: #ff3838;
+}
   .cart-bottom .total h6{
     color: var(--blue);
     font-weight: 900;
@@ -670,8 +687,15 @@ header style end here */
 
 
   /* checkout style start here */
-
-
+.total .cart-container{
+    padding: 0 !important;
+    margin: 0;
+}
+  .total .cart-container table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
   .checkout-form{
     margin-top: 90px;
     border: 1px solid var(--black2);

@@ -74,7 +74,10 @@
 }
 
 .mx-auto button:hover {
-  background-color: #ed5656;
+  background-color: #0f0d2a;
+}
+.mx-auto button i {
+  color: white !important;
 }
 .total-container {
   width: 20%;

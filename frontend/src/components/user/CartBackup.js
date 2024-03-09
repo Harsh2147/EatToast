@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { FETCH_ALL_PRODUCTS } from "../../graphql/FetchProductQuery";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 function Cart() {
   const navigate = useNavigate();
   const cartItemsString = localStorage.getItem("cartItems");
@@ -10,7 +11,7 @@ function Cart() {
   const cartItems = JSON.parse(cartItemsString) || []; // Parse the string into an array, or default to an empty array if cartItemsString is null or cannot be parsed
   const [cartItem, setCartItems] = useState(cartItems);
   const [totalPriceNew, setTotalPrice] = useState(0);
-  const taxRate = 0.1;
+  const taxRate = 0.13;
 
   let finalPrice = 0;
   let totalPrice = cartItems.reduce(
@@ -53,6 +54,9 @@ function Cart() {
       //cartItems = cartItem;
     }
   };
+  const handleRemoveProductfromCart = (productId) => {
+    setCartItems(cartItem.filter((item) => item._id !== productId));
+  };
   useEffect(() => {
     const newTotalPrice = cartItem.reduce(
       (price, item) => price + item.quantity * item.Product_price,
@@ -73,20 +77,7 @@ function Cart() {
   return (
     <>
       {/* header section start from here */}
-      <header>
-        <a href="#" class="nav-logo">
-          <i class="fas fa-utensils"></i>EatToast
-        </a>
-        <div id="menu-button" class="fas fa-bars"></div>
-        <nav class="navbar">
-          <a href="/Index">Home</a>
-          <a href="/Menu">Menu</a>
-          <a href="/Cart">Cart</a>
-          <a href="#">Order</a>
-          <a href="#">Review</a>
-          <a href="#">Profile</a>
-        </nav>
-      </header>
+      <Header />
       {/* header section end here */}
 
       <div class="container-fluid text-center">
@@ -95,24 +86,17 @@ function Cart() {
           <table class="mx-auto" width="100%">
             <thead>
               <tr>
-                <td>Remove</td>
                 <td>Image</td>
                 <td>Product</td>
                 <td>Price</td>
                 <td>Quantity</td>
-                <td>Total</td>
+                <td>Total</td> <td>Remove</td>
               </tr>
             </thead>
 
             <tbody>
               {cartItems.map((item, index) => (
                 <tr key={item._id}>
-                  <td>
-                    <a href="#">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                  </td>
-
                   <td>
                     <img src="/img/pancake.jpg"></img>
                   </td>
@@ -150,8 +134,15 @@ function Cart() {
                   <td>
                     <h5>
                       {" "}
-                      {item.quantity}*${item.Product_price}
+                      <h5>${item.quantity * item.Product_price}</h5>
                     </h5>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleRemoveProductfromCart(item._id)}
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
               ))}
