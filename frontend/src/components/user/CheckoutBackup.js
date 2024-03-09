@@ -166,72 +166,65 @@ function Checkout() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Check validation
     if (validateForm()) {
-      //Check CUSTOMER EXIST result
-      const CUSTOMER_EXIST = await dataQ({
-        variables: { email: email },
-      });
-      console.log(
-        "CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly=" +
-          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly
-      );
-      if (CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly === null) {
-        try {
-          const registration_result = await registration({
-            variables: {
-              customerInput: {
-                Firstname,
-                Mobile: parseInt(Mobile),
-                Lastname,
-                email,
-                Password,
-                Address1,
-                Address2,
-                PostalCode,
-                State,
-                Country,
-              },
+      console.log("passwprd: - " + Password);
+      try {
+        const result = await registration({
+          variables: {
+            customerInput: {
+              Firstname,
+              Mobile: parseInt(Mobile),
+              Lastname,
+              email,
+              Password,
+              Address1,
+              Address2,
+              PostalCode,
+              State,
+              Country,
             },
-          });
-
-          if (
-            registration_result.data &&
-            registration_result.data.signupCustomer
-          ) {
-            RegistrationId = registration_result.data.signupCustomer._id;
-            console.log(
-              "RegistrationId in registation = " +
-                registration_result.data.signupCustomer._id
-            );
-          }
-        } catch (error) {
-          //  RegistrationId = result.data.signupCustomer._id;
-          // if (result1.data && result1.data.signupCustomer) {
-          //   RegistrationId = result.data.signupCustomer._id;
-          //   // alert("Successful");
-          //   // navigate("/UserLogin");
-          // }
-          // Check if the error message is related to an existing user
-          // if (
-          //   error.message.includes(
-          //     "User with the provided email and usertype already exists."
-          //   )
-          // ) {
-          //   setErrorMessages([
-          //     `User with the provided email and usertype already exists. will you like to login? `,
-          //   ]);
-          // }
-          // return;
+          },
+        });
+        // console.log("result.data " + result.data);
+        // console.log(
+        //   "result.data.signupCustomer " + result.data.signupCustomer._id
+        // );
+        if (result.data && result.data.signupCustomer) {
+          RegistrationId = result.data.signupCustomer._id;
+          // alert("Successful");
+          // navigate("/UserLogin");
+          // navigate("/Confirmation", {
+          //   state: {
+          //     cartItems: cartItems,
+          //     totalPrice: totalPrice,
+          //     taxAmount: taxAmount,
+          //     totalPriceWithTax: totalPriceWithTax,
+          //   },
+          // });
         }
-        console.log("RegistrationId= " + RegistrationId);
-      } else {
-        RegistrationId =
-          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly._id;
+      } catch (error) {
+        //  RegistrationId = result.data.signupCustomer._id;
+        // if (result1.data && result1.data.signupCustomer) {
+        //   RegistrationId = result.data.signupCustomer._id;
+        //   // alert("Successful");
+        //   // navigate("/UserLogin");
+        // }
+        // Check if the error message is related to an existing user
+        // if (
+        //   error.message.includes(
+        //     "User with the provided email and usertype already exists."
+        //   )
+        // ) {
+        //   setErrorMessages([
+        //     `User with the provided email and usertype already exists. will you like to login? `,
+        //   ]);
+        // }
+        // return;
       }
+      console.log("RegistrationId= " + RegistrationId);
       if (RegistrationId !== 0) {
         try {
-          console.log("entered in with RegistrationId not null");
+          console.log("entered");
 
           for (const cartItem of cartItems) {
             const totalPriceWithTaxInt = Math.round(
@@ -279,56 +272,66 @@ function Checkout() {
           }
         } catch (error1) {}
       } else {
-        // if (result.data.checkExistingCustomerwithemailonly !== null) {
-        //   try {
-        //     console.log("enteredanother,");
-        //     for (const cartItem of cartItems) {
-        //       const totalPriceWithTaxInt = Math.round(
-        //         cartItem.quantity * cartItem.Product_price * (1 + taxRate)
-        //       );
-        //       const result1 = await order({
-        //         variables: {
-        //           orderInput: {
-        //             CustomerFirstname: Firstname,
-        //             CustomerLastname: Lastname,
-        //             CustomerMobile: parseInt(Mobile),
-        //             Product_name: cartItem.Product_name,
-        //             Product_price: cartItem.Product_price,
-        //             Quantity: cartItem.quantity,
-        //             TotalPriceWithTax: totalPriceWithTaxInt,
-        //             Date: pickupDate,
-        //             CurrentDate: selectedDate,
-        //             DeliveryType: DeliveryType,
-        //             PaymentBy: PaymentBy,
-        //             CustomerId:
-        //               result.data.checkExistingCustomerwithemailonly._id,
-        //             Time: Time,
-        //           },
-        //         },
-        //       });
-        //       console.log("result1.data " + result1.data.AddOrder._id);
-        //       // console.log(
-        //       //   "result.data.signupCustomer " + result1.data.signupCustomer._id
-        //       // );
-        //       if (result1.data && result1.data.AddOrder._id) {
-        //         navigate("/Confirmation", {
-        //           state: {
-        //             cartItems: cartItems,
-        //             totalPrice: totalPrice,
-        //             taxAmount: taxAmount,
-        //             totalPriceWithTax: totalPriceWithTax,
-        //           },
-        //         });
-        //         //    console.log(
-        //         //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
-        //         // );
-        //         // RegistrationId = result1.data.signupCustomer._id;
-        //         // alert("Successful");
-        //         // navigate("/UserLogin");
-        //       }
-        //     }
-        //   } catch (error1) {}
-        // }
+        const result = await dataQ({
+          variables: { email: email },
+        });
+        console.log(
+          "result.data.checkExistingCustomer._id= " +
+            result.data.checkExistingCustomerwithemailonly._id
+        );
+        if (result.data.checkExistingCustomerwithemailonly._id != null) {
+          try {
+            console.log("enteredanother,");
+
+            for (const cartItem of cartItems) {
+              const totalPriceWithTaxInt = Math.round(
+                cartItem.quantity * cartItem.Product_price * (1 + taxRate)
+              );
+
+              const result1 = await order({
+                variables: {
+                  orderInput: {
+                    CustomerFirstname: Firstname,
+                    CustomerLastname: Lastname,
+                    CustomerMobile: parseInt(Mobile),
+                    Product_name: cartItem.Product_name,
+                    Product_price: cartItem.Product_price,
+                    Quantity: cartItem.quantity,
+                    TotalPriceWithTax: totalPriceWithTaxInt,
+                    Date: pickupDate,
+                    CurrentDate: selectedDate,
+                    DeliveryType: DeliveryType,
+                    PaymentBy: PaymentBy,
+                    CustomerId:
+                      result.data.checkExistingCustomerwithemailonly._id,
+                    Time: Time,
+                  },
+                },
+              });
+
+              console.log("result1.data " + result1.data.AddOrder._id);
+              // console.log(
+              //   "result.data.signupCustomer " + result1.data.signupCustomer._id
+              // );
+              if (result1.data && result1.data.AddOrder._id) {
+                navigate("/Confirmation", {
+                  state: {
+                    cartItems: cartItems,
+                    totalPrice: totalPrice,
+                    taxAmount: taxAmount,
+                    totalPriceWithTax: totalPriceWithTax,
+                  },
+                });
+                //    console.log(
+                //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
+                // );
+                // RegistrationId = result1.data.signupCustomer._id;
+                // alert("Successful");
+                // navigate("/UserLogin");
+              }
+            }
+          } catch (error1) {}
+        }
       }
     }
   };

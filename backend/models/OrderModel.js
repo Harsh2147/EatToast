@@ -28,6 +28,8 @@ const orderSchema = mongoose.Schema({
   Quantity: { type: Number, required: true },
   TotalPriceWithTax: { type: Number, required: true },
   Date: { type: Date, default: new Date() },
+  CurrentDate: { type: Date, default: new Date(), required: true },
+  Time: { type: String },
   DeliveryType: {
     type: String,
     enum: ["Online Delivery", "Pick up order"],

@@ -23,9 +23,11 @@ type Order{
   Quantity:Int,
   TotalPriceWithTax:Int,
   Date: Date,
+  CurrentDate:Date,
   DeliveryType:String ,
   PaymentBy: String,
   CustomerId: ID,
+  Time:String,
 }
 input OrderInput{
   
@@ -37,9 +39,11 @@ input OrderInput{
   Quantity:Int,
   TotalPriceWithTax:Int,
   Date: Date,
+  CurrentDate:Date,
   DeliveryType:String ,
   PaymentBy: String,
   CustomerId: ID,
+  Time:String,
   
 }
 type User{
@@ -74,6 +78,7 @@ type Customer{
   PostalCode: String,
   State: String,
   Country: String,
+
  
 }
 input CustomerInput{
@@ -88,6 +93,7 @@ input CustomerInput{
   PostalCode: String,
   State: String,
   Country: String,
+ 
   
 }
 enum UserType{
@@ -139,6 +145,7 @@ type Query{
     getProductById_db(pro_id:ID) : Products
     getAllUsers_db: [User]
     checkExistingUser (email: String, Usertype: UserType) : [User]
+    getAllOrder_db: [Order]
    
 }
 
@@ -241,6 +248,18 @@ const resolvers = {
         const { email, Usertype } = args;
         const existingUser = await UsersModel.find({ email, Usertype });
         return existingUser;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    getAllOrder_db: async (parent, args, context, info) => {
+      try {
+        const order_from_db = await OrderModel.find({});
+
+        console.log(parent);
+        console.log(order_from_db);
+
+        return order_from_db;
       } catch (err) {
         console.log(err);
       }
@@ -450,9 +469,9 @@ const resolvers = {
         const { email } = args;
         const logexistingUser = await CustomersModel.findOne({ email });
 
-        if (!logexistingUser) {
-          throw new Error("User not found");
-        }
+        // if (!logexistingUser) {
+        //   throw new Error("User not found");
+        // }
 
         return logexistingUser;
       } catch (error) {

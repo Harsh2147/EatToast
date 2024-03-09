@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+import { FETCH_All_ORDERS } from "../../graphql/FetchAllOrders";
 function Vieworders() {
   const navigate = useNavigate();
   // Check if loginData exists in localStorage
@@ -12,6 +14,11 @@ function Vieworders() {
       //alert(`Please Login First`);
     }
   }, []);
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  }
   const [showCategorySubMenu, setShowCategorySubMenu] = useState(false);
   const [showItemsSubMenu, setShowItemsSubMenu] = useState(false);
   const [showOrdersSubMenu, setShowOrdersSubMenu] = useState(false);
@@ -28,6 +35,16 @@ function Vieworders() {
   const handleManageOrdersClick = (event) => {
     event.preventDefault();
     setShowOrdersSubMenu(!showOrdersSubMenu);
+  };
+  const { loading, error, data } = useQuery(FETCH_All_ORDERS);
+  if (!data || !data.getAllOrder_db) {
+    console.error("No data or empty data returned for categories.");
+  }
+  const setData = (cat) => {
+    let { category_name, _id } = cat;
+    console.log("ID" + _id);
+    localStorage.setItem("id", _id);
+    localStorage.setItem("category_name", category_name);
   };
   return (
     <>
@@ -184,69 +201,32 @@ function Vieworders() {
               <table>
                 <thead>
                   <tr>
-                    <td>Name</td>
-                    <td>Price</td>
-                    <td>Date</td>
-                    <td>Time</td>
+                    <td>Customer Name</td>
+                    <td>Product</td>
+                    <td>Quantity</td>
+                    <td>Total Price With Tax</td>
+                    <td>Pickup Date</td>
+                    <td>Pickup Time</td>
+                    <td>Order Date</td>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
-
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>$1200</td>
-                    <td>12 jan 2023</td>
-                    <td>12:09 PM</td>
-                  </tr>
+                  {data?.getAllOrder_db.map((order) => (
+                    <tr key={order._id}>
+                      <td>
+                        {" "}
+                        {order.CustomerFirstname}
+                        {order.CustomerLastname}
+                      </td>
+                      <td>{order.Product_name}</td>
+                      <td>{order.Quantity}</td>
+                      <td>{order.TotalPriceWithTax}</td>
+                      <td>{formatDate(order.Date)}</td>
+                      <td>{order.Time}</td>
+                      <td>{formatDate(order.CurrentDate)}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
