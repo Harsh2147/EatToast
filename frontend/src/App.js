@@ -27,6 +27,7 @@ import Checkout from "./components/user/Checkout";
 import UserLogout from "./components/user/Logout";
 import ConfirmationPage from "./components/user/ConfirmationPage";
 import Review from "./components/user/Review";
+import Order from "./components/user/Order";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -56,10 +57,11 @@ function App() {
         <Route path="UserSignup" element={<UserSignup />} />
         <Route path="Cart" element={<Cart />} />
         <Route path="Checkout" element={<Checkout />} />
-    
+
         <Route path="UserLogout" element={<UserLogout />} />
         <Route path="Confirmation" element={<ConfirmationPage />} />
         <Route path="Review" element={<Review />} />
+        <Route path="Order" element={<Order />} />
       </Routes>
     </BrowserRouter>
   );

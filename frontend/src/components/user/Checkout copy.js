@@ -174,7 +174,17 @@ function Checkout() {
       });
       console.log(
         "CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly=" +
-          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly
+          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly,
+        Firstname,
+        parseInt(Mobile),
+        Lastname,
+        email,
+        Password,
+        Address1,
+        Address2,
+        PostalCode,
+        State,
+        Country
       );
       if (CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly === null) {
         try {
@@ -206,28 +216,23 @@ function Checkout() {
             );
           }
         } catch (error) {
-          //  RegistrationId = result.data.signupCustomer._id;
-          // if (result1.data && result1.data.signupCustomer) {
-          //   RegistrationId = result.data.signupCustomer._id;
-          //   // alert("Successful");
-          //   // navigate("/UserLogin");
-          // }
           // Check if the error message is related to an existing user
-          // if (
-          //   error.message.includes(
-          //     "User with the provided email and usertype already exists."
-          //   )
-          // ) {
-          //   setErrorMessages([
-          //     `User with the provided email and usertype already exists. will you like to login? `,
-          //   ]);
-          // }
-          // return;
+          if (
+            error.message.includes(
+              "User with the provided email and usertype already exists."
+            )
+          ) {
+            setErrorMessages([
+              `User with the provided email and usertype already exists. will you like to login? `,
+            ]);
+          }
+          return;
         }
-        console.log("RegistrationId= " + RegistrationId);
+        console.log("in if RegistrationId= " + RegistrationId);
       } else {
         RegistrationId =
           CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly._id;
+        console.log("in else RegistrationId= " + RegistrationId);
       }
       if (RegistrationId !== 0) {
         try {
@@ -248,6 +253,7 @@ function Checkout() {
                   Quantity: cartItem.quantity,
                   TotalPriceWithTax: totalPriceWithTaxInt,
                   Date: pickupDate,
+                  Time: Time,
                   DeliveryType: DeliveryType,
                   PaymentBy: PaymentBy,
                   CustomerId: RegistrationId,

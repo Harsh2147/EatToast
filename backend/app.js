@@ -9,6 +9,7 @@ import ProductModel from "./models/ProductModel.js";
 import UsersModel from "./models/UsersModel.js";
 import CustomersModel from "./models/CustomerModel.js";
 import OrderModel from "./models/OrderModel.js";
+import ReviewsModel from "./models/ReviewModel.js";
 import bcrypt from "bcrypt";
 const typeDefs = `
 scalar Date
@@ -45,6 +46,22 @@ input OrderInput{
   CustomerId: ID,
   Time:String,
   
+}
+type Review{
+  _id: ID,
+  Firstname: String,
+  Lastname: String,
+  email: String,
+  Message: String,
+  Mobile: Int,
+
+}
+input ReviewInput{
+  Firstname: String,
+  Lastname: String,
+  email: String,
+  Message: String,
+  Mobile: Int,
 }
 type User{
   _id: ID,
@@ -146,11 +163,14 @@ type Query{
     getAllUsers_db: [User]
     checkExistingUser (email: String, Usertype: UserType) : [User]
     getAllOrder_db: [Order]
+    getOrderByCusomerId_db(CustomerId:ID) : [Order]
+    
    
 }
 
 type Mutation{
   createProducts(productInput: ProductDetails): Products
+  createReview(ReviewInput: ReviewInput): Review
   db_updateProductById(pro_id:ID,updated_data :ProductDetails): Products
   db_deleteProductById(pro_id:ID):Products
 
@@ -164,6 +184,7 @@ type Mutation{
   checkExistingUser(email: String!, Password:String!, Usertype: UserType!): User
   checkExistingCustomer(email: String!, Password:String!): Customer
   checkExistingCustomerwithemailonly (email: String!) : Customer
+  getOrderById_db(CustomerId:ID!) : [Order]
 }
 
 
@@ -252,6 +273,15 @@ const resolvers = {
         console.log(err);
       }
     },
+    getOrderByCusomerId_db: async (parent, args, context, info) => {
+      try {
+        const { CustomerId } = args;
+        const Oder_by_CustomerId = await OrderModel.find({ CustomerId });
+        return Oder_by_CustomerId;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     getAllOrder_db: async (parent, args, context, info) => {
       try {
         const order_from_db = await OrderModel.find({});
@@ -274,6 +304,17 @@ const resolvers = {
         const savedProducts = await newProducts.save();
         console.log(savedProducts);
         return savedProducts;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    createReview: async (parent, args, context, info) => {
+      try {
+        const newReview = new ReviewsModel(args.ReviewInput);
+
+        const savedReview = await newReview.save();
+        console.log(savedReview);
+        return savedReview;
       } catch (err) {
         console.log(err);
       }
@@ -474,6 +515,20 @@ const resolvers = {
         // }
 
         return logexistingUser;
+      } catch (error) {
+        throw error;
+      }
+    },
+    getOrderById_db: async (parent, args, context, info) => {
+      try {
+        const { CustomerId } = args;
+        const orderByCustomers = await OrderModel.find({ CustomerId });
+
+        // if (!logexistingUser) {
+        //   throw new Error("User not found");
+        // }
+
+        return orderByCustomers;
       } catch (error) {
         throw error;
       }

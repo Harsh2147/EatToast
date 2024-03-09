@@ -20,10 +20,10 @@ function Header() {
         <a href="/Index">Home</a>
         <a href="/Menu">Menu</a>
 
-        <a href="#">Order</a>
         <a href="/Review">Review</a>
         {CustomerloginData ? (
           <>
+            <a href="/Order">Order</a>
             <a href="#">Profile</a>
             <a href="/UserLogout">Logout</a>
           </>
