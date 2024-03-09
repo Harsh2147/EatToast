@@ -4,7 +4,7 @@ import { CUSTOMER_REGISTRATION_MUTATION } from "../../graphql/CustomerRegistrati
 import { ADD_ORDER_MUTATION } from "../../graphql/AddOrderMutation";
 import { useMutation, useQuery } from "@apollo/client";
 import { CUSTOMER_EXIST_QUERY } from "../../graphql/CheckExistingCustomer";
-
+import moment from "moment";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Additems from "../admin/Additems";
@@ -28,7 +28,8 @@ function Checkout() {
   const [State, setState] = useState("");
   const [Country, setCountry] = useState("");
   const [DeliveryType, setDeliveryType] = useState("");
-  const [Date, setDate] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   const [Time, setTime] = useState("");
   const [PaymentBy, setPaymentBy] = useState("");
   const [CardHolderName, setCardHolderName] = useState("");
@@ -37,7 +38,15 @@ function Checkout() {
   const [Cvv, setCvv] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
   const [dataQ, { loading, errorQ }] = useMutation(CUSTOMER_EXIST_QUERY);
+  // Function to format current date as yyyy-mm-dd
+  const getCurrentDate = () => {
+    return moment().format("YYYY-MM-DD");
+  };
 
+  useEffect(() => {
+    // Set current date when component mounts
+    setSelectedDate(getCurrentDate());
+  }, []);
   const [registration, { error, data }] = useMutation(
     CUSTOMER_REGISTRATION_MUTATION
   );
@@ -67,7 +76,7 @@ function Checkout() {
     if (!State) {
       errors.push("State is required");
     }
-    if (!State) {
+    if (!Country) {
       errors.push("Country is required");
     }
     if (!DeliveryType) {
@@ -116,6 +125,40 @@ function Checkout() {
   const handleDropdownTimeChange = (e) => {
     setTime(e.target.value);
   };
+  const handleDateChange = (e) => {
+    const inputDate = e.target.value;
+
+    // Regular expression to match YYYY-MM-DD format
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+    // Check if inputDate matches the expected format
+    if (!dateRegex.test(inputDate)) {
+      // Handle invalid input
+      console.error("Invalid date format. Please use YYYY-MM-DD format.");
+      return;
+    }
+
+    // Split the inputDate into year, month, and day components
+    const [year, month, day] = inputDate.split("-");
+
+    // Create a new Date object
+    const localDate = new Date(year, month - 1, day);
+
+    // Check if the parsed date is valid
+    if (isNaN(localDate.getTime())) {
+      // Handle invalid date
+      console.error("Invalid date. Please provide a valid date.");
+      return;
+    }
+
+    // Convert the local date to the local time zone string format
+    const localDateString = localDate.toLocaleDateString("en-CA", {
+      timeZone: "America/Toronto",
+    });
+
+    // Set the formatted date in the state
+    setPickupDate(localDateString);
+  };
 
   useEffect(() => {
     setPassword(Mobile);
@@ -123,65 +166,77 @@ function Checkout() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Check validation
     if (validateForm()) {
-      console.log("passwprd: - " + Password);
-      try {
-        const result = await registration({
-          variables: {
-            customerInput: {
-              Firstname,
-              Mobile: parseInt(Mobile),
-              Lastname,
-              email,
-              Password,
-              Address1,
-              Address2,
-              PostalCode,
-              State,
-              Country,
-            },
-          },
-        });
-        // console.log("result.data " + result.data);
-        // console.log(
-        //   "result.data.signupCustomer " + result.data.signupCustomer._id
-        // );
-        if (result.data && result.data.signupCustomer) {
-          RegistrationId = result.data.signupCustomer._id;
-          // alert("Successful");
-          // navigate("/UserLogin");
-          navigate("/Confirmation", {
-            state: {
-              cartItems: cartItems,
-              totalPrice: totalPrice,
-              taxAmount: taxAmount,
-              totalPriceWithTax: totalPriceWithTax,
+      //Check CUSTOMER EXIST result
+      const CUSTOMER_EXIST = await dataQ({
+        variables: { email: email },
+      });
+      console.log(
+        "CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly=" +
+          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly,
+        Firstname,
+        parseInt(Mobile),
+        Lastname,
+        email,
+        Password,
+        Address1,
+        Address2,
+        PostalCode,
+        State,
+        Country
+      );
+      if (CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly === null) {
+        try {
+          const registration_result = await registration({
+            variables: {
+              customerInput: {
+                Firstname,
+                Mobile: parseInt(Mobile),
+                Lastname,
+                email,
+                Password,
+                Address1,
+                Address2,
+                PostalCode,
+                State,
+                Country,
+              },
             },
           });
+
+          if (
+            registration_result.data &&
+            registration_result.data.signupCustomer
+          ) {
+            RegistrationId = registration_result.data.signupCustomer._id;
+            console.log(
+              "RegistrationId in registation = " +
+                registration_result.data.signupCustomer._id
+            );
+          }
+        } catch (error) {
+          // Check if the error message is related to an existing user
+          if (
+            error.message.includes(
+              "User with the provided email and usertype already exists."
+            )
+          ) {
+            setErrorMessages([
+              `User with the provided email and usertype already exists. will you like to login? `,
+            ]);
+          }
+          return;
         }
-      } catch (error) {
-        //  RegistrationId = result.data.signupCustomer._id;
-        // if (result1.data && result1.data.signupCustomer) {
-        //   RegistrationId = result.data.signupCustomer._id;
-        //   // alert("Successful");
-        //   // navigate("/UserLogin");
-        // }
-        // Check if the error message is related to an existing user
-        // if (
-        //   error.message.includes(
-        //     "User with the provided email and usertype already exists."
-        //   )
-        // ) {
-        //   setErrorMessages([
-        //     `User with the provided email and usertype already exists. will you like to login? `,
-        //   ]);
-        // }
-        // return;
+        console.log("in if RegistrationId= " + RegistrationId);
+      } else {
+        RegistrationId =
+          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly._id;
+        console.log("in else RegistrationId= " + RegistrationId);
       }
-      console.log("RegistrationId= " + RegistrationId);
       if (RegistrationId !== 0) {
         try {
-          console.log("entered");
+          console.log("entered in with RegistrationId not null");
 
           for (const cartItem of cartItems) {
             const totalPriceWithTaxInt = Math.round(
@@ -197,10 +252,12 @@ function Checkout() {
                   Product_price: cartItem.Product_price,
                   Quantity: cartItem.quantity,
                   TotalPriceWithTax: totalPriceWithTaxInt,
-                  Date: Date,
+                  Date: pickupDate,
+                  Time: Time,
                   DeliveryType: DeliveryType,
                   PaymentBy: PaymentBy,
                   CustomerId: RegistrationId,
+                  CurrentDate: selectedDate,
                 },
               },
             });
@@ -228,63 +285,56 @@ function Checkout() {
           }
         } catch (error1) {}
       } else {
-        const result = await dataQ({
-          variables: { email: email },
-        });
-        console.log(
-          "result.data.checkExistingCustomer._id= " +
-            result.data.checkExistingCustomerwithemailonly._id
-        );
-        if (result.data.checkExistingCustomerwithemailonly._id != null) {
-          try {
-            console.log("enteredanother");
-
-            for (const cartItem of cartItems) {
-              const totalPriceWithTaxInt = Math.round(
-                cartItem.quantity * cartItem.Product_price * (1 + taxRate)
-              );
-              const result1 = await order({
-                variables: {
-                  orderInput: {
-                    CustomerFirstname: Firstname,
-                    CustomerMobile: parseInt(Mobile),
-                    CustomerLastname: Lastname,
-                    Product_name: cartItem.Product_name,
-                    Product_price: cartItem.Product_price,
-                    Quantity: cartItem.quantity,
-                    TotalPriceWithTax: totalPriceWithTaxInt,
-                    Date: Date,
-                    DeliveryType: DeliveryType,
-                    PaymentBy: PaymentBy,
-                    CustomerId:
-                      result.data.checkExistingCustomerwithemailonly._id,
-                  },
-                },
-              });
-
-              console.log("result1.data " + result1.data.AddOrder._id);
-              // console.log(
-              //   "result.data.signupCustomer " + result1.data.signupCustomer._id
-              // );
-              if (result1.data && result1.data.AddOrder._id) {
-                navigate("/Confirmation", {
-                  state: {
-                    cartItems: cartItems,
-                    totalPrice: totalPrice,
-                    taxAmount: taxAmount,
-                    totalPriceWithTax: totalPriceWithTax,
-                  },
-                });
-                //    console.log(
-                //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
-                // );
-                // RegistrationId = result1.data.signupCustomer._id;
-                // alert("Successful");
-                // navigate("/UserLogin");
-              }
-            }
-          } catch (error1) {}
-        }
+        // if (result.data.checkExistingCustomerwithemailonly !== null) {
+        //   try {
+        //     console.log("enteredanother,");
+        //     for (const cartItem of cartItems) {
+        //       const totalPriceWithTaxInt = Math.round(
+        //         cartItem.quantity * cartItem.Product_price * (1 + taxRate)
+        //       );
+        //       const result1 = await order({
+        //         variables: {
+        //           orderInput: {
+        //             CustomerFirstname: Firstname,
+        //             CustomerLastname: Lastname,
+        //             CustomerMobile: parseInt(Mobile),
+        //             Product_name: cartItem.Product_name,
+        //             Product_price: cartItem.Product_price,
+        //             Quantity: cartItem.quantity,
+        //             TotalPriceWithTax: totalPriceWithTaxInt,
+        //             Date: pickupDate,
+        //             CurrentDate: selectedDate,
+        //             DeliveryType: DeliveryType,
+        //             PaymentBy: PaymentBy,
+        //             CustomerId:
+        //               result.data.checkExistingCustomerwithemailonly._id,
+        //             Time: Time,
+        //           },
+        //         },
+        //       });
+        //       console.log("result1.data " + result1.data.AddOrder._id);
+        //       // console.log(
+        //       //   "result.data.signupCustomer " + result1.data.signupCustomer._id
+        //       // );
+        //       if (result1.data && result1.data.AddOrder._id) {
+        //         navigate("/Confirmation", {
+        //           state: {
+        //             cartItems: cartItems,
+        //             totalPrice: totalPrice,
+        //             taxAmount: taxAmount,
+        //             totalPriceWithTax: totalPriceWithTax,
+        //           },
+        //         });
+        //         //    console.log(
+        //         //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
+        //         // );
+        //         // RegistrationId = result1.data.signupCustomer._id;
+        //         // alert("Successful");
+        //         // navigate("/UserLogin");
+        //       }
+        //     }
+        //   } catch (error1) {}
+        // }
       }
     }
   };
@@ -492,10 +542,10 @@ function Checkout() {
                   <input
                     class="form-control"
                     type="date"
-                    id="Date"
-                    name="Date"
-                    value={Date}
-                    onChange={(e) => setDate(e.target.value)}
+                    id="pickupDate"
+                    name="pickupDate"
+                    value={pickupDate}
+                    onChange={handleDateChange}
                   ></input>
                 </div>
 
