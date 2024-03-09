@@ -242,7 +242,7 @@ header style end here */
 /* about section style start here */
 /*--About--*/
 
-.about{
+.about {
     width: 100%;
     height: 100vh;
     padding: 10px 0 0 0;
@@ -251,47 +251,47 @@ header style end here */
     background-position: center;
 }
 
-.about .about_main{
+.about .about_main {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.about .about_main .about_image img{
+.about .about_main .about_image img {
     width: 46rem;
 }
 
-.about .about_main .about_text h1{
+.about .about_main .about_text h1 {
     font-size: 3rem;
     position: relative;
     bottom: 40px;
 }
 
-.about .about_main .about_text h1 span{
+.about .about_main .about_text h1 span {
     color: var(--red);
     margin-right: 15px;
 }
 
-.about .about_main .about_text h3{
+.about .about_main .about_text h3 {
     position: relative;
     bottom: .5rem;
     font-size: 2rem;
 }
 
-.about .about_main .about_text p{
+.about .about_main .about_text p {
     width: 650px;
     text-align: justify;
     line-height: 23px;
     margin-top: 20px;
 }
 
-.about .about_main .about_text .about_services{
+.about .about_main .about_text .about_services {
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.about .about_main .about_text .about_services .s_1{
+.about .about_main .about_text .about_services .s_1 {
     display: flex;
     align-items: center;
     width: 180px;
@@ -301,29 +301,29 @@ header style end here */
     cursor: pointer;
 }
 
-.about .about_main .about_text .about_services .s_1 i{
+.about .about_main .about_text .about_services .s_1 i {
     color: #000;
     margin: 5px 10px 5px 5px;
     font-size: 20px;
     transition: 0.3s;
 }
 
-.about .about_main .about_text .about_services .s_1:hover i{
+.about .about_main .about_text .about_services .s_1:hover i {
     color: var(--blue);
 }
 
-.about .about_main .about_text .about_services .s_1 a{
+.about .about_main .about_text .about_services .s_1 a {
     text-decoration: none;
     color: #000;
     font-size: 16px;
 }
 
-.about .about_main .about_text .about_btn i{
+.about .about_main .about_text .about_btn i {
     font-size: 15px;
     margin-right: 8px;
 }
 
-.about .about_main .about_text .about_btn{
+.about .about_main .about_text .about_btn {
     position: relative;
     top: 35px;
     padding: 10px 20px;
@@ -334,11 +334,11 @@ header style end here */
     transition: 0.3s;
 }
 
-.about .about_main .about_text .about_btn:hover{
+.about .about_main .about_text .about_btn:hover {
     color: #fff;
 }
 
-.about .about_main .about_text .about_btn::before{
+.about .about_main .about_text .about_btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -350,7 +350,7 @@ header style end here */
     transition: 0.3s;
 }
 
-.about .about_main .about_text .about_btn:hover::before{
+.about .about_main .about_text .about_btn:hover::before {
     top: unset;
     width: 100%;
     bottom: 0;
@@ -374,7 +374,7 @@ header style end here */
     border: .1rem solid rgba(0, 0, 0, .2);
     border-radius: .5rem;
     box-shadow: var(--box-shadow);
-    flex: 1 0 calc(33% - 1.5rem); 
+    flex: 1 0 calc(33% - 1.5rem);
 
 }
 
@@ -412,34 +412,34 @@ header style end here */
     color: var(--blue);
 }
 
-.menu-section .menu-box-container .menu-box .menu-box-content{
+.menu-section .menu-box-container .menu-box .menu-box-content {
     padding: 1.5rem;
     padding-top: 0;
 }
 
-.menu-section .menu-box-container .menu-box .menu-box-content .stars{
+.menu-section .menu-box-container .menu-box .menu-box-content .stars {
     padding-bottom: 1rem;
-} 
+}
 
-.menu-section .menu-box-container .menu-box .menu-box-content .stars i{
+.menu-section .menu-box-container .menu-box .menu-box-content .stars i {
     font-size: 1.5rem;
     color: var(--red);
-} 
+}
 
-.menu-section .menu-box-container .menu-box .menu-box-content h3{
+.menu-section .menu-box-container .menu-box .menu-box-content h3 {
     color: var(--blue);
     font-weight: 900;
     font-size: 1.7rem;
 }
 
-.menu-section .menu-box-container .menu-box .menu-box-content p{
+.menu-section .menu-box-container .menu-box .menu-box-content p {
     color: var(--green);
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5rem;
 }
 
-.menu-section .menu-box-container .menu-box .menu-box-content .menu-button{
+.menu-section .menu-box-container .menu-box .menu-box-content .menu-button {
     background: var(--blue);
     padding: .7rem;
     color: var(--white);
@@ -448,24 +448,24 @@ header style end here */
 }
 
 
-.menu-section .menu-box-container .menu-box .menu-box-content .item-price{
+.menu-section .menu-box-container .menu-box .menu-box-content .item-price {
     color: var(--red);
     margin-left: 1rem;
     font-size: 1.5rem;
     font-weight: 700;
 }
 
-.menu-section .menu-box-container .menu-box .menu-box-content .menu-button:hover{
+.menu-section .menu-box-container .menu-box .menu-box-content .menu-button:hover {
     background: var(--green);
     color: var(--blue);
     font-weight: 900;
 }
 
-.p-search input{
+.p-search input {
     border: 2px solid black;
 }
 
-.s-label{
+.s-label {
     font-weight: 900;
     padding: 1rem 0;
 }
@@ -474,21 +474,21 @@ header style end here */
 /* user login style start from here */
 
 
-.login-container{
+.login-container {
     width: 100%;
     height: 100vh;
     background-image: url('../../public/img/bg.png');
     background-size: cover;
     background-position: center;
-    
+
 }
 
 
-.login-container .login_form{
+.login-container .login_form {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
     padding: 2.5rem;
     border-radius: 10px;
     box-shadow: var(--box-shadow);
@@ -499,14 +499,14 @@ header style end here */
     background-position: center;
 }
 
-.login-container .login_form .login_input{
+.login-container .login_form .login_input {
     width: 330px;
     margin: 0 auto;
 }
 
-.login-container .login_form .login_input .field{
+.login-container .login_form .login_input .field {
     width: 100%;
-    border-bottom: 2px solid  var(--black1);
+    border-bottom: 2px solid var(--black1);
     border-top: 0;
     border-left: 0;
     border-right: 0;
@@ -517,13 +517,13 @@ header style end here */
     color: var(--blue);
 }
 
-.submit-button{
+.submit-button {
     background: var(--blue);
     padding: .7rem;
     color: var(--white);
     border-radius: 20%;
     font-weight: 900;
-    width: 15rem;  
+    width: 15rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -531,190 +531,198 @@ header style end here */
     cursor: pointer;
 }
 
-.login-container .login_form .tag{
+.login-container .login_form .tag {
     margin: 25px auto 0 auto;
     text-align: center;
 }
 
-.login-container .login_form .tag span{
+.login-container .login_form .tag span {
     font-size: 1rem;
     font-weight: 900;
     color: var(--blue);
 }
 
-.login-container .login_form .tag a{
+.login-container .login_form .tag a {
     font-size: 1rem;
     margin-left: 5px;
     color: var(--red);
     font-weight: 900;
     text-decoration: none;
 }
+
 /* user style end here */
 
 /* cart page design start here */
 
 /* cart page design start here */
 
-.cart-container{
+.cart-container {
     margin-top: 80px;
-  }
+}
 
-  .cart-head{
-      font-weight: 900;
-      color: var(--blue);
-      font-size: 1.5rem;
-  }
+.cart-head {
+    font-weight: 900;
+    color: var(--blue);
+    font-size: 1.5rem;
+}
 
-  .cart-container table{
+.cart-container table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
-  }
+}
 
-  .cart-container table thead{
+.cart-container table thead {
     font-weight: 700;
-  }
+}
 
-  .cart-container table thead td{
+.cart-container table thead td {
     background: var(--blue);
     color: var(--white);
     border: none;
     padding: .7rem;
-  }
+}
 
-  .cart-container table td{
+.cart-container table td {
     border: 1px solid var(--black1);
     text-align: center;
-  }
+}
 
-  .cart-container table td:nth-child(1){
+.cart-container table td:nth-child(1) {
     width: 100px;
-  }
+}
 
-  .cart-container table td:nth-child(2),
-  .cart-container table td:nth-child(3){
+.cart-container table td:nth-child(2),
+.cart-container table td:nth-child(3) {
     width: 200px;
-  }
+}
 
-  .cart-container table td:nth-child(4),
-  .cart-container table td:nth-child(5),
-  .cart-container table td:nth-child(6) {
+.cart-container table td:nth-child(4),
+.cart-container table td:nth-child(5),
+.cart-container table td:nth-child(6) {
     width: 170px;
-  }
+}
 
 
-  .cart-container table tbody img{
+.cart-container table tbody img {
     width: 100px;
     height: 80px;
     object-fit: cover;
-  }
+}
 
-  .cart-container table tbody i{
+.cart-container table tbody i {
     color: var(--blue);
-    
-  }
 
-  .cart-bottom .coupon>div,
-  .cart-bottom .total>div{
+}
+
+.cart-bottom .coupon>div,
+.cart-bottom .total>div {
     border: 1px solid var(--light-color);
     margin-top: 2.5rem;
 
-  }
+}
 
-  .cart-bottom .coupon h5,
-  .cart-bottom .total h5{
+.cart-bottom .coupon h5,
+.cart-bottom .total h5 {
     background: var(--blue);
     color: var(--white);
     border: none;
     padding: .7rem 12px;
     font-weight: 700;
-  }
-  .cart-bottom .coupon p,
-  .cart-bottom .coupon input {
+}
+
+.cart-bottom .coupon p,
+.cart-bottom .coupon input {
     padding: 0 .7rem;
-  }
+}
 
-  .cart-bottom .coupon input {
-     height: 2.5rem;
-     margin: 0 0 1.5rem 1.5rem;
-  }
+.cart-bottom .coupon input {
+    height: 2.5rem;
+    margin: 0 0 1.5rem 1.5rem;
+}
 
-  .cart-bottom .total div>div{
+.cart-bottom .total div>div {
     padding: 0 2rem;
-  }
+}
 
-  .cart-bottom button{
+.cart-bottom button {
     margin-left: 2rem;
-    
+
     background-color: var(--blue);
     color: var(--white);
     font-weight: 900;
-    padding:8px;
+    padding: 8px;
     border-radius: 20%;
-  }
-  .cart-bottom button:hover {
+}
+
+.cart-bottom button:hover {
     background-color: #ff3838;
 }
-  .cart-bottom a {
+
+.cart-bottom a {
     margin-left: 2rem;
     height: 2.5rem;
     background-color: var(--blue);
     color: var(--white);
     font-weight: 900;
-    padding:12px;
+    padding: 12px;
     text-decoration: none;
     border-radius: 20%;
 }
+
 .cart-bottom a:hover {
     background-color: #ff3838;
 }
-  .cart-bottom .total h6{
+
+.cart-bottom .total h6 {
     color: var(--blue);
     font-weight: 900;
-  }
-  
-  .second-hr{
+}
+
+.second-hr {
     background: var(--green);
     width: 100%;
     height: .5rem;
-  }
+}
 
-  .cart-bottom .total div>button{
-    margin:  0 2rem 2.5rem 0;
+.cart-bottom .total div>button {
+    margin: 0 2rem 2.5rem 0;
     display: flex;
     justify-content: flex-end;
-  }
+}
 
 
-  /* checkout style start here */
-.total .cart-container{
+/* checkout style start here */
+.total .cart-container {
     padding: 0 !important;
     margin: 0;
 }
-  .total .cart-container table {
+
+.total .cart-container table {
     border-collapse: collapse;
     width: 100%;
     table-layout: auto;
 }
-  .checkout-form{
+
+.checkout-form {
     margin-top: 90px;
     border: 1px solid var(--black2);
     padding: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border-radius: 1rem 5rem;
-  }
+}
 
- .side-cart{
+.side-cart {
     margin-top: 90px;
- }
+}
 
 .section-break {
     border: none;
-    border-top: 4px solid var(--blue); 
+    border-top: 4px solid var(--blue);
     margin: 10px 0;
 }
 
-.checkout-form .row h3{
+.checkout-form .row h3 {
     background-color: var(--blue);
     color: var(--white);
     font-weight: 900;
@@ -724,7 +732,7 @@ header style end here */
 
 .checkout-form .row .col label,
 .checkout-form .row .col-3 label,
-.checkout-form .row .col-6 label{
+.checkout-form .row .col-6 label {
     font-weight: 900;
     margin: .4rem;
     color: var(--blue);
@@ -732,12 +740,12 @@ header style end here */
 
 .checkout-form .row .col input,
 .checkout-form .row .col-3 input,
-.checkout-form .row .col-6 input{
+.checkout-form .row .col-6 input {
     border: 1px solid var(--black2);
     border-radius: .7rem;
 }
 
-.check-button{
+.check-button {
     background-color: var(--blue);
     color: var(--white);
     font-weight: 900;
@@ -746,10 +754,42 @@ header style end here */
     width: 17rem;
 }
 
-  /* checkout style end here */
+/* checkout style end here */
+
+
+/* review page style start here */
 
 
 
+.oder {
+    width: 100%;
+    height: 100vh;
+    padding: 5px 0;
+}
+
+.oder .oder_main {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 15px;
+}
+
+.oder .oder_main .oder_img img {
+    width: 650px;
+}
+
+.oder .oder_main .oder_form {
+    width: 50%;
+    height: 620px;
+    background: #faf3ce;
+    padding: 15px 20px 0 20px;
+    border-radius: 10px;
+}
+
+
+
+/* review page style end here */
 
 /* media queries  */
 
