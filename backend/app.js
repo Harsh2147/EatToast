@@ -8,8 +8,40 @@ import productModel from "./models/ProductModel.js";
 import ProductModel from "./models/ProductModel.js";
 import UsersModel from "./models/UsersModel.js";
 import CustomersModel from "./models/CustomerModel.js";
+import OrderModel from "./models/OrderModel.js";
 import bcrypt from "bcrypt";
 const typeDefs = `
+scalar Date
+type Order{
+  
+  _id: ID,
+  CustomerFirstname: String,
+  CustomerLastname: String,
+  CustomerMobile: Int,
+  Product_name: String,
+  Product_price: Int,
+  Quantity:Int,
+  TotalPriceWithTax:Int,
+  Date: Date,
+  DeliveryType:String ,
+  PaymentBy: String,
+  CustomerId: ID,
+}
+input OrderInput{
+  
+  CustomerFirstname: String,
+  CustomerLastname: String,
+  CustomerMobile: Int,
+  Product_name: String,
+  Product_price: Int,
+  Quantity:Int,
+  TotalPriceWithTax:Int,
+  Date: Date,
+  DeliveryType:String ,
+  PaymentBy: String,
+  CustomerId: ID,
+  
+}
 type User{
   _id: ID,
   Firstname: String,
@@ -37,6 +69,11 @@ type Customer{
  
   Mobile: Int,
   Password: String,
+  Address1: String,
+  Address2: String,
+  PostalCode: String,
+  State: String,
+  Country: String,
  
 }
 input CustomerInput{
@@ -46,6 +83,11 @@ input CustomerInput{
  
   Password: String,
   Mobile: Int,
+  Address1: String,
+  Address2: String,
+  PostalCode: String,
+  State: String,
+  Country: String,
   
 }
 enum UserType{
@@ -97,6 +139,7 @@ type Query{
     getProductById_db(pro_id:ID) : Products
     getAllUsers_db: [User]
     checkExistingUser (email: String, Usertype: UserType) : [User]
+   
 }
 
 type Mutation{
@@ -110,7 +153,10 @@ type Mutation{
 
   signupUser(userInput: UserInput): User
   signupCustomer(CustomerInput: CustomerInput): Customer
+  AddOrder(OrderInput: OrderInput): Order
   checkExistingUser(email: String!, Password:String!, Usertype: UserType!): User
+  checkExistingCustomer(email: String!, Password:String!): Customer
+  checkExistingCustomerwithemailonly (email: String!) : Customer
 }
 
 
@@ -375,6 +421,53 @@ const resolvers = {
         return logexistingUser;
       } catch (error) {
         throw error;
+      }
+    },
+    checkExistingCustomer: async (parent, args, context, info) => {
+      try {
+        const { email, Password } = args;
+        const logexistingUser = await CustomersModel.findOne({ email });
+
+        if (!logexistingUser) {
+          throw new Error("User not found");
+        }
+
+        const isPasswordValid = await bcrypt.compare(
+          Password,
+          logexistingUser.Password
+        );
+
+        if (!isPasswordValid) {
+          throw new Error("Invalid password");
+        }
+        return logexistingUser;
+      } catch (error) {
+        throw error;
+      }
+    },
+    checkExistingCustomerwithemailonly: async (parent, args, context, info) => {
+      try {
+        const { email } = args;
+        const logexistingUser = await CustomersModel.findOne({ email });
+
+        if (!logexistingUser) {
+          throw new Error("User not found");
+        }
+
+        return logexistingUser;
+      } catch (error) {
+        throw error;
+      }
+    },
+    AddOrder: async (parent, args, context, info) => {
+      try {
+        const newOrder = new OrderModel(args.OrderInput);
+
+        const savedOrder = await newOrder.save();
+        console.log(savedOrder);
+        return savedOrder;
+      } catch (err) {
+        console.log(err);
       }
     },
   },

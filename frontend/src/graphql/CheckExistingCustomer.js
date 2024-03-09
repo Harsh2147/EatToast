@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const CUSTOMER_REGISTRATION_MUTATION = gql`
-  mutation Mutation($customerInput: CustomerInput) {
-    signupCustomer(CustomerInput: $customerInput) {
+export const CUSTOMER_EXIST_QUERY = gql`
+  mutation Mutation($email: String!) {
+    checkExistingCustomerwithemailonly(email: $email) {
       _id
       Firstname
       Lastname

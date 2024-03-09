@@ -7,7 +7,7 @@ function UserLogin() {
   const navigate = useNavigate();
   // Check if loginData exists in localStorage
   const CustomerloginData = localStorage.getItem("CustomerloginData");
-  console.log("CustomerloginData= " + CustomerloginData);
+  //console.log("CustomerloginData= " + CustomerloginData);
   useEffect(() => {
     // Define the logout function
     if (!CustomerloginData && CustomerloginData == null) {
@@ -43,7 +43,9 @@ function UserLogin() {
         const { data } = await checkExistingCustomer({
           variables: { email, password },
         });
-
+        // console.log(
+        //   " data.checkExistingCustomer._id= " + data.checkExistingCustomer._id
+        // );
         if (data.checkExistingCustomer) {
           localStorage.setItem(
             "CustomerloginData",

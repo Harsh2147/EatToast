@@ -26,6 +26,11 @@ const CustomerSchema = mongoose.Schema({
   email: { type: String, required: true },
 
   Password: { type: String, required: true },
+  Address1: { type: String },
+  Address2: { type: String },
+  PostalCode: { type: String },
+  State: { type: String },
+  Country: { type: String },
 });
 
 const CustomersModel = mongoose.model("Customers", CustomerSchema);

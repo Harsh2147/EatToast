@@ -25,6 +25,7 @@ import UserSignup from "./components/user/Signup";
 import Cart from "./components/user/Cart";
 import Checkout from "./components/user/Checkout";
 import UserLogout from "./components/user/Logout";
+import ConfirmationPage from "./components/user/ConfirmationPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -33,7 +34,6 @@ function App() {
         <Route path="/" element={<Registration />}>
           {" "}
         </Route>
-
         <Route path="Login" element={<Login />} />
         <Route path="Logout" element={<Logout />} />
         <Route path="Registration" element={<Registration />} />
@@ -49,7 +49,6 @@ function App() {
         <Route path="/updateProduct/:id" element={<Updateproduct />} />
         <Route path="/deleteProduct/:id" element={<Deleteproduct />} />
         <Route path="*" element={<NoPage />} />
-
         <Route path="Index" element={<Index />} />
         <Route path="Menu" element={<Menu />} />
         <Route path="UserLogin" element={<UserLogin />} />
@@ -57,6 +56,7 @@ function App() {
         <Route path="Cart" element={<Cart />} />
         <Route path="Checkout" element={<Checkout />} />
         <Route path="UserLogout" element={<UserLogout />} />
+        <Route path="Confirmation" element={<ConfirmationPage />} />
       </Routes>
     </BrowserRouter>
   );
