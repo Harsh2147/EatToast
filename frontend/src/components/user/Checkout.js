@@ -113,6 +113,10 @@ function Checkout() {
   const handleDropdownPaymentByChange = (e) => {
     setPaymentBy(e.target.value);
   };
+  const handleDropdownTimeChange = (e) => {
+    setTime(e.target.value);
+  };
+
   useEffect(() => {
     setPassword(Mobile);
   }, [Mobile]);
@@ -175,7 +179,7 @@ function Checkout() {
         // return;
       }
       console.log("RegistrationId= " + RegistrationId);
-      if (RegistrationId != 0) {
+      if (RegistrationId !== 0) {
         try {
           console.log("entered");
 
@@ -488,7 +492,7 @@ function Checkout() {
                   <input
                     class="form-control"
                     type="date"
-                    id="delivery"
+                    id="Date"
                     name="Date"
                     value={Date}
                     onChange={(e) => setDate(e.target.value)}
@@ -497,17 +501,33 @@ function Checkout() {
 
                 <div class="col-6">
                   <label for="Time">Time (select one):</label>
-                  <select class="form-select" id="time" name="time">
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
-                    <option>11:30pm</option>
+                  <select
+                    class="form-select"
+                    id="time"
+                    name="time"
+                    value={Time}
+                    onChange={handleDropdownTimeChange}
+                  >
+                    <option>Select Time</option>
+                    <option>09:00am</option>
+                    <option>09:30am</option>
+                    <option>10:00am</option>
+                    <option>10:30am</option>
+                    <option>11:00am</option>
+                    <option>11:30am</option>
+                    <option>12:00pm</option>
+                    <option>12:30pm</option>
+                    <option>01:00pm</option>
+                    <option>01:30pm</option>
+                    <option>02:00pm</option>
+                    <option>04:00pm</option>
+                    <option>04:30pm</option>
+                    <option>05:00pm</option>
+                    <option>05:30pm</option>
+                    <option>06:00pm</option>
+                    <option>06:30pm</option>
+                    <option>07:00pm</option>
+                    <option>07:30pm</option>
                   </select>
                 </div>
               </div>
@@ -537,7 +557,10 @@ function Checkout() {
                       type="text"
                       class="form-control"
                       placeholder="Enter Card Holder Name"
-                      name="cname"
+                      id="CardHolderName"
+                      name="CardHolderName"
+                      value={CardHolderName}
+                      onChange={(e) => setCardHolderName(e.target.value)}
                     />
                   </div>
 
@@ -547,7 +570,10 @@ function Checkout() {
                       type="text"
                       class="form-control"
                       placeholder="Enter Card number"
-                      name="cnumber"
+                      id="CardNumber"
+                      name="CardNumber"
+                      value={CardNumber}
+                      onChange={(e) => setCardNumber(e.target.value)}
                     />
                   </div>
                 </div>
@@ -559,7 +585,10 @@ function Checkout() {
                       type="text"
                       class="form-control"
                       placeholder="Enter expiry date"
-                      name="exp"
+                      id="ExDate"
+                      name="ExDate"
+                      value={ExDate}
+                      onChange={(e) => setExDate(e.target.value)}
                     />
                   </div>
 
@@ -569,7 +598,10 @@ function Checkout() {
                       type="text"
                       class="form-control"
                       placeholder="Enter cvv number"
-                      name="cvv"
+                      id="Cvv"
+                      name="Cvv"
+                      value={Cvv}
+                      onChange={(e) => setCvv(e.target.value)}
                     />
                   </div>
                 </div>
