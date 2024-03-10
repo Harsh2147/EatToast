@@ -156,6 +156,9 @@ function Index() {
       </div>
 
       {/* about section end here */}
+
+
+      
     </>
   );
 }

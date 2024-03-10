@@ -19,14 +19,13 @@ function Profile() {
       <Header />
       {/* header section end here */}
 
+      
       <div class="oder">
-        <h1>
-          <span>Oder</span>Now
-        </h1>
+       
 
-        <div class="oder_main">
-          <div class="oder_img">
-            <img src="/img/oder.png"></img>
+        <div class="oder_main mt-5">
+          <div class="profile_img">
+            <img src="/img/profile.png"></img>
           </div>
 
           <div class="oder_form">
@@ -99,8 +98,10 @@ function Profile() {
 
                   <div class="row">
                     <h3>Address :</h3>
+
                     <div class="col">
-                      {/* <label for="order-details"> Order Details</label> */}
+
+                      <label for="Adress 1"> Address 1</label>
                       <input
                         type="text"
                         className="form-control"
@@ -111,7 +112,7 @@ function Profile() {
                       />
                     </div>
                     <div class="col">
-                      {/* <label for="order-details"> Order Details</label> */}
+                      <label for="Adress 2"> Address 2</label>
                       <input
                         type="text"
                         className="form-control"
@@ -124,7 +125,7 @@ function Profile() {
                   </div>
                   <div class="row">
                     <div class="col">
-                      {/* <label for="order-details"> Order Details</label> */}
+                      <label for="Postal Code"> Postal Code</label>
                       <input
                         type="text"
                         className="form-control"
@@ -135,7 +136,7 @@ function Profile() {
                       />
                     </div>
                     <div class="col">
-                      {/* <label for="order-details"> Order Details</label> */}
+                      <label for="State"> State</label>
                       <input
                         type="text"
                         className="form-control"
@@ -148,7 +149,7 @@ function Profile() {
                   </div>
                   <div class="row">
                     <div class="col">
-                      {/* <label for="order-details"> Order Details</label> */}
+                      <label for="Country"> Country</label>
                       <input
                         type="text"
                         className="form-control"
@@ -165,9 +166,7 @@ function Profile() {
           </div>
         </div>
 
-        <a href="#" class="oder_btn">
-          Oder Now
-        </a>
+
       </div>
     </>
   );

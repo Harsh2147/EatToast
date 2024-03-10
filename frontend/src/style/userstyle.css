@@ -763,8 +763,12 @@ header style end here */
 
 .oder {
     width: 100%;
-    height: 100vh;
     padding: 5px 0;
+    margin-bottom: 3rem;
+}
+
+.review-head{
+   font-weight: 900;
 }
 
 .oder .oder_main {
@@ -781,15 +785,92 @@ header style end here */
 
 .oder .oder_main .oder_form {
     width: 50%;
-    height: 620px;
-    background: #faf3ce;
-    padding: 15px 20px 0 20px;
+    height: max-content;
+}
+
+.review{
+    width: 100%;
+    height: 77vh;
+    padding: 10px 0;
+}
+
+.review .review_line_1{
+    width: 100%;
+    height: 5rem;
+    position: relative;
+    background: var(--blue);
+    top: 25%;
+    z-index: 1;
+}
+
+.review .review_box {
+    margin: 0 auto;
+    position: relative;
+    width: 95%;
+    height: auto;
+    bottom: 55px;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+}
+
+.review .review_box > * {
+    flex: 0 1 calc(25% - 40px); /* Adjust as needed */
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+
+.review .review_box .review_card{
+    width: 350px;
+    height: 20rem;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
     border-radius: 10px;
+    margin: 2rem auto;
+    z-index: 5;
+    box-shadow: 1px 2px 10px rgba(0,0,0,0.7);
+}
+
+.review .review_box .review_card .review_tag h2{
+    margin: 10px 0;
+    color: var(--red);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.review .review_box .review_card .review_tag p.info{
+    text-align: center;
+    line-height: 23px;
+    margin-top: 10px;
+    color: var(--green);
+    font-weight: 700;
 }
 
 
 
 /* review page style end here */
+
+/* 
+profile page style start here */
+
+/* profile page end here */
+
+
+/* conform page style start here */
+
+.conform-card{
+    box-shadow: 10px 10px 8px #888888;
+}
+
+.conform-card .card-body h5{
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--blue);
+}
+ 
+
 
 /* media queries  */
 

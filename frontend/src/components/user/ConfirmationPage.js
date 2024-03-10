@@ -18,10 +18,10 @@ function ConfirmationPage() {
       <Header />
 
       {/* Confirmation content */}
-      <div className="container">
+      <div className="container mt-5">
         <div className="row justify-content-center mt-5">
-          <div className="col-md-8">
-            <div className="card">
+          <div className="col-md-8 ">
+            <div className="card conform-card">
               <div className="card-body">
                 <h5 className="card-title text-center">Order Confirmation</h5>
                 <p className="card-text text-center">
@@ -61,7 +61,7 @@ function ConfirmationPage() {
                   <p>Total Price with Tax: ${totalPriceWithTax.toFixed(2)}</p>
                 </div>
                 <div className="text-center mt-3">
-                  <Link to="/" className="btn btn-primary">
+                  <Link to="/" className="submit-button">
                     Continue Shopping
                   </Link>
                 </div>

@@ -79,21 +79,17 @@ function Review() {
       <Header />
       {/* header section end here */}
 
-      <div class="oder">
-        <h1>
-          <span>Oder</span>Now
-        </h1>
-
+      <div class="oder mt-5">
         <div class="oder_main">
           <div class="oder_img">
-            <img src="/img/oder.png"></img>
+            <img src="/img/review.jpg"></img>
           </div>
 
           <div class="oder_form">
             <div class="form-row row">
-              <div class="form-container  ">
+              <div class="form-container">
                 <form class="checkout-form" onSubmit={handleSubmit}>
-                  <h3 class="text-center">GIVE REVIEW</h3>
+                  <h3 class="text-center review-head">GIVE REVIEW</h3>
                   <p class="text-center">
                     Reviews matter's a lot in our business
                   </p>
@@ -184,19 +180,138 @@ function Review() {
                       </ul>
                     </div>
                   )}
-                  <button type="submit" class="submit-button">
-                    Submit Review
+                  <button type="submit" class="submit-button mt-3">
+                    SUBMIT REVIEW
                   </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-
-        <a href="#" class="oder_btn">
-          Oder Now
-        </a>
       </div>
+
+
+
+      <div class="review">
+
+        <h1 class="text-center">Our Review</h1>
+        <p class="text-center">
+              Thanks for giving us a good review....We really appreciate it.
+        </p>
+
+        <div class="review_line_1"></div>
+
+
+        <div class="review_box">
+
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+          
+
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+          
+          
+
+        </div>
+
+      </div>
+
     </>
   );
 }

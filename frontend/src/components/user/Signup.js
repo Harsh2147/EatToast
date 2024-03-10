@@ -159,7 +159,7 @@ function UserSignup() {
             </button>
             <div class="tag">
               <span>All ready registered?</span>
-              <a href="/UserLogin">Lgo In</a>
+              <a href="/UserLogin">Log In</a>
             </div>
           </form>
         </div>

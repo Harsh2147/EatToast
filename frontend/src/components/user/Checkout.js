@@ -693,7 +693,7 @@ function Checkout() {
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody >
                       {cartItems.map((item) => (
                         <tr key={item._id}>
                           <td>{item.Product_name}</td>
