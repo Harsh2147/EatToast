@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { CUSTOMER_EXIST_QUERY } from "../../graphql/CheckExistingCustomer";
 import Header from "./Header";
-import { Link } from "react-router-dom";
 
-function Profile() {
+function ProfileUpdate() {
   const navigate = useNavigate();
   const [Firstname, setFirstname] = useState("");
   const [Lastname, setLastname] = useState("");
@@ -71,6 +70,7 @@ function Profile() {
               <div class="form-container  ">
                 <form class="checkout-form">
                   <h3 class="text-center">Profile</h3>
+
                   <div class="row">
                     <h3>Personal Information :</h3>
                     <div class="col">
@@ -79,7 +79,6 @@ function Profile() {
                       <input
                         id="Firstname"
                         type="text"
-                        readOnly
                         className="form-control"
                         placeholder="Enter First name"
                         name="Firstname"
@@ -92,7 +91,6 @@ function Profile() {
                       <input
                         id="Lastname"
                         type="text"
-                        readOnly
                         className="form-control"
                         placeholder="Enter Last name"
                         name="Lastname"
@@ -100,6 +98,7 @@ function Profile() {
                       />
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col">
                       <label for="pnumber"> Phone number</label>
@@ -107,7 +106,6 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        readOnly
                         placeholder="Enter phone number"
                         id="Mobile"
                         name="Mobile"
@@ -120,7 +118,6 @@ function Profile() {
 
                       <input
                         type="Email"
-                        readOnly
                         className="form-control"
                         placeholder="Enter Email"
                         id="email"
@@ -129,7 +126,9 @@ function Profile() {
                       />
                     </div>
                   </div>
+
                   <h2 class="section-break"></h2>
+
                   <div class="row">
                     <h3>Address :</h3>
                     <div class="col">
@@ -137,7 +136,6 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        readOnly
                         placeholder="Address1"
                         id="Address1"
                         name="Address1"
@@ -149,7 +147,6 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        readOnly
                         placeholder="Address2"
                         id="Address2"
                         name="Address2"
@@ -163,7 +160,6 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        readOnly
                         placeholder="PostalCode"
                         id="PostalCode"
                         name="PostalCode"
@@ -175,7 +171,6 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        readOnly
                         placeholder="State"
                         id="State"
                         name="State"
@@ -189,7 +184,6 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        readOnly
                         placeholder="Country"
                         id="Country"
                         name="Country"
@@ -197,9 +191,9 @@ function Profile() {
                       />
                     </div>
                   </div>
-                  <Link to={`/ProfileUpdate`} className="submit-button mt-3 ">
-                    Edit Profile
-                  </Link>{" "}
+                  <button type="submit" class="submit-button mt-3">
+                    Update Profile
+                  </button>
                 </form>
               </div>
             </div>
@@ -210,4 +204,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileUpdate;

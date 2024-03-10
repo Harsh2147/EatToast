@@ -51,6 +51,10 @@ function UserLogin() {
             "CustomerloginData",
             data.checkExistingCustomer._id
           );
+          localStorage.setItem(
+            "CustomerEmail",
+            data.checkExistingCustomer.email
+          );
 
           navigate("/Index");
         }

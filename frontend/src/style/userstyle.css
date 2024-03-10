@@ -800,7 +800,7 @@ header style end here */
     position: relative;
     background: var(--blue);
     top: 25%;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .review .review_box {
