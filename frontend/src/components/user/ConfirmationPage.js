@@ -2,12 +2,16 @@ import React from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 function ConfirmationPage() {
   const location = useLocation();
+  const navigate = useNavigate();
+  if (location.state === null) {
+    navigate("/Cart");
+  } else {
+  }
   const { cartItems, totalPrice, taxAmount, totalPriceWithTax } =
     location.state;
-
   return (
     <>
       {/* Header section */}

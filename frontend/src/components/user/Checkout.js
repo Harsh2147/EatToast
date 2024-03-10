@@ -275,6 +275,7 @@ function Checkout() {
                   totalPriceWithTax: totalPriceWithTax,
                 },
               });
+              localStorage.removeItem("cartItems");
               //    console.log(
               //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
               // );

@@ -13,7 +13,7 @@ function Order() {
   useEffect(() => {
     // Define the logout function
     if (!customerId && customerId == null) {
-      navigate("/Login");
+      navigate("/UserLogin");
       //alert(`Please Login First`);
     }
   }, []);
