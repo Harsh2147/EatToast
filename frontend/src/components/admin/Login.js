@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../graphql/LoginMutation";
-
+import Header from "./Header";
 function Login() {
   const navigate = useNavigate();
   // Check if loginData exists in localStorage
@@ -87,132 +87,7 @@ function Login() {
   return (
     <>
       <div class="container ">
-        <div class="admin-navigation">
-          <ul>
-            <li>
-              <a href="#">
-                <span class="title">EatToast</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="#">
-                <span class="icon">
-                  <ion-icon name="home-outline"></ion-icon>
-                </span>
-                <span class="title">
-                  <a href="/Dashboard">Dashboard</a>
-                </span>
-              </a>
-            </li>
-            {loginData && (
-              <>
-                <li className="manage-category">
-                  <a href="#" onClick={handleManageCategoryClick}>
-                    <span className="icon">
-                      <ion-icon name="fast-food-outline"></ion-icon>
-                    </span>
-                    <span className="title">Manage Category</span>
-                  </a>
-                </li>
-                {showCategorySubMenu && (
-                  <>
-                    <ul>
-                      <li>
-                        <a href="/Addcategory">
-                          <span className="title">Add Category</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/Viewcategory">
-                          <span className="title">View Category</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </>
-                )}
-                <li className="manage-items">
-                  <a href="#" onClick={handleManageItemsClick}>
-                    <span className="icon">
-                      <ion-icon name="restaurant"></ion-icon>
-                    </span>
-                    <span className="title">Manage Items</span>
-                  </a>
-                </li>
-                {showItemsSubMenu && (
-                  <>
-                    <ul>
-                      <li>
-                        <a href="/Additems">
-                          <span className="title">Add Items</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/Viewproduct">
-                          <span className="title">View Product</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </>
-                )}
-                <li className="manage-orders">
-                  <a href="#" onClick={handleManageOrdersClick}>
-                    <span className="icon">
-                      <ion-icon name="cart-outline"></ion-icon>
-                    </span>
-                    <span className="title">Manage Orders</span>
-                  </a>
-                </li>
-                {showOrdersSubMenu && (
-                  <>
-                    <ul>
-                      <li>
-                        <a href="/Vieworders">
-                          {" "}
-                          <span className="title">View Order</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </>
-                )}
-                <li>
-                  <a href="#">
-                    <span class="icon">
-                      <ion-icon name="exit-outline"></ion-icon>
-                    </span>
-                    <span class="title">
-                      <a href="/Logout">Logout</a>
-                    </span>
-                  </a>
-                </li>
-              </>
-            )}
-            {!loginData && (
-              <>
-                <li>
-                  <a href="#">
-                    <span class="icon">
-                      <ion-icon name="exit-outline"></ion-icon>
-                    </span>
-                    <span class="title">
-                      <a href="/Registration">Register Here</a>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="icon">
-                      <ion-icon name="exit-outline"></ion-icon>
-                    </span>
-                    <span class="title">
-                      <a href="/Login">Login</a>
-                    </span>
-                  </a>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
+        <Header />
       </div>
 
       <div class="row justify-content-center">
@@ -224,7 +99,7 @@ function Login() {
 
             <div class="card-body">
               {errorMessages.length > 0 && (
-                <div style={{ color: "red" , fontWeight:"700"}}>
+                <div style={{ color: "red", fontWeight: "700" }}>
                   <ul>
                     {errorMessages.map((error, index) => (
                       <li key={index}>{error}</li>
