@@ -93,7 +93,7 @@ header style end here */
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    min-height: 100vh;
+    min-height: 70vh;
     align-items: center;
 }
 
@@ -239,6 +239,90 @@ header style end here */
 
 /* special section end here */
 
+/* team section start here */
+
+
+
+.team{
+    width: 100%;
+    height: 77vh;
+    padding: 10px 0;
+}
+
+.team h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+}
+
+
+
+.team .team_line_1{
+    width: 100%;
+    height: 50px;
+    background: var(--blue);
+    position: relative;
+    top: 25%;
+    z-index: 1;
+}
+
+.team .team_box{
+    width: 95%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    bottom: 55px;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0;
+}
+
+.team .team_box .team_card{
+    width: 350px;
+    height: 35rem;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0 auto;
+    z-index: 5;
+    box-shadow: 1px 2px 10px rgba(0,0,0,0.7);
+}
+
+.team .team_box .team_card .team_img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team .team_box .team_card .team_img img{
+    width: 150px;
+    height: 10rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+
+.team .team_box .team_card .team_tag h2{
+   font-weight: 900;
+   color: var(--blue);
+   text-transform: uppercase;
+}
+
+.team .team_box .team_card .team_tag p.info{
+    text-align: center;
+    color: var(--light-color);
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+/* team section end here */
+
 /* about section style start here */
 /*--About--*/
 
@@ -276,6 +360,8 @@ header style end here */
     position: relative;
     bottom: .5rem;
     font-size: 2rem;
+    color: var(--gray);
+    font-weight: 900;
 }
 
 .about .about_main .about_text p {
@@ -283,6 +369,9 @@ header style end here */
     text-align: justify;
     line-height: 23px;
     margin-top: 20px;
+    font-weight: 700;
+    color: var(--light-color);
+  
 }
 
 .about .about_main .about_text .about_services {
@@ -295,27 +384,19 @@ header style end here */
     display: flex;
     align-items: center;
     width: 180px;
-    background: #ececec;
+    background: var(--white);
     padding: 10px;
     border: 2px solid var(--blue);
     cursor: pointer;
 }
 
-.about .about_main .about_text .about_services .s_1 i {
-    color: #000;
-    margin: 5px 10px 5px 5px;
-    font-size: 20px;
-    transition: 0.3s;
-}
 
-.about .about_main .about_text .about_services .s_1:hover i {
-    color: var(--blue);
-}
 
 .about .about_main .about_text .about_services .s_1 a {
     text-decoration: none;
-    color: #000;
-    font-size: 16px;
+    color: var(--red);
+    font-size: 1.2rem;
+    font-weight: 800;
 }
 
 .about .about_main .about_text .about_btn i {
@@ -361,6 +442,35 @@ header style end here */
 
 
 /* menu section style start here */
+
+.banner_bg{
+    width: 100%;
+    height: 40vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) , url(../../public/img/banner_bg.jpeg);
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.banner_bg h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--white);
+    position: relative;
+    top: 50%;
+}
+
+
+.banner_bg h1 span{
+    color:var(--red);
+    margin-left: 15px;
+    font-weight: 900;
+}
+
+
 
 .menu-section .menu-box-container {
     display: flex;
@@ -556,6 +666,44 @@ header style end here */
 
 /* cart page design start here */
 
+.cart-bg{
+    width: 100%;
+    height: 40vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) , url(../../public/img/cart.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+
+.cart-bg h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--white);
+    position: relative;
+    top: 50%;
+    font-weight: 900; 
+
+}
+
+.cart-bg p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    position: relative;
+    top: 50%;
+    font-weight: 900;
+}
+
+.cart-bg h1 span{
+  color: var(--red);
+}
+
+
+
 .cart-container {
     margin-top: 80px;
 }
@@ -618,7 +766,8 @@ header style end here */
 .cart-bottom .coupon>div,
 .cart-bottom .total>div {
     border: 1px solid var(--light-color);
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
 
 }
 
@@ -693,6 +842,46 @@ header style end here */
 
 
 /* checkout style start here */
+
+.checkout-bg{
+    width: 100%;
+    height: 40vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) , url(../../public/img/checkout.jpg);
+    background-size: contain;
+    background-position: center;
+}
+
+
+.checkout-bg h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--white);
+    position: relative;
+    top: 50%;
+    font-weight: 900;
+}
+
+.checkout-bg p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    position: relative;
+    top: 50%;
+    font-weight: 900;
+}
+
+.checkout-bg h1 span{
+    color:var(--red);
+    margin-left: 15px;
+    font-weight: 900;
+}
+
+
+
 .total .cart-container {
     padding: 0 !important;
     margin: 0;
@@ -705,7 +894,7 @@ header style end here */
 }
 
 .checkout-form {
-    margin-top: 90px;
+    /* margin-top: 90px; */
     border: 1px solid var(--black2);
     padding: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
@@ -870,6 +1059,78 @@ profile page style start here */
     color: var(--blue);
 }
  
+
+/* book table style start here */
+
+
+.book-table {
+    overflow: hidden;
+    margin-top: 90px;
+}
+
+.book-table-shape img {
+    position: absolute;
+ 
+    right: 73%;
+    width: 540px;
+}
+
+.book-table-shape.book-table-shape2 img {
+    left: 74%;
+    transform: scale(-1, 1);
+}
+
+.book-table-info {
+    margin: 30px 0 20px;
+}
+
+.table-title p {
+    font-size: 1.7rem;
+    line-height: 30px;
+    font-weight: 700;
+    color: var(--light-color);  
+}
+
+.table-title h3{
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--blue);
+}
+
+.call-now {
+    border-left: 3px dotted var(--blue);
+    border-right: 3px dotted var(--blue);
+    padding: 15px 0;
+}
+
+.sec-sub-title{
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--blue);
+}
+
+.sec-sub-para{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--light-color);
+}
+
+
+.call-now a {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--blue);
+    text-decoration: none;
+  
+}
+
+
+
+
+
+
+
+/* book table style end here */
 
 
 /* media queries  */

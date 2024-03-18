@@ -79,20 +79,45 @@ function Review() {
       <Header />
       {/* header section end here */}
 
-      <div class="oder mt-5">
-        <div class="oder_main">
-          <div class="oder_img">
-            <img src="/img/review.jpg"></img>
-          </div>
+      
 
-          <div class="oder_form">
+      <div class="book-table section bg-light">
+                <div class="book-table-shape">
+                    <img src="/img/table-leaves-shape.png" alt="" />
+                </div>
+
+                <div class="book-table-shape book-table-shape2">
+                    <img src="/img/table-leaves-shape.png" alt="" />
+                </div>
+
+                <div class="sec-wp">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sec-title text-center ">
+                                <h1 class="special-head text-center">
+                                    {" "}
+                                    GIVE <span>REVIEW</span>
+                                </h1>
+                                <p class="sec-sub-para">Your review matters a lot in your business .</p>
+                                <h2 class="section-break mx-auto w-50"></h2>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+     
+      <div class="oder">
+        <div class="oder_main">
+    
             <div class="form-row row">
               <div class="form-container">
                 <form class="checkout-form" onSubmit={handleSubmit}>
-                  <h3 class="text-center review-head">GIVE REVIEW</h3>
-                  <p class="text-center">
-                    Reviews matter's a lot in our business
-                  </p>
+                
 
                   <div class="row">
                     <h3>Personal Information :</h3>
@@ -122,9 +147,7 @@ function Review() {
                         onChange={(e) => setLastname(e.target.value)}
                       />
                     </div>
-                  </div>
 
-                  <div class="row">
                     <div class="col">
                       <label for="pnumber"> Phone number</label>
 
@@ -153,6 +176,8 @@ function Review() {
                       />
                     </div>
                   </div>
+
+                 
 
                   <h2 class="section-break"></h2>
 
@@ -188,15 +213,18 @@ function Review() {
             </div>
           </div>
         </div>
-      </div>
+
 
 
 
       <div class="review">
 
-        <h1 class="text-center">Our Review</h1>
+      <h1 class="special-head text-center mt-5">
+          {" "}
+          Our <span> Review</span>
+        </h1>
         <p class="text-center">
-              Thanks for giving us a good review....We really appreciate it.
+          Thanks for giving us a good review....We really appreciate it.
         </p>
 
         <div class="review_line_1"></div>
@@ -252,7 +280,7 @@ function Review() {
               <button class="submit-button">Raed more</button>
             </div>
           </div>
-          
+
 
           <div class="review_card">
             <div class="review_tag">
@@ -305,8 +333,8 @@ function Review() {
               <button class="submit-button">Raed more</button>
             </div>
           </div>
-          
-          
+
+
 
         </div>
 

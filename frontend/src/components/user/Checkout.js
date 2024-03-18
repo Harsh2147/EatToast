@@ -174,7 +174,7 @@ function Checkout() {
       });
       console.log(
         "CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly=" +
-          CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly,
+        CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly,
         Firstname,
         parseInt(Mobile),
         Lastname,
@@ -212,7 +212,7 @@ function Checkout() {
             RegistrationId = registration_result.data.signupCustomer._id;
             console.log(
               "RegistrationId in registation = " +
-                registration_result.data.signupCustomer._id
+              registration_result.data.signupCustomer._id
             );
           }
         } catch (error) {
@@ -284,7 +284,7 @@ function Checkout() {
               // navigate("/UserLogin");
             }
           }
-        } catch (error1) {}
+        } catch (error1) { }
       } else {
         // if (result.data.checkExistingCustomerwithemailonly !== null) {
         //   try {
@@ -363,10 +363,21 @@ function Checkout() {
       <Header />
       {/* header section ends here */}
 
+      <div class="checkout-bg">
+        <h1>Checkout<span>Form</span></h1>
+        <p>
+          You must fill all the required details
+        </p>
+      </div>
+
       <div class="form-row row">
-        <div class="form-container col-md-7 ">
-          <form class="checkout-form mx-3" onSubmit={handleSubmit}>
-            <h3 class="text-center">CHECKOUT FORM</h3>
+
+
+
+        <div class="form-container col-md-7 mt-5 ">
+
+          <form class="checkout-form mx-3 " onSubmit={handleSubmit}>
+           
 
             <div class="row">
               <h3>Personal Information :</h3>
@@ -678,11 +689,15 @@ function Checkout() {
           </form>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 ">
+
           <div class="cart-bottom side-cart">
-            <div class="total" mb-4>
+
+            <div class="total" >
+
               <div>
                 <div class="cart-container ">
+                  
                   <table className="mx-auto" width="100%">
                     <thead>
                       <tr>

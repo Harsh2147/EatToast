@@ -65,13 +65,16 @@ function Menu() {
       {/* header section end here */}
 
       {/* menu section start here */}
-      <section class="menu-section" id="menu-section">
-        <h1 class="special-head text-center mt-5">
-          {" "}
-          Our <span> Menu</span>
-        </h1>
 
-        <div className="container mt-5 mb-5 px-5">
+      <div class="banner_bg">
+        <h1>Our<span>Menu</span></h1>
+      </div>
+
+
+
+      <section class="menu-section" id="menu-section">
+
+        <div className="container  mb-5 px-5">
           <div className="row">
             <div className="col-md-12 ">
               <label for="search" class="s-label">Search Product Here:</label>

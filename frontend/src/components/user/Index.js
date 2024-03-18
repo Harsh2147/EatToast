@@ -120,7 +120,7 @@ function Index() {
             <h1>
               <span>About</span>Us
             </h1>
-            <h3>why food choose us?</h3>
+            <h3>Why food choose us?</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
               recusandae dolore tempora fugiat quisquam illum, veniam adipisci
@@ -133,17 +133,17 @@ function Index() {
 
             <div class="about_services">
               <div class="s_1">
-                <i class="fa-solid fa-truck-fast"></i>
+               
                 <a href="#">Fast Delivery</a>
               </div>
 
               <div class="s_1">
-                <i class="fa-brands fa-amazon-pay"></i>
+               
                 <a href="#">Easy Payment</a>
               </div>
 
               <div class="s_1">
-                <i class="fa-solid fa-headset"></i>
+                
                 <a href="#">24 x 7 Services</a>
               </div>
             </div>
@@ -158,7 +158,110 @@ function Index() {
       {/* about section end here */}
 
 
-      
+
+
+      <div class="team">
+
+        <h1 class="special-head text-center">
+          {" "}
+          Our <span>Speciality Team</span>
+        </h1>
+
+        <div class="team_line_1"></div>
+
+
+        <div class="team_box">
+
+          <div class="team_card">
+
+            <div class="team_img">
+              <img src="/img/team_1.jpg" />
+            </div>
+
+            <div class="team_tag">
+
+              <h2>John Deo</h2>
+              <p class="job">Cook</p>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="team_card">
+
+            <div class="team_img">
+              <img src="/img/team_2.jpg" />
+            </div>
+
+            <div class="team_tag">
+
+              <h2>John Deo</h2>
+              <p class="job">Cook</p>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="team_card">
+
+            <div class="team_img">
+              <img src="/img/team_3.jpg" />
+            </div>
+
+            <div class="team_tag">
+
+              <h2>John Deo</h2>
+              <p class="job">Cook</p>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="team_card">
+
+            <div class="team_img">
+              <img src="/img/team_4.jpg" />
+            </div>
+
+            <div class="team_tag">
+
+              <h2>John Deo</h2>
+              <p class="job">Cook</p>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
     </>
   );
 }

@@ -80,9 +80,16 @@ function Cart() {
       <Header />
       {/* header section end here */}
 
+      <div class="cart-bg">
+        <h1>YOUR <span>SHOPPING CART</span></h1>
+        <p>
+          Check all the details move forward for checkout 
+        </p>
+      </div>
+
       <div class="container-fluid text-center">
         <div class="cart-container ">
-          <p class="cart-head">YOUR SHOPPING CART</p>
+       
           <table class="mx-auto" width="100%">
             <thead>
               <tr>
