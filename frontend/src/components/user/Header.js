@@ -22,11 +22,10 @@ function Header() {
 
         <a href="/Review">Review</a>
         <a href="/Profile">Profile</a>
-        <a href="/Table">Table</a>
         {CustomerloginData ? (
           <>
             <a href="/Order">Order</a>
-            <a href="#">Profile</a>
+            <a href="/Profile">Profile</a>
             <a href="/UserLogout">Logout</a>
           </>
         ) : (

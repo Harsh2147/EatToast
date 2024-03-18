@@ -156,7 +156,7 @@ input CategoryList
 
 type Query{
     getAllCategory_db: [Category]
-    
+    getAllReview_db: [Review]
     getAllProducts_db: [Products]
     getCategoryById_db(cat_id:ID) : Category
     getProductById_db(pro_id:ID) : Products
@@ -180,6 +180,7 @@ type Mutation{
 
   signupUser(userInput: UserInput): User
   signupCustomer(CustomerInput: CustomerInput): Customer
+  db_updateCustomerById(Customer_id:ID,updated_data :CustomerInput): Customer
   AddOrder(OrderInput: OrderInput): Order
   checkExistingUser(email: String!, Password:String!, Usertype: UserType!): User
   checkExistingCustomer(email: String!, Password:String!): Customer
@@ -200,6 +201,18 @@ const resolvers = {
         console.log(categories_from_db);
 
         return categories_from_db;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    getAllReview_db: async (parent, args, context, info) => {
+      try {
+        const reviews_from_db = await ReviewsModel.find({});
+
+        console.log(parent);
+        console.log(reviews_from_db);
+
+        return reviews_from_db;
       } catch (err) {
         console.log(err);
       }
@@ -503,6 +516,24 @@ const resolvers = {
         return logexistingUser;
       } catch (error) {
         throw error;
+      }
+    },
+    db_updateCustomerById: async (parent, args, context, info) => {
+      try {
+        const id = args.Customer_id;
+
+        const updated_customer = args.updated_data;
+
+        const updated_customer_from_db = await CustomersModel.findByIdAndUpdate(
+          id,
+          updated_customer
+        );
+
+        console.log(updated_customer);
+
+        return updated_customer;
+      } catch (err) {
+        console.log(`Update Failed due to the error below \n ${err}`);
       }
     },
     checkExistingCustomerwithemailonly: async (parent, args, context, info) => {

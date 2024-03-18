@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_REVIEW } from "../../graphql/AddReview";
 import Header from "./Header";
-
+import { FETCH_ALL_REVIEWS } from "../../graphql/FetchAllReviews";
 function Review() {
   const navigate = useNavigate();
   const [Firstname, setFirstname] = useState("");
@@ -12,7 +12,14 @@ function Review() {
   const [Message, setMessage] = useState("");
   const [Mobile, setMobile] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
-  const [insertReview, { loading, error, data }] = useMutation(ADD_REVIEW);
+  const { loading, error, data } = useQuery(FETCH_ALL_REVIEWS);
+  const [insertReview, { loading1, error1, data1 }] = useMutation(ADD_REVIEW);
+
+  useEffect(() => {
+    console.log("Loading:", loading);
+    console.log("Error:", error);
+    console.log("Data:", data);
+  }, [loading, error, data]);
   const validateForm = async () => {
     const errors = [];
 
@@ -36,6 +43,10 @@ function Review() {
     setErrorMessages(errors);
     return errors.length === 0;
   };
+  if (data) {
+    console.log("data=" + data);
+    console.error("No data or empty data returned for Reviews.");
+  }
   const resetForm = () => {
     setFirstname("");
     setLastname("");
@@ -57,6 +68,7 @@ function Review() {
               Message,
               Mobile: parseInt(Mobile),
             },
+            refetchQueries: [{ query: FETCH_ALL_REVIEWS }],
           },
         });
         // console.log("result.data " + result.data);
@@ -213,23 +225,18 @@ function Review() {
             </div>
           </div>
         </div>
-
+      </div>
 
 
 
       <div class="review">
 
-      <h1 class="special-head text-center mt-5">
-          {" "}
-          Our <span> Review</span>
-        </h1>
+        <h1 class="text-center">Our Review</h1>
         <p class="text-center">
           Thanks for giving us a good review....We really appreciate it.
         </p>
 
         <div class="review_line_1"></div>
-
-
         <div class="review_box">
 
           <div class="review_card">
@@ -280,20 +287,7 @@ function Review() {
               <button class="submit-button">Raed more</button>
             </div>
           </div>
-
-
-          <div class="review_card">
-            <div class="review_tag">
-              <h2>Name</h2>
-              <p class="info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore!
-                Veniam sit quod iusto quas eligendi. Natus numquam
-                aspernatur alias illo voluptates dolorem, id ad.
-              </p>
-              <button class="submit-button">Raed more</button>
-            </div>
-          </div>
+          
 
           <div class="review_card">
             <div class="review_tag">
@@ -334,12 +328,23 @@ function Review() {
             </div>
           </div>
 
-
+          <div class="review_card">
+            <div class="review_tag">
+              <h2>Name</h2>
+              <p class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium cupiditate deserunt odio in fugiat dolore!
+                Veniam sit quod iusto quas eligendi. Natus numquam
+                aspernatur alias illo voluptates dolorem, id ad.
+              </p>
+              <button class="submit-button">Raed more</button>
+            </div>
+          </div>
+          
+          
 
         </div>
-
       </div>
-
     </>
   );
 }

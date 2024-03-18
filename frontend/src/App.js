@@ -29,8 +29,6 @@ import ConfirmationPage from "./components/user/ConfirmationPage";
 import Review from "./components/user/Review";
 import Order from "./components/user/Order";
 import Profile from "./components/user/Profile";
-import Table from "./components/user/Table";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -66,7 +64,6 @@ function App() {
         <Route path="Review" element={<Review />} />
         <Route path="Order" element={<Order />} />
         <Route path="Profile" element={<Profile />} />
-        <Route path="Table" element={<Table />} />
       </Routes>
     </BrowserRouter>
   );
