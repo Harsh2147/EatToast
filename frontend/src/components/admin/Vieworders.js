@@ -5,6 +5,8 @@ import { FETCH_All_ORDERS } from "../../graphql/FetchAllOrders";
 import Header from "./Header";
 function Vieworders() {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Number of items per page
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -22,13 +24,32 @@ function Vieworders() {
     localStorage.setItem("id", _id);
     localStorage.setItem("category_name", category_name);
   };
+  // Logic to calculate total number of pages
+  const totalPages = Math.ceil(
+    (data?.getAllOrder_db?.length || 0) / itemsPerPage
+  );
+
+  // Logic to get current orders based on pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentOrders = data?.getAllOrder_db?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  // Change page
+  const paginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
   return (
     <>
       <div className="container">
         <Header />
 
         <div className="main">
-          <div className="container mt-5">
+          {/* <div className="container mt-5">
             <div className="row">
               <div className="col-md-6 mx-1">
                 <div className="input-group mx-4">
@@ -54,7 +75,7 @@ function Vieworders() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="details">
             <div className="latestOrder">
               <div className="cardHeader">
@@ -68,30 +89,77 @@ function Vieworders() {
                     <td>Product</td>
                     <td>Quantity</td>
                     <td>Total Price With Tax</td>
-                    <td>Pickup Date</td>
-                    <td>Pickup Time</td>
+
                     <td>Order Date</td>
+                    <td>Status</td>
                   </tr>
                 </thead>
 
                 <tbody>
-                  {data?.getAllOrder_db.map((order) => (
-                    <tr key={order._id}>
+                  {currentOrders?.map((order, index) => (
+                    <tr key={index}>
+                      <td>
+                        {index === 0 ||
+                        currentOrders[index - 1].CustomerFirstname !==
+                          order.CustomerFirstname ||
+                        currentOrders[index - 1].CustomerLastname !==
+                          order.CustomerLastname
+                          ? `${order.CustomerFirstname} ${order.CustomerLastname}`
+                          : null}
+                      </td>
                       <td>
                         {" "}
-                        {order.CustomerFirstname}
-                        {order.CustomerLastname}
+                        {order.orderItems.map((item) => (
+                          <div key={item.product_name}>
+                            <div>{item.product_name}</div>
+                            <div>Price: ${item.product_price}</div>
+                          </div>
+                        ))}
                       </td>
-                      <td>{order.Product_name}</td>
-                      <td>{order.Quantity}</td>
+
+                      <td>
+                        {order.orderItems.map((item) => {
+                          const sum = item.Quantity > 1 ? item.Quantity : "";
+                          return (
+                            <div key={item.Quantity}>
+                              <div>
+                                {item.Quantity > 1 ? sum : item.Quantity}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </td>
+
                       <td>{order.TotalPriceWithTax}</td>
-                      <td>{formatDate(order.Date)}</td>
-                      <td>{order.Time}</td>
-                      <td>{formatDate(order.CurrentDate)}</td>
+
+                      <td>
+                        {" "}
+                        {new Date(order.CurrentDate).toISOString().slice(0, 10)}
+                      </td>
+                      <td>
+                        {order.Status !== "Ready" ? "Completed" : "Pending"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              <div className="pagination">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                <span className="currentPage">{currentPage}</span>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -7,8 +7,10 @@ export const FETCH_PRODUCT_BY_ID = gql`
       Product_name
       Product_price
       Product_description
-      Product_image
       Category
+      Product_image {
+        url
+      }
     }
   }
 `;

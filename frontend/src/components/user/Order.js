@@ -69,8 +69,15 @@ function Order() {
                         {order.CustomerFirstname}
                         {order.CustomerLastname}
                       </td>
-                      <td>{order.Product_name}</td>
-                      <td>{order.Quantity}</td>
+                      <td>
+                        {order.orderItems.map((item) => (
+                          <div key={item.product_name}>
+                            {item.product_name} (${item.product_price})
+                          </div>
+                        ))}
+                      </td>
+                      <td>{order.orderItems.reduce((acc, item) => acc + item.Quantity, 0)}</td>
+                     
                       <td>{order.TotalPriceWithTax}</td>
                       <td>{formatDate(order.Date)}</td>
                       <td>{order.Time}</td>

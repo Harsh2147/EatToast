@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FETCH_ALL_PRODUCTS } from "../../graphql/FetchProductQuery";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import PayButton from "./PayButton";
+
 function Cart() {
   const navigate = useNavigate();
   const cartItemsString = localStorage.getItem("cartItems");
@@ -74,6 +76,11 @@ function Cart() {
   const taxAmount = subTotalPrice * taxRate;
   const totalPriceWithTax = subTotalPrice + taxAmount;
   console.log("cartItem_updated" + JSON.stringify(cartItem));
+
+  const clearCart = () => {
+    localStorage.removeItem("cartItems");
+    setCartItems([]);
+  };
   return (
     <>
       {/* header section start from here */}
@@ -81,15 +88,14 @@ function Cart() {
       {/* header section end here */}
 
       <div class="cart-bg">
-        <h1>YOUR <span>SHOPPING CART</span></h1>
-        <p>
-          Check all the details move forward for checkout 
-        </p>
+        <h1>
+          YOUR <span>SHOPPING CART</span>
+        </h1>
+        <p>Check all the details move forward for checkout</p>
       </div>
 
       <div class="container-fluid text-center">
         <div class="cart-container ">
-       
           <table class="mx-auto" width="100%">
             <thead>
               <tr>
@@ -105,7 +111,7 @@ function Cart() {
               {cartItems.map((item, index) => (
                 <tr key={item._id}>
                   <td>
-                    <img src="/img/pancake.jpg"></img>
+                    <img src={item.Product_image.url} alt="product-img" />
                   </td>
 
                   <td>
@@ -193,12 +199,18 @@ function Cart() {
               </div>
 
               <div class="d-flex justify-content-between">
-                <h6></h6>
                 <p>
-                  {/* <button class="ml-auto">PROCESS</button> */}
-                  <Link to={`/Checkout`} className="ml-auto ">
-                    PROCCED TO CHECKOUT
-                  </Link>{" "}
+                  {/* <button class="ml-auto">PROCESS</button>*/}
+                  {cartItems.length > 0 ? (
+                    <Link to={`/Checkout`} className="ml-auto ">
+                      PROCEED TO CHECKOUT
+                    </Link>
+                  ) : (
+                    <button onClick={() => navigate("/menu")} className="ml-auto">
+                      PROCEED TO MENU
+                    </button>
+                  )}
+                  {/** <PayButton cartItems= {cartItems} clearCart={clearCart}/> */}
                 </p>
               </div>
             </div>

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 function Viewcategory() {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Number of items per page
 
   const { loading, error, data } = useQuery(FETCH_ALL_CATEGORIES);
   const [search, setSearch] = useState("");
@@ -28,6 +30,25 @@ function Viewcategory() {
     console.log("ID" + _id);
     localStorage.setItem("id", _id);
     localStorage.setItem("category_name", category_name);
+  };
+  // Logic to calculate total number of pages
+  const totalPages = Math.ceil(
+    (data?.getAllCategory_db?.length || 0) / itemsPerPage
+  );
+
+  // Logic to get current items based on pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data?.getAllCategory_db?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  // Change page
+  const paginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
   };
   return (
     <>
@@ -68,8 +89,8 @@ function Viewcategory() {
                 </thead>
 
                 <tbody>
-                  {data?.getAllCategory_db
-                    .filter((cat) => {
+                  {currentItems
+                    ?.filter((cat) => {
                       return search.toLocaleLowerCase() === ""
                         ? cat
                         : cat.category_name
@@ -101,6 +122,23 @@ function Viewcategory() {
                     ))}
                 </tbody>
               </table>
+              <div className="pagination">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                <span className="currentPage">{currentPage}</span>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>

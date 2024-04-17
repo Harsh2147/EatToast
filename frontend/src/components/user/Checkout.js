@@ -8,14 +8,21 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Additems from "../admin/Additems";
-function Checkout() {
+import PayButton from "./PayButton";
+import CheckoutSuccess from "./CheckoutSuccess";
+
+function Checkout({}) {
   const navigate = useNavigate();
   let RegistrationId = 0;
   const cartItemsString = localStorage.getItem("cartItems");
+
   const cartItems = JSON.parse(cartItemsString) || [];
+
+  const [cartItem, setCartItems] = useState(cartItems);
   const [totalPrice, setTotalPrice] = useState(0);
   const taxRate = 0.13;
 
+  const [customerId, setCustomerId] = useState(null);
   const [Firstname, setFirstname] = useState("");
   const [Lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -36,11 +43,44 @@ function Checkout() {
   const [CardNumber, setCardNumber] = useState("");
   const [ExDate, setExDate] = useState("");
   const [Cvv, setCvv] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [dataQ, { loading, errorQ }] = useMutation(CUSTOMER_EXIST_QUERY);
+  const [customerExist] = useMutation(CUSTOMER_EXIST_QUERY);
   // Function to format current date as yyyy-mm-dd
   const getCurrentDate = () => {
     return moment().format("YYYY-MM-DD");
+  };
+
+  useEffect(() => {
+    // Fetch customer data if email is available
+    const storedEmail = localStorage.getItem("CustomerEmail");
+    if (storedEmail) {
+      setEmail(storedEmail);
+      fetchCustomerData(storedEmail);
+    }
+  }, []);
+
+  async function fetchCustomerData(email) {
+    try {
+      const { data } = await customerExist({ variables: { email } });
+      if (data.checkExistingCustomerwithemailonly) {
+        const { Firstname, Mobile, _id } =
+          data.checkExistingCustomerwithemailonly;
+        setFirstname(Firstname);
+        setLastname(Lastname);
+        setMobile(Mobile);
+        setCustomerId(_id);
+        console.log("customer id", _id);
+      }
+    } catch (error) {
+      console.error("Error fetching customer data:", error);
+    }
+  }
+
+  const clearCart = () => {
+    localStorage.removeItem("cartItems");
+    setCartItems([]);
   };
 
   useEffect(() => {
@@ -164,7 +204,7 @@ function Checkout() {
     setPassword(Mobile);
   }, [Mobile]);
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
 
     //Check validation
     if (validateForm()) {
@@ -172,20 +212,7 @@ function Checkout() {
       const CUSTOMER_EXIST = await dataQ({
         variables: { email: email },
       });
-      console.log(
-        "CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly=" +
-        CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly,
-        Firstname,
-        parseInt(Mobile),
-        Lastname,
-        email,
-        Password,
-        Address1,
-        Address2,
-        PostalCode,
-        State,
-        Country
-      );
+
       if (CUSTOMER_EXIST.data.checkExistingCustomerwithemailonly === null) {
         try {
           const registration_result = await registration({
@@ -212,11 +239,18 @@ function Checkout() {
             RegistrationId = registration_result.data.signupCustomer._id;
             console.log(
               "RegistrationId in registation = " +
-              registration_result.data.signupCustomer._id
+                registration_result.data.signupCustomer._id
             );
           }
         } catch (error) {
           // Check if the error message is related to an existing user
+
+          if (error.graphQLErrors) {
+            const validationErrors = error.graphQLErrors.map(
+              (err) => err.message
+            );
+            setErrorMessages(validationErrors);
+          }
           if (
             error.message.includes(
               "User with the provided email and usertype already exists."
@@ -239,6 +273,7 @@ function Checkout() {
           console.log("entered in with RegistrationId not null");
 
           for (const cartItem of cartItems) {
+            console.log("what is in cart", cartItem);
             const totalPriceWithTaxInt = Math.round(
               cartItem.quantity * cartItem.Product_price * (1 + taxRate)
             );
@@ -263,9 +298,7 @@ function Checkout() {
             });
 
             console.log("result1.data " + result1.data.AddOrder._id);
-            // console.log(
-            //   "result.data.signupCustomer " + result1.data.signupCustomer._id
-            // );
+
             if (result1.data && result1.data.AddOrder._id) {
               navigate("/Confirmation", {
                 state: {
@@ -276,69 +309,15 @@ function Checkout() {
                 },
               });
               localStorage.removeItem("cartItems");
-              //    console.log(
-              //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
-              // );
-              // RegistrationId = result1.data.signupCustomer._id;
-              // alert("Successful");
-              // navigate("/UserLogin");
             }
           }
-        } catch (error1) { }
+        } catch (error1) {}
       } else {
-        // if (result.data.checkExistingCustomerwithemailonly !== null) {
-        //   try {
-        //     console.log("enteredanother,");
-        //     for (const cartItem of cartItems) {
-        //       const totalPriceWithTaxInt = Math.round(
-        //         cartItem.quantity * cartItem.Product_price * (1 + taxRate)
-        //       );
-        //       const result1 = await order({
-        //         variables: {
-        //           orderInput: {
-        //             CustomerFirstname: Firstname,
-        //             CustomerLastname: Lastname,
-        //             CustomerMobile: parseInt(Mobile),
-        //             Product_name: cartItem.Product_name,
-        //             Product_price: cartItem.Product_price,
-        //             Quantity: cartItem.quantity,
-        //             TotalPriceWithTax: totalPriceWithTaxInt,
-        //             Date: pickupDate,
-        //             CurrentDate: selectedDate,
-        //             DeliveryType: DeliveryType,
-        //             PaymentBy: PaymentBy,
-        //             CustomerId:
-        //               result.data.checkExistingCustomerwithemailonly._id,
-        //             Time: Time,
-        //           },
-        //         },
-        //       });
-        //       console.log("result1.data " + result1.data.AddOrder._id);
-        //       // console.log(
-        //       //   "result.data.signupCustomer " + result1.data.signupCustomer._id
-        //       // );
-        //       if (result1.data && result1.data.AddOrder._id) {
-        //         navigate("/Confirmation", {
-        //           state: {
-        //             cartItems: cartItems,
-        //             totalPrice: totalPrice,
-        //             taxAmount: taxAmount,
-        //             totalPriceWithTax: totalPriceWithTax,
-        //           },
-        //         });
-        //         //    console.log(
-        //         //   "result1.data.signupCustomer " + result1.data.signupCustomer._id
-        //         // );
-        //         // RegistrationId = result1.data.signupCustomer._id;
-        //         // alert("Successful");
-        //         // navigate("/UserLogin");
-        //       }
-        //     }
-        //   } catch (error1) {}
-        // }
       }
     }
   };
+  console.log(cartItems);
+ 
   useEffect(() => {
     const newTotalPrice = cartItems.reduce(
       (price, item) => price + item.quantity * item.Product_price,
@@ -354,9 +333,11 @@ function Checkout() {
     navigate("/thank-you");
   };
 
+  console.log(cartItems);
   const taxAmount = totalPrice * taxRate;
   const totalPriceWithTax = totalPrice + taxAmount;
-
+  console.log(Date);
+  console.log(Time);
   return (
     <>
       {/* header section start from here */}
@@ -364,21 +345,15 @@ function Checkout() {
       {/* header section ends here */}
 
       <div class="checkout-bg">
-        <h1>Checkout<span>Form</span></h1>
-        <p>
-          You must fill all the required details
-        </p>
+        <h1>
+          Checkout<span>Form</span>
+        </h1>
+        <p>You must fill all the required details</p>
       </div>
 
       <div class="form-row row">
-
-
-
         <div class="form-container col-md-7 mt-5 ">
-
           <form class="checkout-form mx-3 " onSubmit={handleSubmit}>
-           
-
             <div class="row">
               <h3>Personal Information :</h3>
               <div class="col">
@@ -605,72 +580,13 @@ function Checkout() {
                 onChange={handleDropdownPaymentByChange}
               >
                 <option Value="null">Select Payment Mehod</option>
-                <option value="Credit Card"> Credit Card</option>
-                <option value="Debit Card"> Debit Card</option>{" "}
-                <option value="Cash on delivery">Cash on delivery</option>
+                <option value="Card Payment"> Card Payment</option>
+           
               </select>
             </div>
-            {PaymentBy === "Credit Card" || PaymentBy === "Debit Card" ? (
-              <>
-                <div class="row">
-                  <div class="col">
-                    <label for="cardname"> Card Holder Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Card Holder Name"
-                      id="CardHolderName"
-                      name="CardHolderName"
-                      value={CardHolderName}
-                      onChange={(e) => setCardHolderName(e.target.value)}
-                    />
-                  </div>
 
-                  <div class="col">
-                    <label for="cardnumber"> Card number</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Card number"
-                      id="CardNumber"
-                      name="CardNumber"
-                      value={CardNumber}
-                      onChange={(e) => setCardNumber(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-3">
-                    <label for="cardexp"> Expiration</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter expiry date"
-                      id="ExDate"
-                      name="ExDate"
-                      value={ExDate}
-                      onChange={(e) => setExDate(e.target.value)}
-                    />
-                  </div>
-
-                  <div class="col-3">
-                    <label for="cvv"> CVV</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter cvv number"
-                      id="Cvv"
-                      name="Cvv"
-                      value={Cvv}
-                      onChange={(e) => setCvv(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </>
-            ) : null}
-            <div class="row">
-              <p>
+           <div class="row">
+              {/* <p>
                 {" "}
                 {errorMessages.length > 0 && (
                   <div style={{ color: "red", fontWeight: "700" }}>
@@ -681,23 +597,54 @@ function Checkout() {
                     </ul>
                   </div>
                 )}
-              </p>
+              </p>*/}
               <div class="col-3">
-                <button class="check-button">CheckOut</button>
+                <PayButton
+                product={cartItems.map(item => item.Product_name).join(', ')} // Concatenate product names if there are multiple items
+                total={totalPriceWithTax} // Pass the total price with tax
+                quantity={cartItems.reduce((total, item) => total + item.quantity, 0)} 
+                  cartItems={cartItems}
+                  customer={{
+                    Firstname,
+                    Lastname,
+                    Mobile,
+                    DeliveryType,
+                    Date,
+                    Time,
+                    Address1,
+                    Address2,
+                    PostalCode,
+                    State,
+                    Country,
+                    PaymentBy,
+                    totalPriceWithTax,
+                    CustomerId: customerId,
+                  }}
+                />
+
+                {showSuccess && (
+                  <CheckoutSuccess
+                    cartItems={cartItems}
+                    customer={{
+                      Firstname,
+                      Lastname,
+                      Mobile,
+                      DeliveryType,
+                      Date,
+                      Time,
+                    }}
+                  />
+                )}
               </div>
             </div>
           </form>
         </div>
 
         <div class="col-md-4 ">
-
           <div class="cart-bottom side-cart">
-
-            <div class="total" >
-
+            <div class="total">
               <div>
                 <div class="cart-container ">
-                  
                   <table className="mx-auto" width="100%">
                     <thead>
                       <tr>
@@ -708,7 +655,7 @@ function Checkout() {
                       </tr>
                     </thead>
 
-                    <tbody >
+                    <tbody>
                       {cartItems.map((item) => (
                         <tr key={item._id}>
                           <td>{item.Product_name}</td>

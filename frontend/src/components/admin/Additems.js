@@ -1,57 +1,98 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { FETCH_ALL_CATEGORIES } from "../../graphql/FetchCatQuery";
+import { UPLOAD_IMAGE } from "../../graphql/Uploadimg";
 import { INSERT_PRODUCTS_MUTATION } from "../../graphql/InsertProcMutation";
 import Header from "./Header";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { initializeApp } from "firebase/app";
+//import firebase from "firebase/app";
+import "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDNkll0obirU-CvSxzotZKs3kfYEvN9DQE",
+  authDomain: "clothingstore-a76eb.firebaseapp.com",
+  databaseURL: "https://clothingstore-a76eb-default-rtdb.firebaseio.com",
+  projectId: "clothingstore-a76eb",
+  storageBucket: "clothingstore-a76eb.appspot.com",
+  messagingSenderId: "369833662928",
+  appId: "1:369833662928:web:44e546dc70a58709b001d5",
+};
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
 function Additems() {
+  const fileInput = useRef();
   const navigate = useNavigate();
 
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState(0);
-  const [productDescription, setProductDescription] = useState("");
-  const [productImage, setProductImage] = useState(null);
-  const [category, setCategory] = useState("");
+  const [productDetails, setProductDetails] = useState({
+    Product_name: "",
+    Product_price: "",
+    Product_description: "",
+    Category: "",
+    Product_image: "",
+  });
   const [errorMessages, setErrorMessages] = useState([]);
+
+  const [uploadImage] = useMutation(UPLOAD_IMAGE);
+  const [createProducts] = useMutation(INSERT_PRODUCTS_MUTATION);
 
   const { loading, error, data } = useQuery(FETCH_ALL_CATEGORIES);
 
-  const [createProducts] = useMutation(INSERT_PRODUCTS_MUTATION);
+  const handleInputChange = (event) => {
+    setProductDetails({
+      ...productDetails,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const storageRef = ref(storage, file.name);
+    await uploadBytesResumable(storageRef, file);
+    return await getDownloadURL(storageRef);
+  };
+
   const validateForm = () => {
     const errors = [];
 
-    if (!productName) {
+    if (!productDetails) {
       errors.push("Product Name is required");
     }
-    if (!productPrice) {
-      errors.push("Product Price is required");
-    }
-    if (!productDescription) {
-      errors.push("Product Description is required");
-    }
-    if (!productImage) {
-      errors.push("Product Image is required");
-    }
-    if (!category) {
-      errors.push("Category is required");
-    }
+
     setErrorMessages(errors);
     return errors.length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const file = fileInput.current.files[0];
+    const storageRef = ref(storage, file.name);
+    await uploadBytesResumable(storageRef, file);
+    const productImage = await getDownloadURL(storageRef);
+
+    // Update the Product_image field in the productDetails state
+    setProductDetails({
+      ...productDetails,
+      Product_image: productImage,
+    });
 
     if (validateForm()) {
       createProducts({
         variables: {
-          productInput: {
-            Product_name: productName,
-            Product_price: parseFloat(productPrice),
-            Product_description: productDescription,
-            Product_image: productImage,
-            Category: category,
-          },
+          productName: productDetails.Product_name,
+          productPrice: parseFloat(productDetails.Product_price),
+          productDescription: productDetails.Product_description,
+          productImage: productImage,
+          category: productDetails.Category,
         },
       });
 
@@ -70,10 +111,6 @@ function Additems() {
 
   if (error) {
     console.error("Error fetching categories:", error.message);
-  }
-
-  if (!data || !data.getAllCategory_db) {
-    console.error("No data or empty data returned for categories.");
   }
 
   return (
@@ -103,44 +140,40 @@ function Additems() {
                 <div class="form-group mb-3">
                   <label>Product Name</label>
                   <input
+                    class="form-control"
                     type="text"
-                    id="ProductName"
-                    className="form-control"
-                    name="ProductName"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
+                    name="Product_name"
+                    placeholder="Product Name"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div class="form-group mb-3">
                   <label>Price</label>
                   <input
+                    class="form-control"
                     type="number"
-                    className="form-control"
-                    id="productprice"
-                    name="productprice"
-                    value={productPrice}
-                    onChange={(e) => setProductPrice(e.target.value)}
+                    name="Product_price"
+                    placeholder="Product Price"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div class="form-group mb-3">
                   <label>Description</label>
                   <input
+                    class="form-control"
                     type="text"
-                    id="productdescription"
-                    className="form-control"
-                    name="productdescription"
-                    value={productDescription}
-                    onChange={(e) => setProductDescription(e.target.value)}
+                    name="Product_description"
+                    placeholder="Product Description"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div class="form-group mb-3">
                   <label>Image</label>
                   <input
+                    class="form-control"
                     type="file"
-                    id="productImage"
-                    className="form-control"
-                    name="productImage"
-                    onChange={(e) => setProductImage(e.target.value)}
+                    onChange={handleImageUpload}
+                    ref={fileInput}
                   />
                 </div>
 
@@ -151,8 +184,7 @@ function Additems() {
                     className="form-control"
                     type="text"
                     name="Category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={handleInputChange}
                   >
                     <option value="">Select Category</option>
 

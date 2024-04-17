@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { CUSTOMER_EXIST_QUERY } from "../../graphql/CheckExistingCustomer";
+import { UPDATE_CUSTOMER_BY_ID } from "../../graphql/UpdateCustomerById";
 import Header from "./Header";
 
 function ProfileUpdate() {
   const navigate = useNavigate();
+  const [customerId, setCustomerId] = useState("");
   const [Firstname, setFirstname] = useState("");
   const [Lastname, setLastname] = useState("");
   const [email, setemail] = useState("");
@@ -20,7 +22,9 @@ function ProfileUpdate() {
   const [errorMessages, setErrorMessages] = useState([]);
   const [customerData, setCustomerData] = useState(null);
   const [dataQ, { loading, errorQ }] = useMutation(CUSTOMER_EXIST_QUERY);
-
+  const [updateUser, { loading1, error1, data1 }] = useMutation(
+    UPDATE_CUSTOMER_BY_ID
+  );
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,19 +32,17 @@ function ProfileUpdate() {
           variables: { email: Email },
         });
         if (result.data) {
-          setFirstname(
-            result.data.checkExistingCustomerwithemailonly.Firstname
-          );
-          setLastname(result.data.checkExistingCustomerwithemailonly.Lastname);
-          setMobile(result.data.checkExistingCustomerwithemailonly.Mobile);
-          setemail(result.data.checkExistingCustomerwithemailonly.email);
-          setAddress1(result.data.checkExistingCustomerwithemailonly.Address1);
-          setAddress2(result.data.checkExistingCustomerwithemailonly.Address2);
-          setPostalCode(
-            result.data.checkExistingCustomerwithemailonly.PostalCode
-          );
-          setState(result.data.checkExistingCustomerwithemailonly.State);
-          setCountry(result.data.checkExistingCustomerwithemailonly.Country);
+          const customer = result.data.checkExistingCustomerwithemailonly;
+          setCustomerId(customer._id);
+          setFirstname(customer.Firstname);
+          setLastname(customer.Lastname);
+          setMobile(customer.Mobile);
+          setemail(customer.email);
+          setAddress1(customer.Address1);
+          setAddress2(customer.Address2);
+          setPostalCode(customer.PostalCode);
+          setState(customer.State);
+          setCountry(customer.Country);
 
           setCustomerData(result.data); // Store the fetched customer data
         }
@@ -53,6 +55,42 @@ function ProfileUpdate() {
 
     fetchData();
   }, [email, dataQ]);
+  const handleInputChange = (e) => {};
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateUser({
+      variables: {
+        customerId: customerId,
+        Firstname,
+        Mobile: parseInt(Mobile),
+        Lastname,
+        email,
+
+        Address1,
+        Address2,
+        PostalCode,
+        State,
+        Country,
+        updatedData: {
+          Firstname: Firstname,
+          Lastname: Lastname,
+          email: Email,
+          Mobile: Mobile,
+
+          Address1: Address1,
+          Address2: Address2,
+          PostalCode: PostalCode,
+          State: State,
+          Country: Country,
+        },
+      },
+    });
+    navigate("/profile");
+
+    alert("Profile Updated Successfully");
+  };
+
   return (
     <>
       {/* header section start from here */}
@@ -68,8 +106,8 @@ function ProfileUpdate() {
           <div class="oder_form">
             <div class="form-row row">
               <div class="form-container  ">
-                <form class="checkout-form">
-                  <h3 class="text-center">Profile</h3>
+                <form class="checkout-form" onSubmit={handleSubmit}>
+                  <h3 class="text-center">Update Profile</h3>
 
                   <div class="row">
                     <h3>Personal Information :</h3>
@@ -83,6 +121,7 @@ function ProfileUpdate() {
                         placeholder="Enter First name"
                         name="Firstname"
                         value={Firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
                       />
                     </div>
 
@@ -95,6 +134,7 @@ function ProfileUpdate() {
                         placeholder="Enter Last name"
                         name="Lastname"
                         value={Lastname}
+                        onChange={(e) => setLastname(e.target.value)}
                       />
                     </div>
                   </div>
@@ -110,6 +150,7 @@ function ProfileUpdate() {
                         id="Mobile"
                         name="Mobile"
                         value={Mobile}
+                        onChange={(e) => setMobile(e.target.value)}
                       />
                     </div>
 
@@ -123,6 +164,7 @@ function ProfileUpdate() {
                         id="email"
                         name="email"
                         value={email}
+                        onChange={(e) => setemail(e.target.value)}
                       />
                     </div>
                   </div>
@@ -140,6 +182,7 @@ function ProfileUpdate() {
                         id="Address1"
                         name="Address1"
                         value={Address1}
+                        onChange={(e) => setAddress1(e.target.value)}
                       />
                     </div>
                     <div class="col">
@@ -151,6 +194,7 @@ function ProfileUpdate() {
                         id="Address2"
                         name="Address2"
                         value={Address2}
+                        onChange={(e) => setAddress2(e.target.value)}
                       />
                     </div>{" "}
                   </div>
@@ -164,6 +208,7 @@ function ProfileUpdate() {
                         id="PostalCode"
                         name="PostalCode"
                         value={PostalCode}
+                        onChange={(e) => setPostalCode(e.target.value)}
                       />
                     </div>
                     <div class="col">
@@ -175,6 +220,7 @@ function ProfileUpdate() {
                         id="State"
                         name="State"
                         value={State}
+                        onChange={(e) => setState(e.target.value)}
                       />
                     </div>{" "}
                   </div>
@@ -188,6 +234,7 @@ function ProfileUpdate() {
                         id="Country"
                         name="Country"
                         value={Country}
+                        onChange={(e) => setCountry(e.target.value)}
                       />
                     </div>
                   </div>

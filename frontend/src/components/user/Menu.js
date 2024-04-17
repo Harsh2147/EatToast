@@ -67,21 +67,20 @@ function Menu() {
       {/* menu section start here */}
 
       <div class="banner_bg">
-        <h1>Our<span>Menu</span></h1>
+        <h1>
+          Our<span>Menu</span>
+        </h1>
       </div>
 
-
-
       <section class="menu-section" id="menu-section">
-
         <div className="container  mb-5 px-5">
           <div className="row">
             <div className="col-md-12 ">
-              <label for="search" class="s-label">Search Product Here:</label>
-              <div className="input-group p-search" >
-
+              <label for="search" class="s-label">
+                Search Product Here:
+              </label>
+              <div className="input-group p-search">
                 <input
-
                   id="search"
                   type="text"
                   className="form-control"
@@ -100,19 +99,19 @@ function Menu() {
               return search.toLocaleLowerCase() === ""
                 ? product
                 : product.Product_name.toLocaleLowerCase().includes(search) ||
-                product.Product_description.toLocaleLowerCase().includes(
-                  search
-                ) ||
-                product.Category.toLocaleLowerCase().includes(search);
+                    product.Product_description.toLocaleLowerCase().includes(
+                      search
+                    ) ||
+                    product.Category.toLocaleLowerCase().includes(search);
             })
             .map((product) => (
               <div class="menu-box">
-                <div class="menu-image">
-                  <img src="/img/pancake.jpg" alt="menu-image1"></img>
-                  <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="menu-box-content">
-                  <tr key={product._id}>
+                <tr key={product._id}>
+                  <div class="menu-image">
+                    <img src={product.Product_image.url} alt="menu-image"></img>
+                    <a href="#" class="fas fa-heart"></a>
+                  </div>
+                  <div class="menu-box-content">
                     <div class="stars">
                       <i class="fas fa-star"></i>
                       <i class="fas fa-star"></i>
@@ -142,8 +141,8 @@ function Menu() {
                       ADD TO CART
                     </button>
                     <span class="item-price">${product.Product_price}</span>
-                  </tr>
-                </div>
+                  </div>{" "}
+                </tr>
               </div>
             ))}
         </div>

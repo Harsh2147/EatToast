@@ -19,9 +19,10 @@ function Header() {
       <nav class="navbar">
         <a href="/Index">Home</a>
         <a href="/Menu">Menu</a>
+        <a href="/Table">Reservation</a>
 
         <a href="/Review">Review</a>
-        <a href="/Profile">Profile</a>
+
         {CustomerloginData ? (
           <>
             <a href="/Order">Order</a>

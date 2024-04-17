@@ -6,7 +6,15 @@ import { INSERT_CATEGORY_MUTATION } from "../../graphql/InsertCatMutation";
 import Header from "./Header";
 function Addcategory() {
   const navigate = useNavigate();
-
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const [categoryName, setCategoryName] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
   const [insertCategories, { loading, error, data }] = useMutation(
