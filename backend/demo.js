@@ -10,20 +10,19 @@ import UsersModel from "./models/UsersModel.js";
 import CustomersModel from "./models/CustomerModel.js";
 import OrderModel from "./models/OrderModel.js";
 import ReviewsModel from "./models/ReviewModel.js";
-import CouponModel from "./models/CouponModel.js";
 import tableModel from "./models/TableBooking.js";
 import bcrypt from "bcrypt";
 import imageaxiosModel from "./models/ImageModel.js";
 import Stripe from "stripe";
-import cors from "cors";
+import cors from 'cors';
 import express from "express";
 import dotenv from "dotenv";
-
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const stripe = require("stripe")(
-  "sk_test_51P4TXWP1fHpjHx9x9xqh3s9CtvGBXfoHGwzghs3sHbkvaxJXttkH7uIa95AO5ScnqEBA0NxPd7hwhZwYFr57DZ89009BWRWJsa"
-);
+const stripe = require('stripe')('sk_test_51P4TXWP1fHpjHx9x9xqh3s9CtvGBXfoHGwzghs3sHbkvaxJXttkH7uIa95AO5ScnqEBA0NxPd7hwhZwYFr57DZ89009BWRWJsa');
+
+const endpointSecret = "whsec_7406ec6cfa6c216c0c60d34f8d963b85b19043bdccacc5484be16a2ef3459fec";
+
 const admin = require("firebase-admin");
 
 const app = express();
@@ -73,15 +72,7 @@ type TableBooking {
   phonenumber: Int,
   email:String,
 }
-type Coupon{
-  _id: ID,
-  code: String,
-  discountType: String,
-  discountAmount: Int,
-  
-  expiryDate: Date,
-  isActive:String,
-}
+
 type Order{
 
   _id: ID,
@@ -91,44 +82,13 @@ type Order{
   Product_name: String,
   Product_price: Int,
   Quantity:Int,
-  TotalPriceWithTax:Float,
+  TotalPriceWithTax:Int,
   Date: Date,
   CurrentDate:Date,
   DeliveryType:String ,
   PaymentBy: String,
   CustomerId: ID,
   Time:String,
-}
-
-type Orders {
-  _id: ID
-  CustomerFirstname: String
-  CustomerLastname: String
-  CustomerMobile: Int
-  orderItems: [OrderItem] 
-  TotalPriceWithTax: Float
-  Date: Date
-  CurrentDate: Date
-  DeliveryType: String
-  PaymentBy: String
-  CustomerId: ID
-  Time: String
-}
-
-type OrderItem {
-  product_name: String
-  product_price: Int
-  Quantity: Int
-}
-input CouponInput{
-  
-  code: String,
-  discountType: String,
-  discountAmount: Int,
-  
-  expiryDate: Date,
-  isActive:String,
-
 }
 input OrderInput{
   
@@ -138,7 +98,7 @@ input OrderInput{
   Product_name: String,
   Product_price: Int,
   Quantity:Int,
-  TotalPriceWithTax:Float,
+  TotalPriceWithTax:Int,
   Date: Date,
   CurrentDate:Date,
   DeliveryType:String ,
@@ -151,7 +111,6 @@ input CartItemInput{
   Product_name: String!
   Product_price: Float!
   quantity: Int!
-  CustomerId: ID,
 }
 type Review{
   _id: ID,
@@ -208,6 +167,7 @@ input CustomerInput{
   Firstname: String,
   Lastname: String,
   email: String,
+ 
   Password: String,
   Mobile: Int,
   Address1: String,
@@ -216,7 +176,7 @@ input CustomerInput{
   State: String,
   Country: String,
  
-
+  
 }
 
 
@@ -275,22 +235,20 @@ type Query{
   getAllCategory: [Category]
     getAllCategory_db: [Category]
     getAllReview_db: [Review]
-    getAllCoupon_db:[Coupon]
     getAllProducts_db: [Products]
     getCategoryById_db(cat_id:ID) : Category
     getProductById_db(pro_id:ID) : Products
     getAllUsers_db: [User]
-    getAllCustomers_db: [Customer]
     checkExistingUser (email: String, Usertype: UserType) : [User]
-    getAllOrder_db: [Orders]
-    getOrderByCusomerId_db(CustomerId:ID) : [Orders]
+    getAllOrder_db: [Order]
+    getOrderByCusomerId_db(CustomerId:ID) : [Order]
     images: [Image!]!
     getAllTableBooking_db:[TableBooking]
    
 }
 
 type Mutation{
-  cCheckoutSession(order: [OrderInput!]): String # '{url: "STRIPEURL.com"}'
+  cCheckoutSession(order: [CartItemInput!]): String # '{url: "STRIPEURL.com"}'
   createProducts(
     Product_name: String!
     Product_price: Float!
@@ -307,7 +265,7 @@ type Mutation{
   ): Products
 
   ProductById(proId: ID!, updatedPro: ProductDetails): Products
-  db_deleteOrderById(OrderId:ID):Orders
+
   db_deleteProductById(pro_id:ID):Products
 
   insertCategories(categoryInsert: CategoryList): Category
@@ -318,8 +276,6 @@ type Mutation{
   signupCustomer(CustomerInput: CustomerInput): Customer
   db_updateCustomerById(Customer_id:ID,updated_data :CustomerInput): Customer
   AddOrder(OrderInput: OrderInput): Order
-  AddCoupon(CouponInput: CouponInput): Coupon
-
   checkExistingUser(email: String!, Password:String!, Usertype: UserType!): User
   checkExistingCustomer(email: String!, Password:String!): Customer
   checkExistingCustomerwithemailonly (email: String!) : Customer
@@ -340,27 +296,27 @@ type Mutation{
 
 const resolvers = {
   Query: {
-    createCheckoutSession: async () => {
+    createCheckoutSession: async() =>{
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
             price_data: {
-              currency: "usd",
+              currency: 'usd',
               product_data: {
-                name: "T-shirt",
+                name: 'T-shirt',
               },
               unit_amount: 2000,
             },
             quantity: 1,
           },
         ],
-        mode: "payment",
-        success_url: `${CLIENT_URL}/CheckoutSuccess`,
-        cancel_url: `${CLIENT_URL}/Cart`,
+        mode: 'payment',
+      success_url: `${CLIENT_URL}/CheckoutSuccess`,
+      cancel_url: `${CLIENT_URL}/Cart`,
       });
       return JSON.stringify({
-        url: session.url,
-      });
+        url: session.url
+      })
     },
     images: async () => {
       try {
@@ -379,18 +335,6 @@ const resolvers = {
         console.log(categories_from_db);
 
         return categories_from_db;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    getAllCoupon_db: async (parent, args, context, info) => {
-      try {
-        const Coupon_from_db = await CouponModel.find({});
-
-        console.log(parent);
-        console.log(Coupon_from_db);
-
-        return Coupon_from_db;
       } catch (err) {
         console.log(err);
       }
@@ -488,18 +432,6 @@ const resolvers = {
         console.log(err);
       }
     },
-    getAllCustomers_db: async (parent, args, context, info) => {
-      try {
-        const customers_from_db = await CustomersModel.find({});
-
-        console.log(parent);
-        console.log(customers_from_db);
-
-        return customers_from_db;
-      } catch (err) {
-        console.log(err);
-      }
-    },
     getAllUsers_db: async (parent, args, context, info) => {
       try {
         const users_from_db = await UsersModel.find({});
@@ -526,8 +458,6 @@ const resolvers = {
       try {
         const { CustomerId } = args;
         const Oder_by_CustomerId = await OrderModel.find({ CustomerId });
-
-        await OrderModel.populate(Oder_by_CustomerId, { path: "orderItems" });
         return Oder_by_CustomerId;
       } catch (err) {
         console.log(err);
@@ -548,94 +478,35 @@ const resolvers = {
   },
 
   Mutation: {
-    db_deleteOrderById: async (parent, args, context, info) => {
+    cCheckoutSession: async(_, {order}) =>{
       try {
-        const id = args.OrderId;
-        const order_deleted = await OrderModel.findByIdAndDelete(id);
-        console.log(order_deleted);
-        return order_deleted;
-      } catch (err) {}
-    },
-    cCheckoutSession: async (_, { order }, args, context, info) => {
-      try {
-        const { email } = args;
-
-        // Check if DeliveryType and PaymentBy are provided
-
-        const lineItems = order.map((orderItem) => ({
+        const lineItems = order.map((order)=> ({
+          
           price_data: {
-            currency: "usd",
+            currency: 'usd',
             product_data: {
-              name: orderItem.Product_name,
+              name: order.Product_name,
             },
-            unit_amount: orderItem.Product_price * 100,
-            // Change to 'unit_amount' instead of 'Product_price'
-          },
-
-          //unit_amount: orderItem.Product_price * 100,
-          quantity: orderItem.Quantity,
-          // Keep as 'quantity'
+            unit_amount: order.Product_price * 100,
+            },
+            quantity: order.quantity,
         }));
-
         const session = await stripe.checkout.sessions.create({
           line_items: lineItems,
-          mode: "payment",
-          success_url: `${CLIENT_URL}/CheckoutSuccess?success=true`,
-          cancel_url: `${CLIENT_URL}/Cart`,
+          mode: 'payment',
+        success_url: `${CLIENT_URL}/CheckoutSuccess`,
+        cancel_url: `${CLIENT_URL}/Cart`,
+      
         });
-
-        // Extracting name, quantity, and price from lineItems
-        const orderItems = lineItems.map((lineItem) => ({
-          product_name: lineItem.price_data.product_data.name,
-          product_price: lineItem.price_data.unit_amount / 100, // Convert back to actual price
-          Quantity: lineItem.quantity,
-        }));
-
-        // Create new OrderModel with orderItems
-        //const newOrder = new OrderModel({
-        // orderItems: orderItems,
-        //});
-        console.log(orderItems);
-        const newOrder = new OrderModel({
-          orderItems,
-          CustomerFirstname: order[0].CustomerFirstname, // Assuming customer info is same for all items
-          CustomerLastname: order[0].CustomerLastname,
-          CustomerMobile: order[0].CustomerMobile,
-          DeliveryType: order[0].DeliveryType,
-          PaymentBy: order[0].PaymentBy,
-          CustomerId: order[0].CustomerId,
-          TotalPriceWithTax: order[0].TotalPriceWithTax,
-          Quantity: order[0].Quantity,
-          Time: order[0].Time,
-        });
-
-        console.log(newOrder);
-        // Save the order to the database
-        const savedOrder = await newOrder.save();
-
         return JSON.stringify({
-          url: session.url,
-          order: savedOrder,
-        });
-      } catch (err) {
+          url: session.url
+        })
+      }catch (err) {
         console.error("Error creating checkout session:", err);
         throw new Error("Failed to create checkout session");
-      }
-    },
-    checkExistingCustomerwithemailonly: async (parent, args, context, info) => {
-      try {
-        const { email } = args;
-        const logexistingUser = await CustomersModel.findOne({ email });
-
-        // if (!logexistingUser) {
-        //   throw new Error("User not found");
-        // }
-
-        return logexistingUser;
-      } catch (error) {
-        throw error;
-      }
-    },
+     
+    }
+  },
     createProducts: async (
       _,
       {
@@ -903,7 +774,20 @@ const resolvers = {
         console.log(`Update Failed due to the error below \n ${err}`);
       }
     },
+    checkExistingCustomerwithemailonly: async (parent, args, context, info) => {
+      try {
+        const { email } = args;
+        const logexistingUser = await CustomersModel.findOne({ email });
 
+        // if (!logexistingUser) {
+        //   throw new Error("User not found");
+        // }
+
+        return logexistingUser;
+      } catch (error) {
+        throw error;
+      }
+    },
     getOrderById_db: async (parent, args, context, info) => {
       try {
         const { CustomerId } = args;
@@ -916,17 +800,6 @@ const resolvers = {
         return orderByCustomers;
       } catch (error) {
         throw error;
-      }
-    },
-    AddCoupon: async (parent, args, context, info) => {
-      try {
-        const newCoupon = new CouponModel(args.CouponInput);
-
-        const savedCoupon = await newCoupon.save();
-        console.log(savedCoupon);
-        return savedCoupon;
-      } catch (err) {
-        console.log(err);
       }
     },
     AddOrder: async (parent, args, context, info) => {
@@ -1004,76 +877,20 @@ const resolvers = {
   },
 };
 
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 var corsOptions = {
   origin: "http://localhost:3000",
   credentials: true,
-};
+}
 app.use(cors(corsOptions));
 
-const stripeWebhookSecret =
-  "whsec_7406ec6cfa6c216c0c60d34f8d963b85b19043bdccacc5484be16a2ef3459fec"; // Make sure to set this in your environment variables
-
-// Configure webhook endpoint for Stripe events
-
-app.post(
-  "/webhook",
-  express.raw({ type: "application/json" }),
-  async (req, res) => {
-    const sig = req.headers["stripe-signature"];
-
-    let event;
-
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body,
-        sig,
-        stripeWebhookSecret
-      );
-    } catch (err) {
-      console.error("Webhook error:", err.message);
-      return res.sendStatus(400);
-    }
-
-    // Handle the event
-    switch (event.type) {
-      case "checkout.session.completed":
-        const session = event.data.object;
-
-        const sessionId = session.id;
-        const orderId = session.client_reference_id;
-
-        const order = await OrderModel.findById(orderId);
-
-        if (!order) {
-          return res.sendStatus(400);
-        }
-        // Here you can update your database to mark the order as paid
-        order.status = "paid";
-        await order.save();
-        // and clear the cart items, for example:
-        // const orderId = session.client_reference_id;
-        // Your database update logic here...
-        console.log(`order marked as paid: ${orderId}`);
-        break;
-      // Handle other event types as needed
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
-    }
-
-    res.sendStatus(200);
-  }
-);
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
-    req, checkExistingCustomer;
-  },
   plugins: [
     {
       requestDidStart: () => ({
@@ -1097,6 +914,54 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
   listen: { port: 6002 },
 });
-
+//app.listen(6002, () => console.log('Server running on port 6002'));
 console.log(`🚀  Server ready at: ${url}`);
+
+app.use(express.json())
+app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
+
+  let event = request.body;
+
+  if (endpointSecret) {
+    // Get the signature sent by Stripe
+    const signature = request.headers['stripe-signature'];
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        signature,
+        endpointSecret
+      );
+    } catch (err) {
+      console.log(`⚠️  Webhook signature verification failed.`, err.message);
+      return res.sendStatus(400);
+    }
+  }
+
+  // Handle the event
+  switch (event.type) {
+    case 'payment_intent.succeeded':
+      const paymentIntent = event.data.object;
+      console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
+      // Then define and call a method to handle the successful payment intent.
+      // handlePaymentIntentSucceeded(paymentIntent);
+      break;
+      case 'payment_method.attached':
+        const paymentMethod = event.data.object;
+        // Then define and call a method to handle the successful attachment of a PaymentMethod.
+        // handlePaymentMethodAttached(paymentMethod);
+        break;
+      default:
+        // Unexpected event type
+        console.log(`Unhandled event type ${event.type}.`);
+    }
+
+  // Return a 200 response to acknowledge receipt of the event
+  response.send();
+})
+
+app.listen(4242, () => console.log('Server running on port 4242'));
+
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
 export default app;

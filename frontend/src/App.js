@@ -17,6 +17,7 @@ import Updateproduct from "./components/admin/Updateproduct";
 import Deleteproduct from "./components/admin/Deleteproduct";
 import NoPage from "./components/admin/NoPage";
 import Logout from "./components/admin/Logout";
+import Table from "./components/user/Table";
 
 import Index from "./components/user/Index";
 import Menu from "./components/user/Menu";
@@ -30,12 +31,21 @@ import Review from "./components/user/Review";
 import Order from "./components/user/Order";
 import Profile from "./components/user/Profile";
 import ProfileUpdate from "./components/user/ProfileUpdate";
+import Tableselection from "./components/manager/Tableselection";
+import Viewordersmanager from "./components/admin/Viewordersmanager";
+
+import Completeordersmanager from "./components/admin/Completeordersmanager";
+import DailyEarningsPage from "./components/admin/DailyEarningsPage";
+import AddCoupon from "./components/admin/AddCoupon";
+import CheckoutSuccess from "./components/user/CheckoutSuccess";
+import PayButton from "./components/user/PayButton";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Registration />}>
+        <Route path="/" element={<Index />}>
           {" "}
         </Route>
         <Route path="Login" element={<Login />} />
@@ -56,16 +66,27 @@ function App() {
         <Route path="Index" element={<Index />} />
         <Route path="Menu" element={<Menu />} />
         <Route path="UserLogin" element={<UserLogin />} />
+        <Route path="Table" element={<Table />} />
         <Route path="UserSignup" element={<UserSignup />} />
-        <Route path="Cart" element={<Cart />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/CheckoutSuccess" element={<CheckoutSuccess />} />
         <Route path="Checkout" element={<Checkout />} />
-
+        <Route path="Tableselection" element={<Tableselection />} />
         <Route path="UserLogout" element={<UserLogout />} />
         <Route path="Confirmation" element={<ConfirmationPage />} />
         <Route path="Review" element={<Review />} />
         <Route path="Order" element={<Order />} />
         <Route path="Profile" element={<Profile />} />
         <Route path="ProfileUpdate" element={<ProfileUpdate />} />
+        <Route path="Viewordersmanager" element={<Viewordersmanager />} />
+        <Route
+          path="Completeordersmanager"
+          element={<Completeordersmanager />}
+        />
+        <Route path="DailyEarningsPage" element={<DailyEarningsPage />} />
+        <Route path="PayButton" element={<PayButton />} />
+        <Route path="AddCoupon" element={<AddCoupon />} />
+        AddCoupon
       </Routes>
     </BrowserRouter>
   );

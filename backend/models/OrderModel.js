@@ -15,36 +15,46 @@ mongoose
   })
   .catch((err) => {
     console.log(
-      `######### not Connected due to the error below ##########\n${err}`
+      "######### not Connected due to the error below ##########\n${err}"
     );
   });
 
 const orderSchema = mongoose.Schema({
-  CustomerFirstname: { type: String, required: true },
-  CustomerLastname: { type: String, required: true },
-  CustomerMobile: { type: Number, required: true },
-  Product_name: { type: String, required: true },
-  Product_price: { type: Number, required: true },
-  Quantity: { type: Number, required: true },
-  TotalPriceWithTax: { type: Number, required: true },
+  orderItems: [
+    {
+      product_name: { type: String },
+      product_price: { type: Number },
+      Quantity: { type: Number },
+    },
+  ],
+  product_name: { type: String },
+  product_price: { type: Number },
+  quantity: { type: Number },
+  CustomerFirstname: { type: String },
+  Customer_email: { type: String },
+  CustomerLastname: { type: String },
+  CustomerMobile: { type: Number },
+  Product_name: { type: String },
+  Product_price: { type: Number },
+  quantity: { type: Number },
+  TotalPriceWithTax: { type: Number },
   Date: { type: Date, default: new Date() },
-  CurrentDate: { type: Date, default: new Date(), required: true },
+  CurrentDate: { type: Date, default: new Date() },
   Time: { type: String },
   DeliveryType: {
     type: String,
     enum: ["Online Delivery", "Pick up order"],
-    required: true,
   },
   PaymentBy: {
     type: String,
-    enum: ["Credit Card", "Debit Card", "Cash on delivery"],
-    required: true,
+    enum: ["Card Payment", "Cash on delivery"],
+    default: "Card Payment",
   },
   CustomerId: {
     type: mongoose.Types.ObjectId,
     ref: "CustomerModel",
-    require: true,
   },
+  Status: { type: String, default: "Pending" },
 });
 
 const OrderModel = mongoose.model("Orders", orderSchema);

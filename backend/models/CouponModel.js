@@ -19,20 +19,36 @@ mongoose
     );
   });
 
-const UserSchema = mongoose.Schema({
-  Firstname: { type: String, required: true },
-  Lastname: { type: String, required: true },
-  Mobile: { type: Number, required: true },
-  email: { type: String, required: true },
-  Address: { type: String, required: true },
-  Password: { type: String, required: true },
-  Usertype: {
+const couponSchema = new mongoose.Schema({
+  code: {
     type: String,
-    enum: ["ADMIN", "MANAGER", "EMPLOYEE"],
     required: true,
+    unique: true,
+    match: /^[a-zA-Z0-9]{5,10}$/,
+  },
+  discountType: {
+    type: String,
+    enum: [
+      "percentage",
+      "fixed",
+      "free_shipping",
+      "bogo",
+      "tiered",
+      "time_based",
+      "bundle",
+    ],
+    required: true,
+  },
+  discountAmount: {
+    type: Number,
+  },
+  expiryDate: { type: Date, default: new Date() },
+  isActive: {
+    type: Boolean,
+    default: true,
   },
 });
 
-const UsersModel = mongoose.model("Userss", UserSchema);
+const CouponModel = mongoose.model("Coupon", couponSchema);
 
-export default UsersModel;
+export default CouponModel;
