@@ -72,6 +72,7 @@ function Tableselection() {
           available: available,
         },
       });
+      alert(`Time Slot for Table Reservation inserted Successfully`);
     }
   };
 

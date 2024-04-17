@@ -38,7 +38,7 @@ function Index() {
             social and cultural experiences, offering a space for celebrations,
             meetings, and shared moments.
           </p>
-          <a href="#" class="main-button">
+          <a href="/Menu" class="main-button">
             Order Now
           </a>
         </div>
@@ -133,22 +133,19 @@ function Index() {
 
             <div class="about_services">
               <div class="s_1">
-               
                 <a href="#">Fast Delivery</a>
               </div>
 
               <div class="s_1">
-               
                 <a href="#">Easy Payment</a>
               </div>
 
               <div class="s_1">
-                
                 <a href="#">24 x 7 Services</a>
               </div>
             </div>
 
-            <a href="#" class="about_btn">
+            <a href="/Menu" class="about_btn">
               <i class="fa-solid fa-burger"></i>Order Now
             </a>
           </div>
@@ -157,11 +154,7 @@ function Index() {
 
       {/* about section end here */}
 
-
-
-
       <div class="team">
-
         <h1 class="special-head text-center">
           {" "}
           Our <span>Speciality Team</span>
@@ -169,99 +162,76 @@ function Index() {
 
         <div class="team_line_1"></div>
 
-
         <div class="team_box">
-
           <div class="team_card">
-
             <div class="team_img">
               <img src="/img/team_1.jpg" />
             </div>
 
             <div class="team_tag">
-
               <h2>John Deo</h2>
               <p class="job">Cook</p>
               <p class="info">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore!
-                Veniam sit quod iusto quas eligendi. Natus numquam
-                aspernatur alias illo voluptates dolorem, id ad.
+                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
+                sit quod iusto quas eligendi. Natus numquam aspernatur alias
+                illo voluptates dolorem, id ad.
               </p>
-
             </div>
-
           </div>
 
           <div class="team_card">
-
             <div class="team_img">
               <img src="/img/team_2.jpg" />
             </div>
 
             <div class="team_tag">
-
               <h2>John Deo</h2>
               <p class="job">Cook</p>
               <p class="info">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore!
-                Veniam sit quod iusto quas eligendi. Natus numquam
-                aspernatur alias illo voluptates dolorem, id ad.
+                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
+                sit quod iusto quas eligendi. Natus numquam aspernatur alias
+                illo voluptates dolorem, id ad.
               </p>
-
             </div>
-
           </div>
 
           <div class="team_card">
-
             <div class="team_img">
               <img src="/img/team_3.jpg" />
             </div>
 
             <div class="team_tag">
-
               <h2>John Deo</h2>
               <p class="job">Cook</p>
               <p class="info">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore!
-                Veniam sit quod iusto quas eligendi. Natus numquam
-                aspernatur alias illo voluptates dolorem, id ad.
+                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
+                sit quod iusto quas eligendi. Natus numquam aspernatur alias
+                illo voluptates dolorem, id ad.
               </p>
-
             </div>
-
           </div>
 
           <div class="team_card">
-
             <div class="team_img">
               <img src="/img/team_4.jpg" />
             </div>
 
             <div class="team_tag">
-
               <h2>John Deo</h2>
               <p class="job">Cook</p>
               <p class="info">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore!
-                Veniam sit quod iusto quas eligendi. Natus numquam
-                aspernatur alias illo voluptates dolorem, id ad.
+                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
+                sit quod iusto quas eligendi. Natus numquam aspernatur alias
+                illo voluptates dolorem, id ad.
               </p>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
-
-
     </>
   );
 }
