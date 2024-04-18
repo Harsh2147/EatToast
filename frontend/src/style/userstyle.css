@@ -117,6 +117,7 @@ header style end here */
   gap: 1.5rem;
   min-height: 70vh;
   align-items: center;
+  margin-top: 75px;
 }
 
 .banner-overlay {
@@ -297,8 +298,8 @@ header style end here */
 }
 
 .team .team_box .team_card {
-  width: 350px;
-  height: 35rem;
+  width: 93%;
+  height: auto;
   background: #fff;
   padding: 20px;
   text-align: center;
@@ -358,7 +359,7 @@ header style end here */
 }
 
 .about .about_main .about_image img {
-  width: 46rem;
+  width: 36rem;
 }
 
 .about .about_main .about_text h1 {
@@ -1113,21 +1114,12 @@ profile page style start here */
 
 /* media queries  */
 @media (max-width: 1500px) {
-  .team .team_box {
-    grid-template-columns: 1fr 1fr;
-  }
   
-  .team .team_box .team_card
-  {
-    margin-bottom: 44px;
-    width: 450px;
-  }
+  
   header {
     padding: 0.8rem;
   }
-  .about .about_main{
-    flex-direction: column;
-  }
+  
   .about {
     height: auto;
     margin-bottom: 50px;
@@ -1137,11 +1129,23 @@ profile page style start here */
 @media (max-width: 1100px) {
   .banner {
     min-height: auto;
+    margin-top: 0;
   }
+  .team .team_box .team_card
+  {
+    margin-bottom: 44px;
+    /* width: 450px; */
+  }
+  .team .team_box {
+    grid-template-columns: 1fr 1fr;
+  }
+  
   html {
     font-size: 55%;
   }
-
+  .about .about_main{
+    flex-direction: column;
+  }
   header {
     padding: 0.2rem;
   }
