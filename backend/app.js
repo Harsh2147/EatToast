@@ -18,6 +18,8 @@ import Stripe from "stripe";
 import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -1094,8 +1096,9 @@ const server = new ApolloServer({
 //  1. creates an Express app
 //  2. installs your ApolloServer instance as middleware
 //  3. prepares your app to handle incoming requests
+const port = process.env.GRAPHQL_PORT;
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 6002 },
+  listen: { port: port },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
