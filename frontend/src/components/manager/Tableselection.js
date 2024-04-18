@@ -165,7 +165,7 @@ function Tableselection() {
                     value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
                   >
-                    <option value="2 People">Select Capacity</option>
+                    <option value="">Select Capacity</option>
                     <option value="2 People">2</option>
                     <option value="3 People">3 </option>
                     <option value="4 People">4 </option>
@@ -182,7 +182,7 @@ function Tableselection() {
 
                 <div class="col" style={{ marginTop: "25px" }}>
                   <button type="submit" class="btn btn-primary">
-                    Add Booking
+                    Add Tables
                   </button>
                 </div>
               </form>

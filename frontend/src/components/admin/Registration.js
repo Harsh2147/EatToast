@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { REGISTRATION_MUTATION } from "../../graphql/RegistrationMutation";
 import { useMutation, useQuery } from "@apollo/client";
-
+import Header from "./Header";
 function Registration() {
   const navigate = useNavigate();
   // Check if loginData exists in localStorage
@@ -116,7 +116,8 @@ function Registration() {
   return (
     <>
       <div className="container">
-        <div class="admin-navigation">
+        <Header />
+        {/* <div class="admin-navigation">
           <ul>
             <li>
               <a href="#">
@@ -241,7 +242,7 @@ function Registration() {
               </>
             )}
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className="row justify-content-center">
         <div className="col-md-6 mt-5">
@@ -353,7 +354,7 @@ function Registration() {
                   >
                     <option value="ADMIN">ADMIN</option>
                     <option value="MANAGER">MANAGER</option>
-                    <option value="EMPLOYEE">EMPLOYEE</option>
+                    {/* <option value="EMPLOYEE">EMPLOYEE</option> */}
                   </select>
                 </div>
                 <input

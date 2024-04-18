@@ -100,7 +100,7 @@ function Vieworders() {
                     <td>Total Price With Tax</td>
 
                     <td>Order Date</td>
-                    <td>Status</td>
+                    {/* <td>Status</td> */}
                   </tr>
                 </thead>
 
@@ -126,7 +126,7 @@ function Vieworders() {
                         ))}
                       </td>
 
-                      <td>
+                      {/* <td>
                         {order.orderItems.map((item) => {
                           const sum = item.Quantity > 1 ? item.Quantity : "";
                           return (
@@ -137,17 +137,15 @@ function Vieworders() {
                             </div>
                           );
                         })}
-                      </td>
-
+                      </td> */}
+                      <td>{order.orderItems[0].Quantity}</td>
                       <td>{order.TotalPriceWithTax}</td>
 
                       <td>
                         {" "}
                         {new Date(order.CurrentDate).toISOString().slice(0, 10)}
                       </td>
-                      <td>
-                        {order.Status !== "Ready" ? "Completed" : "Pending"}
-                      </td>
+                      {/* <td>{order.Status}</td> */}
                     </tr>
                   ))}
                 </tbody>

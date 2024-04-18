@@ -9,7 +9,7 @@ import Header from "./Header";
 function Table() {
   const { loading, error, data } = useQuery(FETCH_ALL_TABLEBOOKINGSLOT);
   const [bookTable] = useMutation(BOOK_TABLE_MUTATION);
-  const [customerExist] = useMutation(CUSTOMER_EXIST_QUERY); 
+  const [customerExist] = useMutation(CUSTOMER_EXIST_QUERY);
   const [showForm, setShowForm] = useState(false);
   const [selectedDate, setSelectedDate] = useState("Select date");
   const [selectedTime, setSelectedTime] = useState("Select time");
@@ -21,7 +21,6 @@ function Table() {
   const [email, setEmail] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
-
 
   useEffect(() => {
     // Fetch customer data if email is available
@@ -386,7 +385,7 @@ function Table() {
                   </div>
                 </div>
                 <div class="col">
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" class="submit-button mt-3 a_button">
                     Book Reservation
                   </button>
                 </div>

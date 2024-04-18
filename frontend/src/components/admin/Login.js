@@ -151,7 +151,7 @@ function Login() {
                   >
                     <option value="ADMIN">ADMIN</option>
                     <option value="MANAGER">MANAGER</option>
-                    <option value="EMPLOYEE">EMPLOYEE</option>
+                    {/* <option value="EMPLOYEE">EMPLOYEE</option> */}
                   </select>
                 </div>
                 <input
