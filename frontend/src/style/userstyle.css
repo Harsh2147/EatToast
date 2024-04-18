@@ -28,6 +28,12 @@ html {
   color: white !important;
   text-decoration: none;
 }
+.a_button{
+  text-decoration: none;
+}
+.a_button:hover{
+  color: var(--red);
+}
 .Success-button{
   background: #0d6efd !important;
     border-color: #0d6efd !important;
@@ -274,7 +280,7 @@ header style end here */
   height: 50px;
   background: var(--blue);
   position: relative;
-  top: 25%;
+  /* top: 25%; */
   z-index: 1;
 }
 
@@ -1106,8 +1112,29 @@ profile page style start here */
 /* book table style end here */
 
 /* media queries  */
-
+@media (max-width: 1500px) {
+  .team .team_box {
+    grid-template-columns: 1fr 1fr;
+  }
+  .team .team_box .team_card
+  {
+    margin-bottom: 44px;
+    width: 450px;
+  }
+  header {
+    padding: 0.8rem;
+  }
+  .about .about_main{
+    flex-direction: column;
+  }
+  .about {
+    height: auto;
+    margin-bottom: 50px;
+  }
+  
+}
 @media (max-width: 1100px) {
+  
   html {
     font-size: 55%;
   }
@@ -1122,8 +1149,14 @@ profile page style start here */
 }
 
 @media (max-width: 900px) {
+  .about .about_main .about_text p {
+    width: calc(100% - 50px);
+  }
   #menu-button {
     display: initial;
+  }
+  .team .team_box {
+    grid-template-columns: 1fr;
   }
 
   header .navbar {

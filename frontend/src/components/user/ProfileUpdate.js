@@ -238,7 +238,7 @@ function ProfileUpdate() {
                       />
                     </div>
                   </div>
-                  <button type="submit" class="submit-button mt-3">
+                  <button type="submit" class="submit-button mt-3 a_button">
                     Update Profile
                   </button>
                 </form>

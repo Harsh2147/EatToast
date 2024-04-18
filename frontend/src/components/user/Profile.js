@@ -197,7 +197,10 @@ function Profile() {
                       />
                     </div>
                   </div>
-                  <Link to={`/ProfileUpdate`} className="submit-button mt-3 ">
+                  <Link
+                    to={`/ProfileUpdate`}
+                    className="submit-button mt-3 a_button"
+                  >
                     Edit Profile
                   </Link>{" "}
                 </form>
