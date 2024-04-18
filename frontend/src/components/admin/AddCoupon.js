@@ -7,7 +7,15 @@ import { FETCH_ALL_Coupon } from "../../graphql/FetchCouponQuery";
 import Header from "./Header";
 function AddCoupon() {
   const navigate = useNavigate();
-
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const [code, setCode] = useState("");
   const [discountAmount, setDiscountAmount] = useState("");
   const [discountType, setDiscountType] = useState("");

@@ -6,6 +6,16 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 
 function Viewproduct() {
+  const navigate = useNavigate();
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3); // Number of items per page
   const { loading, error, data } = useQuery(FETCH_ALL_PRODUCTS);

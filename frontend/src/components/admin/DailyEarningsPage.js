@@ -2,8 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { FETCH_All_ORDERS } from "../../graphql/FetchAllOrders";
 import Header from "./Header";
-
+import { useNavigate } from "react-router-dom";
 function DailyEarningsPage() {
+  const navigate = useNavigate();
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const [dailyDetails, setDailyDetails] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Number of items per page

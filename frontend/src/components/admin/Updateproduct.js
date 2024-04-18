@@ -31,6 +31,15 @@ const storage = getStorage(app);
 
 function Updateproduct() {
   const navigate = useNavigate();
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const fileInput = useRef();
 
   const [productName, setProductName] = useState("");
@@ -55,16 +64,16 @@ function Updateproduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      // Check if a new image file has been selected
-  if (fileInput.current.files.length > 0) {
-    const file = fileInput.current.files[0];
-    const storageRef = ref(storage, file.name);
-    await uploadBytesResumable(storageRef, file);
-    const imageUrl = await getDownloadURL(storageRef);
+    // Check if a new image file has been selected
+    if (fileInput.current.files.length > 0) {
+      const file = fileInput.current.files[0];
+      const storageRef = ref(storage, file.name);
+      await uploadBytesResumable(storageRef, file);
+      const imageUrl = await getDownloadURL(storageRef);
 
-    // Update the productImage state with the new image URL
-    setProductImage(imageUrl);
-  }
+      // Update the productImage state with the new image URL
+      setProductImage(imageUrl);
+    }
 
     updatePro({
       variables: {
@@ -94,12 +103,20 @@ function Updateproduct() {
   useEffect(() => {
     const storedProductName = localStorage.getItem("Product_name");
     const storedProductPrice = localStorage.getItem("Product_price");
-    const storedProductDescription = localStorage.getItem("Product_description");
+    const storedProductDescription = localStorage.getItem(
+      "Product_description"
+    );
     const storedProductImage = localStorage.getItem("Product_image");
     const storedCategory = localStorage.getItem("Category");
-  
+
     if (dataproduct) {
-      const { Product_name, Product_price, Product_description, Product_image, Category } = dataproduct;
+      const {
+        Product_name,
+        Product_price,
+        Product_description,
+        Product_image,
+        Category,
+      } = dataproduct;
       setProductName(Product_name || storedProductName);
       setProductPrice(Product_price || parseFloat(storedProductPrice));
       setProductDescription(Product_description || storedProductDescription);
