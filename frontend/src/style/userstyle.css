@@ -1002,6 +1002,9 @@ header style end here */
   flex: 0 1 calc(25% - 40px); /* Adjust as needed */
   margin-bottom: 10px; /* Adjust as needed */
 }
+.row.justify-content-center.mt-5 {
+  margin-left: 105px;
+}
 
 .review .review_box .review_card {
   width: 350px;

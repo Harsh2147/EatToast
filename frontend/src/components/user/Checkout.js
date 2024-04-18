@@ -317,7 +317,7 @@ function Checkout({}) {
     }
   };
   console.log(cartItems);
- 
+
   useEffect(() => {
     const newTotalPrice = cartItems.reduce(
       (price, item) => price + item.quantity * item.Product_price,
@@ -581,11 +581,10 @@ function Checkout({}) {
               >
                 <option Value="null">Select Payment Mehod</option>
                 <option value="Card Payment"> Card Payment</option>
-           
               </select>
             </div>
 
-           <div class="row">
+            <div class="row">
               {/* <p>
                 {" "}
                 {errorMessages.length > 0 && (
@@ -600,9 +599,14 @@ function Checkout({}) {
               </p>*/}
               <div class="col-3">
                 <PayButton
-                product={cartItems.map(item => item.Product_name).join(', ')} // Concatenate product names if there are multiple items
-                total={totalPriceWithTax} // Pass the total price with tax
-                quantity={cartItems.reduce((total, item) => total + item.quantity, 0)} 
+                  product={cartItems
+                    .map((item) => item.Product_name)
+                    .join(", ")} // Concatenate product names if there are multiple items
+                  total={totalPriceWithTax} // Pass the total price with tax
+                  quantity={cartItems.reduce(
+                    (total, item) => total + item.quantity,
+                    0
+                  )}
                   cartItems={cartItems}
                   customer={{
                     Firstname,

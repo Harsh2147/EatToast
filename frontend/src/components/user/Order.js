@@ -55,7 +55,7 @@ function Order() {
                     <td>Product</td>
                     <td>Quantity</td>
                     <td>Total Price With Tax</td>
-                    <td>Pickup Date</td>
+                    <td> Date</td>
                     <td>Pickup Time</td>
                     <td>Order Date</td>
                   </tr>
@@ -76,8 +76,13 @@ function Order() {
                           </div>
                         ))}
                       </td>
-                      <td>{order.orderItems.reduce((acc, item) => acc + item.Quantity, 0)}</td>
-                     
+                      <td>
+                        {order.orderItems.reduce(
+                          (acc, item) => acc + item.Quantity,
+                          0
+                        )}
+                      </td>
+
                       <td>{order.TotalPriceWithTax}</td>
                       <td>{formatDate(order.Date)}</td>
                       <td>{order.Time}</td>
