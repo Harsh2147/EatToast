@@ -63,10 +63,10 @@ function Index() {
 
             <div class="content">
               <div class="fas fa-pizza-slice content-icon"></div>
-              <h3>Breakfast wrap</h3>
+              <h3>Decadent Chocolate Cake</h3>
               <p>
-                The "burger" is derived from the resemblance of the icon to the
-                layers in a hamburger.
+                Indulge in layers of rich chocolate cake, topped with creamy
+                chocolate frosting and chocolate shavings.
               </p>
             </div>
           </div>
@@ -80,10 +80,10 @@ function Index() {
 
             <div class="content">
               <div class="fas fa-glass-whiskey content-icon"></div>
-              <h3>Breakfast wrap</h3>
+              <h3>Classic Club Sandwich</h3>
               <p>
-                The "burger" is derived from the resemblance of the icon to the
-                layers in a hamburger.
+                Savor the flavors of turkey, bacon, lettuce, tomato, and
+                mayonnaise layered between toasted bread slices.
               </p>
             </div>
           </div>

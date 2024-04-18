@@ -1124,7 +1124,10 @@ profile page style start here */
     height: auto;
     margin-bottom: 50px;
   }
+  .login-container .login_form {
   
+    top: 67%;
+  }
 }
 @media (max-width: 1100px) {
   .banner {
