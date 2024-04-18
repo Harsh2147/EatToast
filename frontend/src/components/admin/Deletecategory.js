@@ -8,7 +8,16 @@ import { DELETE_CATEGORY_BY_ID } from "../../graphql/DeleteCategoryById";
 import Header from "./Header";
 function Deletecategory() {
   const navigate = useNavigate();
-
+  //const navigate = useNavigate();
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const [category_name, setcategory_name] = useState("");
   const [errorl, setError] = useState(false);
   const [deleteCat, { loading1, error1, data1 }] = useMutation(

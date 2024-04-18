@@ -31,7 +31,15 @@ const storage = getStorage(app);
 function Additems() {
   const fileInput = useRef();
   const navigate = useNavigate();
-
+  const loginData = localStorage.getItem("loginData");
+  console.log("Login Data= " + loginData);
+  useEffect(() => {
+    // Define the logout function
+    if (!loginData && loginData == null) {
+      navigate("/Login");
+      //alert(`Please Login First`);
+    }
+  }, []);
   const [productDetails, setProductDetails] = useState({
     Product_name: "",
     Product_price: "",

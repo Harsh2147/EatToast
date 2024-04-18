@@ -13,6 +13,8 @@ function Login() {
     if (!loginData && loginData == null) {
       navigate("/Login");
       //alert(`Please Login First`);
+    } else {
+      navigate("/Dashboard");
     }
   }, []);
   const [showCategorySubMenu, setShowCategorySubMenu] = useState(false);

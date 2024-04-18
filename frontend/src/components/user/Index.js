@@ -122,13 +122,17 @@ function Index() {
             </h1>
             <h3>Why food choose us?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-              recusandae dolore tempora fugiat quisquam illum, veniam adipisci
-              iusto consequuntur porro explicabo repudiandae nam quis beatae
-              obcaecati. Magnam provident fuga aspernatur. Lorem ipsum dolor sit
-              amet consectetur adipisicing elit. Cum minus facilis placeat sint
-              repellendus dolorum nostrum, corrupti magni ducimus, et neque
-              nihil enim. Tempore quia rerum placeat laboriosam, sit quasi!
+              At EatToast, we believe that food isn't just about sustenance –
+              it's about creating moments to savor and memories to cherish.
+              Here's why discerning diners choose us: Exceptional Quality: We
+              source the freshest ingredients from local producers and artisans,
+              ensuring that every dish is bursting with flavor and quality.
+              Creative Cuisine: Our talented chefs infuse every dish with
+              innovation and creativity, resulting in a menu that surprises and
+              delights with each bite. Community Focus: We're more than just a
+              restaurant – we're a gathering place for friends, families, and
+              food lovers alike. Our welcoming atmosphere and attentive service
+              make every meal feel like a special occasion.
             </p>
 
             <div class="about_services">
@@ -172,10 +176,10 @@ function Index() {
               <h2>John Deo</h2>
               <p class="job">Cook</p>
               <p class="info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
-                sit quod iusto quas eligendi. Natus numquam aspernatur alias
-                illo voluptates dolorem, id ad.
+                John Deo brings a wealth of culinary expertise to our kitchen.
+                With years of experience in the culinary industry, John has
+                honed his skills in kitchens around the world. His passion for
+                food and dedication to his craft shine.
               </p>
             </div>
           </div>
@@ -186,13 +190,13 @@ function Index() {
             </div>
 
             <div class="team_tag">
-              <h2>John Deo</h2>
-              <p class="job">Cook</p>
+              <h2>Mary Smith</h2>
+              <p class="job">Sous Chef</p>
               <p class="info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
-                sit quod iusto quas eligendi. Natus numquam aspernatur alias
-                illo voluptates dolorem, id ad.
+                Mary Smith is a vital member of our culinary team, bringing
+                creativity and precision to every dish she prepares. With a
+                background as a chef, Mary has developed a keen eye for detail
+                and a flair for creating unforgettable culinary experiences.
               </p>
             </div>
           </div>
@@ -203,13 +207,13 @@ function Index() {
             </div>
 
             <div class="team_tag">
-              <h2>John Deo</h2>
-              <p class="job">Cook</p>
+              <h2>David Johnson</h2>
+              <p class="job">Chef de Partie</p>
               <p class="info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
-                sit quod iusto quas eligendi. Natus numquam aspernatur alias
-                illo voluptates dolorem, id ad.
+                David Johnson is a skilled Chef de Partie with a passion for
+                crafting exquisite dishes. Trained in making cusion, David
+                brings a unique blend of creativity and technical expertise to
+                our kitchen.
               </p>
             </div>
           </div>
@@ -220,13 +224,14 @@ function Index() {
             </div>
 
             <div class="team_tag">
-              <h2>John Deo</h2>
-              <p class="job">Cook</p>
+              <h2>Emily Brown</h2>
+              <p class="job">Pastry Chef</p>
               <p class="info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium cupiditate deserunt odio in fugiat dolore! Veniam
-                sit quod iusto quas eligendi. Natus numquam aspernatur alias
-                illo voluptates dolorem, id ad.
+                Emily Brown is our talented Pastry Chef, responsible for
+                creating delectable desserts that leave our customers craving
+                more. With a background in [mention any relevant culinary
+                training or experiences], Emily has mastered the art of
+                pastry-making and dessert design.
               </p>
             </div>
           </div>
