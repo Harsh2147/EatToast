@@ -1005,7 +1005,7 @@ header style end here */
 
 .review .review_box .review_card {
   width: 350px;
-  height: 20rem;
+  height:auto;
   background: #fff;
   padding: 20px;
   text-align: center;
