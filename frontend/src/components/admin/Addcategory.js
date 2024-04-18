@@ -25,7 +25,7 @@ function Addcategory() {
     const errors = [];
 
     if (!categoryName) {
-      errors.push("productName is required");
+      errors.push("Category Name is required");
     }
 
     setErrorMessages(errors);
@@ -76,7 +76,7 @@ function Addcategory() {
               <h4>Add Category</h4>
             </div>
             {errorMessages.length > 0 && (
-              <div style={{ color: "#fff" }}>
+              <div style={{ color: "red" }}>
                 <ul>
                   {errorMessages.map((error, index) => (
                     <li key={index}>{error}</li>

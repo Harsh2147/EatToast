@@ -40,6 +40,11 @@ function Additems() {
       //alert(`Please Login First`);
     }
   }, []);
+  const [Product_name, setProduct_name] = useState("");
+  const [Product_price, setProduct_price] = useState("");
+  const [Product_description, setProduct_description] = useState("");
+  const [Category, setCategory] = useState("");
+  const [Product_image, setProduct_image] = useState("");
   const [productDetails, setProductDetails] = useState({
     Product_name: "",
     Product_price: "",
@@ -71,14 +76,39 @@ function Additems() {
   const validateForm = () => {
     const errors = [];
 
-    if (!productDetails) {
+    if (!Product_name) {
       errors.push("Product Name is required");
     }
-
+    if (!Product_price) {
+      if (!parseFloat(Product_price)) {
+        errors.push("Product Price is required");
+      }
+    }
+    if (!Product_description) {
+      errors.push("Product description is required");
+    }
+    // if (!Product_image) {
+    //   errors.push("Product Image is required");
+    // }
+    if (!Category) {
+      errors.push("Product Category is required");
+    }
     setErrorMessages(errors);
     return errors.length === 0;
   };
+  // useEffect(() => {
+  //   const file = fileInput.current.files[0];
+  //   if (file) {
+  //     const storageRef = ref(storage, file.name);
+  //     uploadBytesResumable(storageRef, file);
+  //     const productImage = getDownloadURL(storageRef);
 
+  //     // Update the Product_image field in the productDetails state
+  //     setProduct_image({
+  //       Product_image: productImage,
+  //     });
+  //   }
+  // }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,19 +118,18 @@ function Additems() {
     const productImage = await getDownloadURL(storageRef);
 
     // Update the Product_image field in the productDetails state
-    setProductDetails({
-      ...productDetails,
+    setProduct_image({
       Product_image: productImage,
     });
 
     if (validateForm()) {
       createProducts({
         variables: {
-          productName: productDetails.Product_name,
-          productPrice: parseFloat(productDetails.Product_price),
-          productDescription: productDetails.Product_description,
+          productName: Product_name,
+          productPrice: parseFloat(Product_price),
+          productDescription: Product_description,
           productImage: productImage,
-          category: productDetails.Category,
+          category: Category,
         },
       });
 
@@ -152,7 +181,8 @@ function Additems() {
                     type="text"
                     name="Product_name"
                     placeholder="Product Name"
-                    onChange={handleInputChange}
+                    value={Product_name}
+                    onChange={(e) => setProduct_name(e.target.value)}
                   />
                 </div>
                 <div class="form-group mb-3">
@@ -162,7 +192,8 @@ function Additems() {
                     type="number"
                     name="Product_price"
                     placeholder="Product Price"
-                    onChange={handleInputChange}
+                    value={Product_price}
+                    onChange={(e) => setProduct_price(e.target.value)}
                   />
                 </div>
                 <div class="form-group mb-3">
@@ -172,7 +203,8 @@ function Additems() {
                     type="text"
                     name="Product_description"
                     placeholder="Product Description"
-                    onChange={handleInputChange}
+                    value={Product_description}
+                    onChange={(e) => setProduct_description(e.target.value)}
                   />
                 </div>
                 <div class="form-group mb-3">
@@ -192,7 +224,8 @@ function Additems() {
                     className="form-control"
                     type="text"
                     name="Category"
-                    onChange={handleInputChange}
+                    value={Category}
+                    onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="">Select Category</option>
 
