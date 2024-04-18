@@ -24,10 +24,10 @@ const ProductsSchema = mongoose.Schema({
   Product_name: { type: String, required: true },
   Product_price: { type: Number, required: true },
   Product_description: { type: String, required: true },
-  Product_image: { 
-    url: { type: String} 
+  Product_image: {
+    url: { type: String },
   },
-  Category: { type: String }
+  Category: { type: String },
 });
 
 const ProductModel = mongoose.model("Products", ProductsSchema);

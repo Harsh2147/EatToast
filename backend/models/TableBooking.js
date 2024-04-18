@@ -19,41 +19,40 @@ mongoose
     );
   });
 
-  const TableBookingSchema = mongoose.Schema({
-    tableName: {
-      type: String,
-      required: true
-    },
-    time: {
-      type: String,
-      required: true
-    },
-    date: {
-      type: String,
-      required: true
-    },
-    capacity: {
-      type: String,
-      required: true
-    },
-    available: {
-      type: Boolean,
-      required: true
-    },
-    firstname: {
-      type: String,
-    },
-    lastname: {
-      type: String,
-    },
-    phonenumber: {
-      type: Number,
-    },
-    email: {
-      type: String,
-    },
-
-  });
+const TableBookingSchema = mongoose.Schema({
+  tableName: {
+    type: String,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: String,
+    required: true,
+  },
+  capacity: {
+    type: String,
+    required: true,
+  },
+  available: {
+    type: Boolean,
+    required: true,
+  },
+  firstname: {
+    type: String,
+  },
+  lastname: {
+    type: String,
+  },
+  phonenumber: {
+    type: Number,
+  },
+  email: {
+    type: String,
+  },
+});
 
 const tableModel = mongoose.model("TableBooking", TableBookingSchema);
 

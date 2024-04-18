@@ -5,7 +5,6 @@ dotenv.config();
 //"mongodb+srv://capstone:Conestoga@cluster0.nhgxcfa.mongodb.net/?retryWrites=true&w=majority";
 const uri = process.env.DATABASE_URL;
 
-
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -25,8 +24,8 @@ mongoose
 const ImageSchema = mongoose.Schema({
   url: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 // Create the image model using the schema

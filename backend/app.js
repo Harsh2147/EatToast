@@ -18,8 +18,6 @@ import Stripe from "stripe";
 import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
-
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -29,6 +27,12 @@ const stripe = require("stripe")(
 const admin = require("firebase-admin");
 
 const app = express();
+// Use CORS middleware with desired configuration
+app.use(
+  cors({
+    origin: "https://thriving-praline-b27945.netlify.app",
+  })
+);
 var serviceAccount = require("./clothingstore-a76eb-firebase-adminsdk-sf291-848c617f1b.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

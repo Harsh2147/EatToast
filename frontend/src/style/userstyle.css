@@ -1116,6 +1116,7 @@ profile page style start here */
   .team .team_box {
     grid-template-columns: 1fr 1fr;
   }
+  
   .team .team_box .team_card
   {
     margin-bottom: 44px;
@@ -1134,7 +1135,9 @@ profile page style start here */
   
 }
 @media (max-width: 1100px) {
-  
+  .banner {
+    min-height: auto;
+  }
   html {
     font-size: 55%;
   }
@@ -1152,6 +1155,10 @@ profile page style start here */
   .about .about_main .about_text p {
     width: calc(100% - 50px);
   }
+  .about_main {
+    margin-left: 90px;
+    margin-right: 35px;
+}
   #menu-button {
     display: initial;
   }
@@ -1219,4 +1226,12 @@ profile page style start here */
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+
+
+@media (max-width: 660px) {
+.about .about_main .about_text .about_services
+  {
+    grid-template-columns: 1fr;
+  }
 }
